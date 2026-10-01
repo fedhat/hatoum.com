@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Using Regular Expressions to change case · Federico Hatoum</title>
+  <meta name="description" content="You can change the case of text with Regular Expressions in some applications and programming languages by placing control strings in the replacement expression indicating the…">
+  <link rel="canonical" href="https://hatoum.com/blog/2017/12/6/using-regular-expressions-to-change-case/">
+  <meta name="color-scheme" content="light dark">
+  <meta name="theme-color" content="#f6f1e9" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#121417" media="(prefers-color-scheme: dark)">
+  <meta property="og:site_name" content="Federico Hatoum">
+  <meta property="og:title" content="Using Regular Expressions to change case · Federico Hatoum">
+  <meta property="og:description" content="You can change the case of text with Regular Expressions in some applications and programming languages by placing control strings in the replacement expression indicating the…">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://hatoum.com/blog/2017/12/6/using-regular-expressions-to-change-case/">
+  <meta property="og:image" content="https://hatoum.com/assets/img/home/lake.webp">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="icon" type="image/png" sizes="32x32" href="../../../../../assets/icons/favicon-32.png">
+  <link rel="apple-touch-icon" href="../../../../../assets/icons/apple-touch-icon.png">
+  <link rel="preload" href="../../../../../assets/fonts/inter-var.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="../../../../../assets/fonts/fraunces-var.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="../../../../../assets/css/site.css">
+  <link rel="alternate" type="application/rss+xml" title="Federico Hatoum — Blog" href="../../../../../blog/feed.xml">
+  <script>try{var t=localStorage.getItem('theme');if(t==='light'||t==='dark')document.documentElement.setAttribute('data-theme',t)}catch(e){}</script>
+  <script src="../../../../../assets/js/site.js" defer></script>
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "BlogPosting", "headline": "Using Regular Expressions to change case", "datePublished": "2017-12-06T14:12:53Z", "author": {"@type": "Person", "name": "Federico Hatoum", "url": "https://hatoum.com"}, "mainEntityOfPage": "https://hatoum.com/blog/2017/12/6/using-regular-expressions-to-change-case/"}</script>
+  <meta property="article:published_time" content="2017-12-06T14:12:53Z">
+</head>
+<body class="">
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-header">
+    <div class="wrap header-inner">
+      <a class="brand" href="../../../../../">
+        <img src="../../../../../assets/icons/dog.png" alt="" width="30" height="30">
+        <span>Federico Hatoum</span>
+      </a>
+      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav">
+        <span class="nav-toggle-bars" aria-hidden="true"></span><span class="visually-hidden">Menu</span>
+      </button>
+      <nav id="site-nav" class="site-nav" aria-label="Main">
+        <a href="../../../../../about/">About</a>
+        <a href="../../../../../blog/" aria-current="page">Blog</a>
+        <a href="../../../../../films/">Films</a>
+        <a href="../../../../../acting/">Acting</a>
+        <a href="../../../../../contact/">Contact</a>
+      </nav>
+      <button class="theme-toggle" type="button" aria-label="Switch to dark theme" title="Toggle theme">
+        <svg class="icon icon-moon" aria-hidden="true"><use href="../../../../../assets/icons/icons.svg#moon"></use></svg>
+        <svg class="icon icon-sun" aria-hidden="true"><use href="../../../../../assets/icons/icons.svg#sun"></use></svg>
+      </button>
+    </div>
+  </header>
+
+  <main id="main">
+<article class="post wrap-narrow">
+  <header class="post-header">
+    <p class="post-kicker"><a href="../../../../../blog/">Blog</a></p>
+    <h1>Using Regular Expressions to change case</h1>
+    <p class="post-meta"><time datetime="2017-12-06T14:12:53Z">December 6, 2017</time> · 2 min read</p>
+  </header>
+  <div class="prose">
+<p>You can change the case of text with Regular Expressions in some applications and programming languages by placing control strings in the replacement expression indicating the type of conversion you want.</p>
+<p>NOTE: The following examples were tested in <a href="https://www.barebones.com/products/bbedit/" target="_blank" rel="noopener">BBEdit</a> which has a great grep search/replace functionality and which uses <code>\</code> to indicate capture groups rather than <code>$</code> as is common in other RegEx implementations.</p>
+<ul><li><code>\U</code>: Start converting all letters to uppercase. Ex:<ul><li>Source text: <code>Hello World</code></li><li>Selection RegEx: <code>(Hello) World</code></li><li>Replacement: <code>\U\1 World</code></li><li>Final value: HELLO WORLD</li><li>Comments: Notice <code>\U</code> starts uppercase conversion and affects all text following it, regardless of the capture group.</li></ul>
+
+</li><li><code>\L</code>: Start converting all letters to lowercase. Ex:<ul><li>Source text: <code>Hello World</code></li><li>Selection RegEx: <code>Hello World</code></li><li>Replacement: <code>\LHello World</code></li><li>Final value: <code>hello world</code></li><li>Comments: With or Without capture groups, the case control string <code>\L</code> affects all text that follows it. </li></ul>
+
+</li><li><code>\E</code>: End most recent conversion setting. Only necessary if you're not using additional control strings to change text case, but wish to stop the initial conversion at some point before the end of the replacement string.<ul><li>Example 1:<ul><li>Source text: <code>hEllo FuNnY WorlD</code></li><li>Selection RegEx: <code>([a-zA-Z]*) ([a-zA-Z]*) ([a-zA-Z]*)</code></li><li>Replacement: <code>\U\1 \2 \3</code></li><li>Final value: <code>HELLO FUNNY WORLD</code></li><li>Comments: The initial <code>\U</code> control string converts all characters that follow uppercase.</li></ul>
+
+</li><li>Example 2:<ul><li>Source text: <code>hEllo FuNnY WorlD</code></li><li>Selection RegEx: <code>([a-zA-Z]*) ([a-zA-Z]*) ([a-zA-Z]*)</code></li><li>Replacement: <code>\U\1 \L\2 \U\3</code></li><li>Final value: <code>HELLO funny WORLD</code></li><li>Comments: We set a conversion control character before each capture group, resetting the conversion that takes place.</li></ul>
+
+</li><li>Example 3:<ul><li>Source text: <code>hEllo FuNnY WorlD</code></li><li>Selection RegEx: <code>([a-zA-Z]*) ([a-zA-Z]*) ([a-zA-Z]*)</code></li><li>Replacement: <code>\U\1\E \2 \3</code></li><li>Final value: <code>HELLO FuNnY WorlD</code></li><li>Comments: A <code>\E</code> control string is used after the initial <code>\U\1</code> (which converts the first capture group to all caps). <code>\E</code> ends the uppercase conversion, leaving capture groups 2 and 3 unaffected by the initial <code>\U</code>. </li></ul>
+
+</li></ul>
+
+</li></ul>
+<p>More complete info at: <a href="https://www.regular-expressions.info/replacecase.html" target="_blank" rel="noopener">https://www.regular-expressions.info/replacecase.html</a></p>
+
+  </div>
+  <section class="comments" aria-labelledby="comments-title">
+    <h2 id="comments-title">3 comments</h2>
+    <p class="comments-note">Comments are closed. These were left on the previous version of this site. Questions? <a href="../../../../../contact/">Get in touch</a>.</p>
+    <ol class="comment-list"><li class="comment" id="comment-630773f9afc28a30e6229af3"><article><header class="comment-meta"><span class="comment-author">Kevin Garrett</span><a class="comment-date" href="#comment-630773f9afc28a30e6229af3"><time datetime="2022-08-25T13:07:05Z">August 25, 2022</time></a></header><div class="comment-body"><p>Thank you for posting this. </p></div></article></li><li class="comment" id="comment-637666bfe2a2ba5e1a99cee3"><article><header class="comment-meta"><span class="comment-author">Meirion</span><a class="comment-date" href="#comment-637666bfe2a2ba5e1a99cee3"><time datetime="2022-11-17T16:52:15Z">November 17, 2022</time></a></header><div class="comment-body"><p>Concise and clear.<br/>Thank you.</p></div></article></li><li class="comment" id="comment-66463ce12b314119d14262c0"><article><header class="comment-meta"><span class="comment-author">Silviu</span><a class="comment-date" href="#comment-66463ce12b314119d14262c0"><time datetime="2024-05-16T17:05:37Z">May 16, 2024</time></a></header><div class="comment-body"><p>very nice, used within sed to adjust a bit a captured pattern before using it </p></div></article></li></ol>
+  </section>
+  <nav class="pager" aria-label="More posts">
+    <a class="pager-prev" href="../../../../../blog/2017/8/20/repair-video-macbook-pro-15-late-2013-battery-replacement/"><span>Older</span>Repair Video: MacBook Pro 15, Late 2013 Battery Replacement</a><a class="pager-next" href="../../../../../blog/2018/1/2/simplify3d-confusing-first-layer-settings/"><span>Newer</span>[UPDATED][DEPRECATED] Simplify3D: Confusing First Layer settings</a>
+  </nav>
+</article>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap footer-inner">
+      <div class="footer-about">
+        <p class="footer-name">Federico Hatoum</p>
+        <p>Software developer, maker &amp; YouTuber in Los Angeles.</p>
+      </div>
+      <nav aria-label="Elsewhere">
+      <ul class="social">
+        <li><a href="https://www.youtube.com/channel/UCQGkNFXJCUBLkzMIShzf12g" title="Fed Learns To Make on YouTube" target="_blank" rel="noopener"><svg class="icon" aria-hidden="true"><use href="../../../../../assets/icons/icons.svg#youtube"></use></svg><span class="visually-hidden">Fed Learns To Make on YouTube</span></a></li>
+        <li><a href="https://github.com/fedhat" title="GitHub" target="_blank" rel="noopener"><svg class="icon" aria-hidden="true"><use href="../../../../../assets/icons/icons.svg#github"></use></svg><span class="visually-hidden">GitHub</span></a></li>
+        <li><a href="https://www.linkedin.com/pub/federico-hatoum/0/866/1a2" title="LinkedIn" target="_blank" rel="noopener"><svg class="icon" aria-hidden="true"><use href="../../../../../assets/icons/icons.svg#linkedin"></use></svg><span class="visually-hidden">LinkedIn</span></a></li>
+        <li><a href="https://www.facebook.com/583536348" title="Facebook" target="_blank" rel="noopener"><svg class="icon" aria-hidden="true"><use href="../../../../../assets/icons/icons.svg#facebook"></use></svg><span class="visually-hidden">Facebook</span></a></li>
+        <li><a href="../../../../../blog/feed.xml" title="Blog RSS feed"><svg class="icon" aria-hidden="true"><use href="../../../../../assets/icons/icons.svg#rss"></use></svg><span class="visually-hidden">Blog RSS feed</span></a></li>
+      </ul>
+      </nav>
+      <p class="footer-copy">© 2026 Federico Hatoum</p>
+    </div>
+  </footer>
+</body>
+</html>

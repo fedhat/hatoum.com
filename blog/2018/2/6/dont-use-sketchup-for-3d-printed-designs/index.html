@@ -1,0 +1,132 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Don&#x27;t use SketchUp for 3D-printed designs · Federico Hatoum</title>
+  <meta name="description" content="SketchUp is great in many ways, especially for creating architectural and construction models. However, while the objects that it creates look solid, many are not. That&#x27;s not a…">
+  <link rel="canonical" href="https://hatoum.com/blog/2018/2/6/dont-use-sketchup-for-3d-printed-designs/">
+  <meta name="color-scheme" content="light dark">
+  <meta name="theme-color" content="#f6f1e9" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#121417" media="(prefers-color-scheme: dark)">
+  <meta property="og:site_name" content="Federico Hatoum">
+  <meta property="og:title" content="Don&#x27;t use SketchUp for 3D-printed designs · Federico Hatoum">
+  <meta property="og:description" content="SketchUp is great in many ways, especially for creating architectural and construction models. However, while the objects that it creates look solid, many are not. That&#x27;s not a…">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://hatoum.com/blog/2018/2/6/dont-use-sketchup-for-3d-printed-designs/">
+  <meta property="og:image" content="https://hatoum.com/assets/img/blog/2018/dont-use-sketchup-for-3d-printed-designs/01-screen-shot-2018-02-05-at-14-16-48.webp">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="icon" type="image/png" sizes="32x32" href="../../../../../assets/icons/favicon-32.png">
+  <link rel="apple-touch-icon" href="../../../../../assets/icons/apple-touch-icon.png">
+  <link rel="preload" href="../../../../../assets/fonts/inter-var.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="../../../../../assets/fonts/fraunces-var.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="../../../../../assets/css/site.css">
+  <link rel="alternate" type="application/rss+xml" title="Federico Hatoum — Blog" href="../../../../../blog/feed.xml">
+  <script>try{var t=localStorage.getItem('theme');if(t==='light'||t==='dark')document.documentElement.setAttribute('data-theme',t)}catch(e){}</script>
+  <script src="../../../../../assets/js/site.js" defer></script>
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "BlogPosting", "headline": "Don't use SketchUp for 3D-printed designs", "datePublished": "2018-02-07T02:49:26Z", "author": {"@type": "Person", "name": "Federico Hatoum", "url": "https://hatoum.com"}, "mainEntityOfPage": "https://hatoum.com/blog/2018/2/6/dont-use-sketchup-for-3d-printed-designs/", "image": "https://hatoum.com/assets/img/blog/2018/dont-use-sketchup-for-3d-printed-designs/01-screen-shot-2018-02-05-at-14-16-48.webp"}</script>
+  <meta property="article:published_time" content="2018-02-07T02:49:26Z">
+</head>
+<body class="">
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-header">
+    <div class="wrap header-inner">
+      <a class="brand" href="../../../../../">
+        <img src="../../../../../assets/icons/dog.png" alt="" width="30" height="30">
+        <span>Federico Hatoum</span>
+      </a>
+      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav">
+        <span class="nav-toggle-bars" aria-hidden="true"></span><span class="visually-hidden">Menu</span>
+      </button>
+      <nav id="site-nav" class="site-nav" aria-label="Main">
+        <a href="../../../../../about/">About</a>
+        <a href="../../../../../blog/" aria-current="page">Blog</a>
+        <a href="../../../../../films/">Films</a>
+        <a href="../../../../../acting/">Acting</a>
+        <a href="../../../../../contact/">Contact</a>
+      </nav>
+      <button class="theme-toggle" type="button" aria-label="Switch to dark theme" title="Toggle theme">
+        <svg class="icon icon-moon" aria-hidden="true"><use href="../../../../../assets/icons/icons.svg#moon"></use></svg>
+        <svg class="icon icon-sun" aria-hidden="true"><use href="../../../../../assets/icons/icons.svg#sun"></use></svg>
+      </button>
+    </div>
+  </header>
+
+  <main id="main">
+<article class="post wrap-narrow">
+  <header class="post-header">
+    <p class="post-kicker"><a href="../../../../../blog/">Blog</a></p>
+    <h1>Don&#x27;t use SketchUp for 3D-printed designs</h1>
+    <p class="post-meta"><time datetime="2018-02-07T02:49:26Z">February 6, 2018</time> · 4 min read</p>
+  </header>
+  <div class="prose">
+<h2>TL;DR:</h2>
+
+<p>SketchUp is great in many ways, especially for creating architectural and construction models. However, while the objects that it creates look solid, many are not. That's not a problem if all you're doing is showing a client a design or creating an animation -- but it's a huge problem if your intention is to print your model in 3D.</p>
+
+<p>Unfortunately, for all its design prowess, <a href="https://www.sketchup.com/" target="_blank" rel="noopener">SketchUp</a> produces faulty, unprintable STL files (the most common file type used by 3D printers). Some slicers (programs used to generate special 3D-printable gcode files) will not complain about SketchUp files, though many will, including Simplify3D.</p>
+
+<p>Don't use SketchUp for designing objects you expect to 3D print. Better choices are the amazing Tinkercad (an online and free tool) or the hardcore Fusion 360 (free to many).</p>
+
+<h2>SketchUp is great (for some things):</h2>
+
+<p>I love <a href="https://www.sketchup.com/" target="_blank" rel="noopener">SketchUp</a>. I used it for many years to help me visualize DIY designs. It's easy to use and when it first came out (and Google eventually bought it), it was way ahead of its time. The way that it let you extrude surfaces and position objects in 3D space was really revolutionary.</p>
+
+<p>And it's still great today, but only if you intend to display your designs on screens or on paper. Unfortunately, for all its design prowess, SketchUp produces faulty, unprintable STL files (the most common file type used by 3D printers).</p>
+
+<p>The two images below illustrate the problem I'm talking about. Both images are screenshots from Simplify3D, an excellent and popular slicer. A slicer is a program that takes STL files and converts them into gcode files for a specific 3D printer. Gcode files contain instructions that tell a 3D printer how to print an object (coordinates, speeds, amount of material, etc).</p>
+
+<p>Slicers also allow you to visualize the layers of a 3D print. The first image below is a screenshot from the layer visualization panel in <a href="https://simplify3d.com" target="_blank" rel="noopener">Simplify3D</a>, a fantastic, if pricey, slicing program. The visualization is of a 3D model which was edited in SketchUp to shorten one of its parts and then output as an STL file. You'll notice right away that something looks very wrong. There are holes in some surfaces, surfaces that jut out at strange angles and areas which should be voids are filled in. What you're seeing is an unprintable 3D model. SketchUp created 3D geometry that looks great on screen, but which can't be replicated as a physical object.</p>
+
+<p>The second image is of the same original source model edited in <a href="https://tinkercad.com" target="_blank" rel="noopener">Tinkercad</a> (a really great and free online CAD tool), output as an STL file and then visualized in Simplify3D. Even if you're not an expert in CAD or 3D printing, it's easy to spot the differences between the good model and the bad model.</p>
+
+<div class="gallery"><figure><a class="lightbox" href="../../../../../assets/img/blog/2018/dont-use-sketchup-for-3d-printed-designs/01-screen-shot-2018-02-05-at-14-16-48.webp" data-caption="Bad model, bad! — STL model output from SketchUp. Notice all malformed surfaces. (Simplify3D screenshot)"><img src="../../../../../assets/img/blog/2018/dont-use-sketchup-for-3d-printed-designs/01-screen-shot-2018-02-05-at-14-16-48.webp" alt="Bad model, bad!" width="1600" height="1176" loading="lazy" decoding="async"></a><figcaption>Bad model, bad! — STL model output from SketchUp. Notice all malformed surfaces. (Simplify3D screenshot)</figcaption></figure>
+
+<figure><a class="lightbox" href="../../../../../assets/img/blog/2018/dont-use-sketchup-for-3d-printed-designs/02-screen-shot-2018-02-05-at-14-16-48.webp" data-caption="Bad model, bad! — STL model output from SketchUp. Notice all malformed surfaces. (Simplify3D screenshot)"><img src="../../../../../assets/img/blog/2018/dont-use-sketchup-for-3d-printed-designs/02-screen-shot-2018-02-05-at-14-16-48.webp" alt="Bad model, bad!" width="1600" height="1176" loading="lazy" decoding="async"></a><figcaption>Bad model, bad! — STL model output from SketchUp. Notice all malformed surfaces. (Simplify3D screenshot)</figcaption></figure>
+
+<figure><a class="lightbox" href="../../../../../assets/img/blog/2018/dont-use-sketchup-for-3d-printed-designs/03-screen-shot-2018-02-05-at-14-17-16.webp" data-caption="You&#x27;re a mess — Close of the same Simplify3D visualization."><img src="../../../../../assets/img/blog/2018/dont-use-sketchup-for-3d-printed-designs/03-screen-shot-2018-02-05-at-14-17-16.webp" alt="You&#x27;re a mess" width="1600" height="1176" loading="lazy" decoding="async"></a><figcaption>You&#x27;re a mess — Close of the same Simplify3D visualization.</figcaption></figure>
+
+<figure><a class="lightbox" href="../../../../../assets/img/blog/2018/dont-use-sketchup-for-3d-printed-designs/04-screen-shot-2018-02-05-at-14-17-16.webp" data-caption="You&#x27;re a mess — Close of the same Simplify3D visualization."><img src="../../../../../assets/img/blog/2018/dont-use-sketchup-for-3d-printed-designs/04-screen-shot-2018-02-05-at-14-17-16.webp" alt="You&#x27;re a mess" width="1600" height="1176" loading="lazy" decoding="async"></a><figcaption>You&#x27;re a mess — Close of the same Simplify3D visualization.</figcaption></figure>
+
+<figure><a class="lightbox" href="../../../../../assets/img/blog/2018/dont-use-sketchup-for-3d-printed-designs/05-screen-shot-2018-02-06-at-19-51-08.webp" data-caption="Who&#x27;s a good model? — This model was created by editing the same source model, but in Tinkercad rather than SketchUp. (Simplify3D screenshot)"><img src="../../../../../assets/img/blog/2018/dont-use-sketchup-for-3d-printed-designs/05-screen-shot-2018-02-06-at-19-51-08.webp" alt="Who&#x27;s a good model?" width="1600" height="1176" loading="lazy" decoding="async"></a><figcaption>Who&#x27;s a good model? — This model was created by editing the same source model, but in Tinkercad rather than SketchUp. (Simplify3D screenshot)</figcaption></figure>
+
+<figure><a class="lightbox" href="../../../../../assets/img/blog/2018/dont-use-sketchup-for-3d-printed-designs/06-screen-shot-2018-02-06-at-19-51-08.webp" data-caption="Who&#x27;s a good model? — This model was created by editing the same source model, but in Tinkercad rather than SketchUp. (Simplify3D screenshot)"><img src="../../../../../assets/img/blog/2018/dont-use-sketchup-for-3d-printed-designs/06-screen-shot-2018-02-06-at-19-51-08.webp" alt="Who&#x27;s a good model?" width="1600" height="1176" loading="lazy" decoding="async"></a><figcaption>Who&#x27;s a good model? — This model was created by editing the same source model, but in Tinkercad rather than SketchUp. (Simplify3D screenshot)</figcaption></figure>
+
+</div>
+
+<p>What's worse is that SketchUp doesn't give the user any clue that something is wrong, nor does it provide any tools to repair faulty geometry. In fact, most people who use SketchUp to design 3D objects are unaware that there are problems with the models they are exporting. They will swear to you that it worked fine in their slicer. That's because some slicers, such as <a href="https://ultimaker.com/en/products/ultimaker-cura-software" target="_blank" rel="noopener">Cura</a>, hide geometry problems in an attempt, I think, to be more user friendly. The problem is that the practice doesn't guarantee a good print and further compounds users' confusion.</p>
+
+<p>That's what happened to me. I used SketchUp to design <a href="https://www.thingiverse.com/thing:2740259" target="_blank" rel="noopener">footrests for my Herman Miller Mirra chair</a>. When it came time to print my models on my <a href="http://amzn.to/2BfCUzR" target="_blank" rel="noopener">Monoprice Select Mini v2 3D printer</a>, I experienced all kinds of problems. Since I was new to 3D printers, I assumed that either the printer was faulty or I was using it incorrectly. Later, when I switched from Cura to Simplify3D for slicing my models, I noticed that the geometry of the footrests was broken. I'm amazed they printed at all.</p>
+
+<p>Rather than spend time redesigning the footrests in Fusion 360 (a high-end and free to many CAD program), I ran my broken STL files through the free <a href="https://web.archive.org/web/20190109090710/https://service.netfabb.com/login.php" target="_blank" rel="noopener">Netfabb Online Service</a> which repairs 3D meshes. My models finally printed correctly, but if I want to continue refining my designs I have no choice but to painstakingly port the work over to another CAD program.</p>
+
+<p>From that moment on I started learning Fusion 360 and use Tinkercad. </p>
+
+  </div>
+  
+  <nav class="pager" aria-label="More posts">
+    <a class="pager-prev" href="../../../../../blog/2018/1/2/simplify3d-confusing-first-layer-settings/"><span>Older</span>[UPDATED][DEPRECATED] Simplify3D: Confusing First Layer settings</a><a class="pager-next" href="../../../../../blog/2018/2/18/thing-added-to-the-verse-of-thingiverse/"><span>Newer</span>Thing added to the verse of Thingiverse</a>
+  </nav>
+</article>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap footer-inner">
+      <div class="footer-about">
+        <p class="footer-name">Federico Hatoum</p>
+        <p>Software developer, maker &amp; YouTuber in Los Angeles.</p>
+      </div>
+      <nav aria-label="Elsewhere">
+      <ul class="social">
+        <li><a href="https://www.youtube.com/channel/UCQGkNFXJCUBLkzMIShzf12g" title="Fed Learns To Make on YouTube" target="_blank" rel="noopener"><svg class="icon" aria-hidden="true"><use href="../../../../../assets/icons/icons.svg#youtube"></use></svg><span class="visually-hidden">Fed Learns To Make on YouTube</span></a></li>
+        <li><a href="https://github.com/fedhat" title="GitHub" target="_blank" rel="noopener"><svg class="icon" aria-hidden="true"><use href="../../../../../assets/icons/icons.svg#github"></use></svg><span class="visually-hidden">GitHub</span></a></li>
+        <li><a href="https://www.linkedin.com/pub/federico-hatoum/0/866/1a2" title="LinkedIn" target="_blank" rel="noopener"><svg class="icon" aria-hidden="true"><use href="../../../../../assets/icons/icons.svg#linkedin"></use></svg><span class="visually-hidden">LinkedIn</span></a></li>
+        <li><a href="https://www.facebook.com/583536348" title="Facebook" target="_blank" rel="noopener"><svg class="icon" aria-hidden="true"><use href="../../../../../assets/icons/icons.svg#facebook"></use></svg><span class="visually-hidden">Facebook</span></a></li>
+        <li><a href="../../../../../blog/feed.xml" title="Blog RSS feed"><svg class="icon" aria-hidden="true"><use href="../../../../../assets/icons/icons.svg#rss"></use></svg><span class="visually-hidden">Blog RSS feed</span></a></li>
+      </ul>
+      </nav>
+      <p class="footer-copy">© 2026 Federico Hatoum</p>
+    </div>
+  </footer>
+</body>
+</html>

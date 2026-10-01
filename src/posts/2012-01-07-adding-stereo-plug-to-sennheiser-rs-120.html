@@ -1,0 +1,107 @@
+---
+title: Add a stereo jack to Sennheiser RS-120 Wireless Headphones
+date: 2012-01-07T23:36:00Z
+url: /blog/2012/01/adding-stereo-plug-to-sennheiser-rs-120.html
+excerpt:  Before After This is a simple project that I did over a couple of hours one Saturday. I decided to make a blog entry about it because I think it makes a good project for someone…
+---
+<figure><a class="lightbox" href="/assets/img/blog/2012/adding-stereo-plug-to-sennheiser-rs-120/01-image.webp"><img alt="" decoding="async" height="290" loading="lazy" src="/assets/img/blog/2012/adding-stereo-plug-to-sennheiser-rs-120/01-image.webp" width="400"/></a><figcaption><strong>Before</strong></figcaption></figure>
+
+<figure><a class="lightbox" href="/assets/img/blog/2012/adding-stereo-plug-to-sennheiser-rs-120/02-image.webp"><img alt="" decoding="async" height="400" loading="lazy" src="/assets/img/blog/2012/adding-stereo-plug-to-sennheiser-rs-120/02-image.webp" width="299"/></a><figcaption><strong>After</strong></figcaption></figure>
+
+<h3>Background:</h3>
+
+<p>
+This is a simple project that I did over a couple of hours one Saturday. I decided to make a blog entry about it because I think it makes a good project for someone just starting in electronics.</p>
+
+<p>
+What I wanted to do was add a stereo output to a pair of <a href="https://www.amazon.com/gp/product/B0001FTVEK/ref=as_li_ss_tl?ie=UTF8&amp;tag=joshcom-20">Sennheiser RS-120 wireless headphones</a> my wife and I use at home when we don't want to disturb each other.</p>
+
+<p>
+For normal day to day use, the Sennheisers work great. They have long range, the batteries last forever, and they're comfortable for extended use. However, they don't lend themselves to being worn during workouts.</p>
+
+<p>
+I have an elliptical machine at home and can't bear to exercise unless I'm distracted by the TV. Since the elliptical machine is rather noisy, I either have to turn up the TV volume--which my wife doesn't like--or wear the headphones, which I don't like because my ears sweat all over the pads. Yeah, I know, gross. </p>
+
+<p>
+The solution, to keep my wife happy ("Happy wife, happy life" as the saying goes) and to have a more comfortable workout, was to add a jack to the Sennheisers so that I could use my own exercise-friendly earbuds, while still enjoying wireless audio.</p>
+
+<h3>Headphone circuitry layout:</h3>
+
+<p>
+The wireless, audio and charging circuitry of the <a href="https://www.amazon.com/gp/product/B0001FTVEK/ref=as_li_ss_tl?ie=UTF8&amp;tag=joshcom-20">Sennheiser RS-120's</a> is split across the left and right ear cups.</p>
+
+<p>
+As illustrated in the drawing below, the left ear cup printed circuit board (PCB) has the power switch, houses the rechargeable batteries and, of course, the left speaker. The right ear cup PCB has the wireless receiver, volume and tuning knobs and the right speaker. Wires run through the headband carrying power from the left ear cup to the right, and an audio signal from the right pcb to the left PCB and speaker.</p>
+
+<p>
+At first I thought I'd have to run extra wires through the headband, as I wasn't sure where the left speaker amplification was happening--did the left audio signal already "arrive" amplified from the right side, or did the left PCB do final amplification. To determine what wired carried what signal, I traced connections on the left and right PCBs and used my multimeter to detect changing voltage values off the leads I suspected carried the audio signals. It would have been better for me to use an oscilloscope, but I don't have one. However, I did connect the leads I suspected carried the audio signals to my earbuds using alligator clips.</p>
+
+<p>
+Anyway, I determined that right PCB did all the amplification and sent the left speaker audio signal over to the left ear cup. I could do all my modifications on the right side without needing to run additional wires through the headband. Here's a simplified circuit diagram:</p>
+
+<p><a class="lightbox" href="/assets/img/blog/2012/adding-stereo-plug-to-sennheiser-rs-120/03-image.webp"><img alt="" decoding="async" height="238" loading="lazy" src="/assets/img/blog/2012/adding-stereo-plug-to-sennheiser-rs-120/03-image.webp" width="553"/></a></p>
+
+<h3>What you'll be doing</h3>
+
+<p>
+You will be adding a switch to your headphones that will let you switch between two sets of speakers: the internal ones and an external set (via a stereo jack).</p>
+
+<p>
+The circuit board in the right ear cup has electronic components and solder points on both sides. On the front side, there is little but two solder points that connect directly to the right speaker.</p>
+
+<p><a class="lightbox" href="/assets/img/blog/2012/adding-stereo-plug-to-sennheiser-rs-120/04-image.webp"><img alt="" decoding="async" height="217" loading="lazy" src="/assets/img/blog/2012/adding-stereo-plug-to-sennheiser-rs-120/04-image.webp" width="307"/></a></p>
+
+<p>
+The back side of the right PCB has many components, including two potentiometers for volume and tuning and five solder pads at the top of the circuit board. The two left-most solder pads connect to wires which go through the headband and eventually connect to the left speaker.</p>
+
+<p><a class="lightbox" href="/assets/img/blog/2012/adding-stereo-plug-to-sennheiser-rs-120/05-image.webp"><img alt="" decoding="async" height="275" loading="lazy" src="/assets/img/blog/2012/adding-stereo-plug-to-sennheiser-rs-120/05-image.webp" width="314"/></a></p>
+
+<p>
+We will be disconnecting one of the wires to the left speaker on the back of the PCB and one of the wires to the right speaker on the front of the PCB and connecting them up to the switch. Then we'll run wires to the two sets of speakers off the switch. </p>
+
+<p>
+ Here's a diagram showing the basic circuit:</p>
+
+<p><a class="lightbox" href="/assets/img/blog/2012/adding-stereo-plug-to-sennheiser-rs-120/06-image.webp"><img alt="" decoding="async" height="384" loading="lazy" src="/assets/img/blog/2012/adding-stereo-plug-to-sennheiser-rs-120/06-image.webp" width="402"/></a></p>
+
+<p>
+Notice that we'll be using a DPDT switch. That stands for "Double-Pole, Double-Throw". Double-pole means that the switch handles two circuits, while double-throw means there are two positions to the switch. Looking at the circuit diagram above, the two circuits are the left and right audio signals.</p>
+
+<h3>What you'll need</h3>
+
+<ul><li><a class="lightbox" href="/assets/img/blog/2012/adding-stereo-plug-to-sennheiser-rs-120/07-image.webp"><img alt="" decoding="async" height="136" loading="lazy" src="/assets/img/blog/2012/adding-stereo-plug-to-sennheiser-rs-120/07-image.webp" width="200"/></a></li><li>1/8" panel-mount stereo headphone jack, 3 conductor.<br/>This is what you'll plug your external headphones into. Panel mount means that the top of the jack as a nut so that you can screw it into a properly-sized hole. The 3 conductors are for left, right and ground connectors.<br/><a href="https://web.archive.org/web/20121127020458/http://www.radioshack.com/product/index.jsp?productId=2103452">Radio Shack model 274-249</a>.</li></ul>
+
+<ul><li><a class="lightbox" href="/assets/img/blog/2012/adding-stereo-plug-to-sennheiser-rs-120/08-image.webp"><img alt="" decoding="async" height="125" loading="lazy" src="/assets/img/blog/2012/adding-stereo-plug-to-sennheiser-rs-120/08-image.webp" width="170"/></a></li><li>DPDT Micro-mini toggle switch.<br/><a href="https://en.wikipedia.org/wiki/Switch">DPDT stands for "double-pole double-throw"</a>. Double-pole means the switch handles two circuits, and double-throw means that the switch has two positions. I chose this switch because I wanted to handle two circuits (the left and right audio circuits) and two positions (to select either the internal speakers or the stereo audio jack). You'll want a micro-mini switch because there isn't much room in the ear cups.<br/><a href="https://web.archive.org/web/20130823103810/http://www.radioshack.com/product/index.jsp?productId=2062505">Radio Shack model 275-626</a>.</li></ul>
+
+<ul><li>Stranded hookup wire (22 to 26 gauge)<br/>This is just what it sounds like: it's wire. Get the stranded type (as opposed to solid copper), as it's easier to bend and use. Since you'll be working in a tight space, stranded wire will be better.<br/><a href="https://web.archive.org/web/20110823051655/http://www.radioshack.com/product/index.jsp?productId=2049745">Radio Shack model 278-1224</a>.</li><li>Soldering Iron</li><li>Solder</li></ul>
+
+<h3>Step-by-Step</h3>
+
+<figure><a class="lightbox" href="/assets/img/blog/2012/adding-stereo-plug-to-sennheiser-rs-120/09-image.webp"><img alt="" decoding="async" height="276" loading="lazy" src="/assets/img/blog/2012/adding-stereo-plug-to-sennheiser-rs-120/09-image.webp" width="454"/></a><figcaption>Circuit Diagram of finished connections</figcaption></figure>
+
+<ul><li>Remove the ear pad on the right side by rotating it.</li><li>Unscrew the speaker panel.</li><li>Remove the screws holding down the printed circuit board.</li><li>Using the soldering iron, disconnect the speaker cable on the lower solder point on the front of the PCB by heating it until you can pull the wire off.</li><li>On the back of the PCB, heat the left-most solder pad up top until you can disconnect the wire connected to it. This is one of the two wires that connects to the left speaker.</li></ul>
+
+<p><a class="lightbox" href="/assets/img/blog/2012/adding-stereo-plug-to-sennheiser-rs-120/10-image.webp"><img alt="" decoding="async" height="457" loading="lazy" src="/assets/img/blog/2012/adding-stereo-plug-to-sennheiser-rs-120/10-image.webp" width="613"/></a></p>
+
+<ul><li>Drill a hole at the top of the right ear cup the size of the switch top. I made successively larger holes until the switch fit through. The reason I put the switch up top is so that I wouldn't accidentally flip the toggle if I leaned back on my couch. Don't screw the switch into place yet. It will be easier to solder all the wires that way.</li><li>You will also need to make a hole for the stereo jack. I placed mine toward the bottom of the ear cup. As with the switch, don't screw it into place.</li><li>Solder a wire from the now free front solder pad to one of the center posts on the DPDT switch. This is the right channel audio signal.</li><li>Solder another wire from the left-most free solder pad on the top of the PCB back to the other center post of the switch. This is the left channel audio signal. </li><li>Solder a wire to each of the four remaining posts on the switch. You will be connecting each set of wires to the speakers, and the other set to the stereo plug.</li></ul>
+
+<p><a class="lightbox" href="/assets/img/blog/2012/adding-stereo-plug-to-sennheiser-rs-120/11-image.webp"><img alt="" decoding="async" height="457" loading="lazy" src="/assets/img/blog/2012/adding-stereo-plug-to-sennheiser-rs-120/11-image.webp" width="613"/></a></p>
+
+<ul><li>Pick a set of wires on either side of the center posts of the switch. We're going to connect those two wires to the left and right speakers. Select the wire that is adjacent to the center post which is connected to the left audio channel (it's the center post which is connected to the pad on the back side of the PCB). In the diagram of the circuit, all the left channel wires are in <strong>GREEN</strong>. Solder this left channel wire to the wire which leads back to the left speaker. Remember that the wire that connects back to the left speaker used to soldered to the back of PCB. To keep this wire to wire connection from causing a short circuit, use some electrical tape.</li></ul>
+
+<p><a class="lightbox" href="/assets/img/blog/2012/adding-stereo-plug-to-sennheiser-rs-120/12-image.webp"><img alt="" decoding="async" height="458" loading="lazy" src="/assets/img/blog/2012/adding-stereo-plug-to-sennheiser-rs-120/12-image.webp" width="612"/></a></p>
+
+<ul><li>Now solder the right channel from the same side of the switch to the free solder pad on the right speaker. In the circuit diagram, the right channel audio wires are in <strong>BLUE</strong>.</li><li>Test that you can hear audio out of the speakers when the switch is flipped to the correct side.</li><li>Now we have two wires left on the switch. These are the right and left channels that we are going to solder to the stereo jack.</li><li>Take the wire that is adjacent to the center post which is connected to the left audio channel. You will connect this to the left channel connector on the stereo jack. Typically the left channel on a set of headphones is the connector that makes contact with the tip of the stereo plug. Take a look at the diagram for reference.</li><li>Now you have one wire remaining coming off the switch. This is the right channel and it should be soldered to the connector in the stereo plug that makes contact with the center part of the stereo plug. Depending on the configuration of the stereo jack you have, the left and right connectors might be hard to pick apart. Refer to the packaging for the jack to figure out which is which.</li><li>Finally, you will need to solder a return wire from the stereo jack common or ground connector back to the PCB. As shown in the diagram, I soldered the jack common to the front of the PCB, to the top solder pad that feeds the right speaker.</li></ul>
+
+<p><a class="lightbox" href="/assets/img/blog/2012/adding-stereo-plug-to-sennheiser-rs-120/13-image.webp"><img alt="" decoding="async" height="457" loading="lazy" src="/assets/img/blog/2012/adding-stereo-plug-to-sennheiser-rs-120/13-image.webp" width="613"/></a></p>
+
+<ul><li>Test the internal and external speakers by flipping the switch back and forth. If you soldered everything correctly, you'll alternatively hear audio from the built-in speakers and through the stereo jack. </li><li>Carefully screw the switch and stereo jack into place and pack all the wires into the ear cup.</li><li>Finally, screw the PCB and then speaker back into place and twist the ear pad back on.</li></ul>
+
+<h3>Additional modification</h3>
+
+<p>
+It was pointed out to me by my friend Josh, who knows more about electronics than I do, that I could have used a <a href="https://web.archive.org/web/20130222044434/http://www.allelectronics.com/make-a-store/item/SMJ-6/3.5MM-STEREO-MINI-PHONE-JACK-W/2-NC-SHUNTS/1.html">4 conductor stereo jack</a> and gotten rid of the toggle switch entirely. A 4 conductor jack acts like a switch as well. The act of inserting a stereo plug into the jack makes it behave like a switch being flipped, so that you can go from the internal speakers to the external audio jack without the need of a separate switch like I used.</p>
+
+<p>
+I like the retro look and feel of the toggle switch, however, so I'm glad that I used it in the project.
+</p>

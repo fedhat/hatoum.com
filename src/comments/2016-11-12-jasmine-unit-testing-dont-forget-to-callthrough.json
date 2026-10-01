@@ -1,0 +1,56 @@
+[
+ {
+  "id": "59b8dfd746c3c486a67be739",
+  "parent": "",
+  "author": "Aleix",
+  "url": "",
+  "owner": false,
+  "date": "2017-09-13T07:35:51Z",
+  "body": "<p>Hi Federico,<br/>Thank you for your article, really clear. </p>\n<p>One question: If I'm going to test the service itself (using .and.callThrough()), What is the advantage of spy on it instead of calling it directly?</p>\n<p>Thanks</p>"
+ },
+ {
+  "id": "59ecaf5b4c326dcab88c5b33",
+  "parent": "59b8dfd746c3c486a67be739",
+  "author": "Federico Hatoum",
+  "url": "",
+  "owner": true,
+  "date": "2017-10-22T14:46:51Z",
+  "body": "<p>Hi Aleix.</p>\n<p>You can certainly just call a service directly and examine the return value. Using spies, however, gives you more information about the call. For example, only with a spy can you use <code>expect(foo).toHaveBeenCalled()</code> or <code>expect(bar).toHaveBeenCalledWith('hi')</code>.</p>"
+ },
+ {
+  "id": "5c090c6f758d462ece96c61d",
+  "parent": "",
+  "author": "Ajay",
+  "url": "",
+  "owner": false,
+  "date": "2018-12-06T11:47:59Z",
+  "body": "<p>Hi Federico,<br/>Thank you for your article. I tried same way but promise is not resolving and not getting any data.<br/>spyOn(RickAndMortyLib, 'getQuote').and.callThrough();<br/>RickAndMortyLib.getQuote();<br/>var tee1 = RickAndMortyLib.getQuote().then(function(response) {<br/> console.log('Success', response);<br/> });<br/> scope.$apply();<br/>.and.callThrough() is not resolving to success</p>"
+ },
+ {
+  "id": "5c090da5f950b7c331958a29",
+  "parent": "",
+  "author": "Ajay",
+  "url": "",
+  "owner": false,
+  "date": "2018-12-06T11:53:09Z",
+  "body": "<p>Hi Federico,<br/>Thank you for your article.</p>\n<p>I used same way for callThrough(). But it not resovling my status.</p>\n<p>spyOn(myService, 'gettest1').and.callThrough();<br/>myService.gettest1();<br/> var tee1 = myService.gettest1().then(function(response) {<br/> console.log('Success', response);<br/> });<br/>scope.$digest();</p>\n<p>It not showing console Success response. But I am getting data in controller not in It block. I am using Jasmine2. Can you help me in this to get actuall data from API</p>"
+ },
+ {
+  "id": "60e41128b2d10014a2af0b58",
+  "parent": "",
+  "author": "Chaynnitt Agarwal",
+  "url": "",
+  "owner": false,
+  "date": "2021-07-06T08:15:36Z",
+  "body": "<p>Hi Federico,</p>\n<p>I really appreciate this article to give a crystal clear understanding of the callThrough method. I just been through a lot of videos and articles but was not able to understand the exact implementation of the method.</p>\n<p>your article is SUPER AWESOME!!!!</p>"
+ },
+ {
+  "id": "60e69083f164375eabece10d",
+  "parent": "60e41128b2d10014a2af0b58",
+  "author": "Federico Hatoum",
+  "url": "",
+  "owner": true,
+  "date": "2021-07-08T05:43:31Z",
+  "body": "<p>Thank you, Chaynnitt! Glad you found the article useful. 😀</p>"
+ }
+]

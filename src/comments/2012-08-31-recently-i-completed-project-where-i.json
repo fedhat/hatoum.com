@@ -1,0 +1,38 @@
+[
+ {
+  "id": "54c3ffd1e4b04453ba5be1d8",
+  "parent": "",
+  "author": "Alex",
+  "url": "",
+  "owner": false,
+  "date": "2012-08-31T14:39:50Z",
+  "body": "I believe this only applies if you are using HTML4x.  If you are using XHTML or HTML 5 this shouldn't be the case."
+ },
+ {
+  "id": "54c3ffd1e4b04453ba5be1d9",
+  "parent": "",
+  "author": "Fed",
+  "url": "",
+  "owner": true,
+  "date": "2012-08-31T15:54:31Z",
+  "body": "I was adding my scripts to a SquareSpace version 5 site, which uses the \"XHTML 1.0 Strict\" doctype, and was seeing the problem. Perhaps on a page with an HTML5 doctype it wouldn't be a problem, though I didn't test that scenario.<br/><br/>For backward compatibility--or to fail gracefully--I'll still continue to use the non-atomic version of the script tag."
+ },
+ {
+  "id": "54c3ffd1e4b04453ba5be1da",
+  "parent": "",
+  "author": "Fed",
+  "url": "",
+  "owner": true,
+  "date": "2012-08-31T22:57:17Z",
+  "body": "UPDATE: Out of curiosity, I just tested this and could not get self-closing script tags to work. Maybe I was doing something wrong, but it didn't seem to matter what doctype I used. Whenever I didn't add a closing script tag, my Javascript files did not load."
+ },
+ {
+  "id": "54c3ffd1e4b04453ba5be1db",
+  "parent": "",
+  "author": "Alex",
+  "url": "",
+  "owner": false,
+  "date": "2012-09-01T00:40:41Z",
+  "body": "So, this is all a bit odd.  I too did several tests and found that what you say is the case.  Self-closing tags don't work in either XHTML Transitional, Strict, or HTML5.  The W3C validator is happy to pass either the separate closing or self-closing variants in XHTML, however in HTML5 validation it actually produces an error:<br/><br/>Self-closing syntax (/&gt;) used on a non-void HTML element. Ignoring the slash and treating as a start tag.<br/><br/>According to the XHTML and HTML5 specs (your link references the HTML4 spec), either is actually valid,  but it just happens that the major browser implementations require a separate close tag.  This is unfortunately an example of another place in web programming where you CAN'T code to the spec, you have to code to the implementations."
+ }
+]

@@ -1,0 +1,174 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Programming Basics: Names matter · Federico Hatoum</title>
+  <meta name="description" content="The names developers use for identifiers in their code is essential for readability, maintainability and is one of the indicators of a competent software developer. Combined with…">
+  <link rel="canonical" href="https://hatoum.com/blog/2016/9/4/programming-basics-names-matter/">
+  <meta name="color-scheme" content="light dark">
+  <meta name="theme-color" content="#f6f1e9" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#121417" media="(prefers-color-scheme: dark)">
+  <meta property="og:site_name" content="Federico Hatoum">
+  <meta property="og:title" content="Programming Basics: Names matter · Federico Hatoum">
+  <meta property="og:description" content="The names developers use for identifiers in their code is essential for readability, maintainability and is one of the indicators of a competent software developer. Combined with…">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://hatoum.com/blog/2016/9/4/programming-basics-names-matter/">
+  <meta property="og:image" content="https://hatoum.com/assets/img/home/lake.webp">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="icon" type="image/png" sizes="32x32" href="../../../../../assets/icons/favicon-32.png">
+  <link rel="apple-touch-icon" href="../../../../../assets/icons/apple-touch-icon.png">
+  <link rel="preload" href="../../../../../assets/fonts/inter-var.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="../../../../../assets/fonts/fraunces-var.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="../../../../../assets/css/site.css">
+  <link rel="alternate" type="application/rss+xml" title="Federico Hatoum — Blog" href="../../../../../blog/feed.xml">
+  <script>try{var t=localStorage.getItem('theme');if(t==='light'||t==='dark')document.documentElement.setAttribute('data-theme',t)}catch(e){}</script>
+  <script src="../../../../../assets/js/site.js" defer></script>
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "BlogPosting", "headline": "Programming Basics: Names matter", "datePublished": "2016-09-04T16:02:39Z", "author": {"@type": "Person", "name": "Federico Hatoum", "url": "https://hatoum.com"}, "mainEntityOfPage": "https://hatoum.com/blog/2016/9/4/programming-basics-names-matter/"}</script>
+  <meta property="article:published_time" content="2016-09-04T16:02:39Z">
+</head>
+<body class="">
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-header">
+    <div class="wrap header-inner">
+      <a class="brand" href="../../../../../">
+        <img src="../../../../../assets/icons/dog.png" alt="" width="30" height="30">
+        <span>Federico Hatoum</span>
+      </a>
+      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav">
+        <span class="nav-toggle-bars" aria-hidden="true"></span><span class="visually-hidden">Menu</span>
+      </button>
+      <nav id="site-nav" class="site-nav" aria-label="Main">
+        <a href="../../../../../about/">About</a>
+        <a href="../../../../../blog/" aria-current="page">Blog</a>
+        <a href="../../../../../films/">Films</a>
+        <a href="../../../../../acting/">Acting</a>
+        <a href="../../../../../contact/">Contact</a>
+      </nav>
+      <button class="theme-toggle" type="button" aria-label="Switch to dark theme" title="Toggle theme">
+        <svg class="icon icon-moon" aria-hidden="true"><use href="../../../../../assets/icons/icons.svg#moon"></use></svg>
+        <svg class="icon icon-sun" aria-hidden="true"><use href="../../../../../assets/icons/icons.svg#sun"></use></svg>
+      </button>
+    </div>
+  </header>
+
+  <main id="main">
+<article class="post wrap-narrow">
+  <header class="post-header">
+    <p class="post-kicker"><a href="../../../../../blog/">Blog</a></p>
+    <h1>Programming Basics: Names matter</h1>
+    <p class="post-meta"><time datetime="2016-09-04T16:02:39Z">September 4, 2016</time> · 5 min read</p>
+  </header>
+  <div class="prose">
+<h2>TLDR;</h2>
+<p>The names developers use for identifiers in their code is essential for readability, maintainability and is one of the indicators of a competent software developer.</p>
+<p>Combined with a naming convention system, well-chosen identifier names have the potential to make or break a project, especially on collaborative endeavors with multiple developers. </p>
+<h2>What makes a good name?</h2>
+<p>A good identifier name enhances comprehension of the code it describes, making it readable, easy to follow and ultimately more maintainable.</p>
+<p>While placing comments in code is very important, you could argue that using descriptive names for identifiers in our code greatly reduces or possibly eliminates the need for comments.</p>
+<p>You can further magnify the effect of the identifier names you use by applying naming conventions.</p>
+<h3>What are naming conventions?</h3>
+<p>For the uninitiated, naming conventions are rule sets applied to the names of identifiers in software (ex: variables, constants, types, functions). There are many systems of naming conventions such as <a href="https://en.wikipedia.org/wiki/Hungarian_notation" target="_blank" rel="noopener">Hungarian Notation</a> and <a href="https://en.wikipedia.org/wiki/CamelCase" target="_blank" rel="noopener">Camel Case</a>.</p>
+<p>Here's an example of Camel Case -- where the individual words in identifier names are visually separated by capitalizing the first letter of that word. <code>getName()</code> instead of <code>getname()</code>. The camel cased version of the method is easier to read.</p>
+<p>I personally separate the concepts of naming from naming conventions since, although similar, they aren't the same thing. Most naming conventions dictate the use of underscores, letter case and letter code combinations for use within identifier names, but they don't address the actual content or meaning of the identifier itself. </p>
+<p>Most naming convention systems rely on the programmer applying them to logical, meaningful names. And that's the area in which, surprisingly, a lot of software developers do a poor job.</p>
+<p>A good identifier name for a service that handled Person objects could be <code>personservice</code>. Applying Camel Case to it transforms it to 'PersonService'. Again, the application of a naming convention makes it easier to read and understand.</p>
+<p>However, if instead of calling the class <code>PersonService</code> we had called it <code>ps</code>, applying camel case to it (<code>PS</code>) does little to aid readability, and the meaning -- arguably the most important part of the name -- is still vague.</p>
+<h2>Examples:</h2>
+<p>One of the things that source code obfuscaters do is rename variables and function calls to remove their meaning. Why? Because it's much harder to understand code that has no context. Consider the following snippets of Javascript:</p>
+<h4>Original code:</h4>
+<p>This is fairly useless code, does nothing too important, but even without comments (which I always encourage), you can easily follow along to figure out what the code is intended to do.</p>
+<pre><code class="language-javascript">var mass, acceleration;
+var force = 0;
+var isAccelerating = false;
+
+mass = 10;
+acceleration = 9.8;
+
+function calculateForce(massKg, accelMeterSecondSq) {
+    return massKg * accelMeterSecondSq;
+}
+
+isAccelerating = (acceleration &gt; 0) ? true : false;
+
+if (isAccelerating) {
+    force = calculateForce(mass, acceleration);
+}
+
+console.log('Value is: ' + force);</code></pre>
+<p>Even if you're unfamiliar with the formula for force ( force = mass * acceleration), you could follow along and get the meaning of code.</p>
+<h4>Obfuscated:</h4>
+<p>Here's what an obfuscater might turn the original code into. I've kept the formatting the same, so we can just focus on the differences in the identifier names.</p>
+<pre><code class="language-javascript">var b,c;
+var d = 0;
+var t = false;
+
+b = 10;
+c = 9.8;
+
+function a(e,f) {
+    return e*f;
+}
+
+t = (c &gt; 0) ? true : false;
+
+if (t) {
+    d = a(b,c);
+}
+
+console.log('Value is: ' + d);</code></pre>
+<p>While functionally the program does the same thing, unless you happen to recognize numbers like 9.8 as the acceleration due to gravity and that force = mass * acceleration, you would have a very hard time placing the code in any sort of context.</p>
+<h4>Stupidly named identifiers:</h4>
+<p>I've seen far too much of this kind of thing. To the programmer who wrote this code, it makes perfect sense, but to anyone else it would be hard to follow.</p>
+<pre><code class="language-javascript">var heavy, fast;
+var hard = 0;
+var acceleration =  false;
+
+heavy = 10;
+fast = 9.8;
+
+function calc(val1, val2) {
+    return val1 * val2;
+}
+
+acceleration = (fast &gt; 0) ? true : false;
+
+if (acceleration) {
+    hard = calc(heavy, fast);
+}
+
+console.log('Value is: ' + hard);</code></pre>
+<p>I consider this version of the code worse than the obfuscated code. At first glance, the identifiers appear to provide contextual information, but as you read the code, you discover that they are named in such a way as to inhibit understanding.</p>
+<h3>Anecdotal proof</h3>
+<p>An excellent programmer and mentor of mine told me a story that illustrated very clearly the effect that identifier names have in software development. He was in a job where he was treated poorly and had decided to leave. In his last week of employment he altered his source code as a final act of rebellion. He didn't add a back door or a virus which could have gotten him into legal trouble. Instead, he changed all the identifier names. <code>isReady()</code> became <code>isNotDoneNot()</code>, <code>correct</code> became <code>unbadly</code>, <code>date</code> became <code>value123</code>. Unfortunately, the programmer who inherited the code was a good friend of my mentor and called him up bitching about how my mentor had ruined his life because the code was impossible to follow. They're still friends.</p>
+<h3>Summary</h3>
+<p>Please use logical, descriptive names for your identifiers. Your fellow programmers will enjoy working on your code, even if they aren't aware why. This also applies to Lone Wolf programmers as well who "work alone, damnit!" Descriptively named identifiers will greatly reduce the amount of time you spend saying to yourself "WTF was I trying to do here?!" when maintaining your old code.</p>
+
+  </div>
+  
+  <nav class="pager" aria-label="More posts">
+    <a class="pager-prev" href="../../../../../blog/2015/11/17/repair-20-year-old-coffee-maker/"><span>Older</span>Repair: 30 year-old coffee maker</a><a class="pager-next" href="../../../../../blog/2016/11/12/jasmine-unit-testing-dont-forget-to-callthrough/"><span>Newer</span>Jasmine unit testing: Don&#x27;t forget to callThrough()</a>
+  </nav>
+</article>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap footer-inner">
+      <div class="footer-about">
+        <p class="footer-name">Federico Hatoum</p>
+        <p>Software developer, maker &amp; YouTuber in Los Angeles.</p>
+      </div>
+      <nav aria-label="Elsewhere">
+      <ul class="social">
+        <li><a href="https://www.youtube.com/channel/UCQGkNFXJCUBLkzMIShzf12g" title="Fed Learns To Make on YouTube" target="_blank" rel="noopener"><svg class="icon" aria-hidden="true"><use href="../../../../../assets/icons/icons.svg#youtube"></use></svg><span class="visually-hidden">Fed Learns To Make on YouTube</span></a></li>
+        <li><a href="https://github.com/fedhat" title="GitHub" target="_blank" rel="noopener"><svg class="icon" aria-hidden="true"><use href="../../../../../assets/icons/icons.svg#github"></use></svg><span class="visually-hidden">GitHub</span></a></li>
+        <li><a href="https://www.linkedin.com/pub/federico-hatoum/0/866/1a2" title="LinkedIn" target="_blank" rel="noopener"><svg class="icon" aria-hidden="true"><use href="../../../../../assets/icons/icons.svg#linkedin"></use></svg><span class="visually-hidden">LinkedIn</span></a></li>
+        <li><a href="https://www.facebook.com/583536348" title="Facebook" target="_blank" rel="noopener"><svg class="icon" aria-hidden="true"><use href="../../../../../assets/icons/icons.svg#facebook"></use></svg><span class="visually-hidden">Facebook</span></a></li>
+        <li><a href="../../../../../blog/feed.xml" title="Blog RSS feed"><svg class="icon" aria-hidden="true"><use href="../../../../../assets/icons/icons.svg#rss"></use></svg><span class="visually-hidden">Blog RSS feed</span></a></li>
+      </ul>
+      </nav>
+      <p class="footer-copy">© 2026 Federico Hatoum</p>
+    </div>
+  </footer>
+</body>
+</html>

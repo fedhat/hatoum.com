@@ -1,0 +1,193 @@
+---
+title: Practical uses for the modulo operator
+date: 2012-12-27T16:14:00Z
+url: /blog/2012/12/practical-uses-for-modulo-operator.html
+excerpt:  I was introduced to the modulo operator in my first real programming job (longer ago than I care to admit). The problem I had was that I needed to generate a calendar as a simple…
+---
+<p>
+I was introduced to the modulo operator in my first real programming job (longer ago than I care to admit). The problem I had was that I needed to generate a calendar as a simple HTML table (remember when all website layout was done with tables?) and needed to layout columns in multiples of 7.</p>
+
+<p>
+I shared my dilemma with Felix, a more experienced and knowledgeable programmer at work who taught me about the modulus operator.</p>
+
+<p>
+The modulus operator returns the remainder of a <a href="https://en.wikipedia.org/wiki/Modulo_operation">division of one number by another</a>. In most programming languages, modulo is indicated with a percent sign. For example, "4 mod 2" or "4%2" returns 0, because 2 divides into 4 perfectly, without a remainder. "5%2", however, returns 1 because 1 is the remainder of 5 divided by 2 (2 divides into 5 2 times, with 1 left over).</p>
+
+<p>
+That doesn't sound like much, but it turns out that knowing the remainder of a division is immensely useful in certain situations.</p>
+
+<h4>
+Example 1: Is a number even?</h4>
+
+<p>
+Since any even number divided by 2 has a remainder of 0, we can use modulo to determine the even-ess of a number. This can be used to make every other row in a table a certain color, for example.</p>
+
+<pre>
+for (x = 1; x &lt; 11; x++) {
+
+    if (x%2 == 0) {
+        // Yes! this is an even row
+        rowColor = #CCCCCC; // grey
+    
+    } else {
+        // This is an odd row
+        rowColor = #FFFFFF; // white
+    }
+}
+</pre>
+
+<h4>
+Example 2: Do something every nth time.</h4>
+
+<p>
+If you have a for loop and want to report on the state of the loop, but not every cycle through, you can use modulo:</p>
+
+<pre>
+for (x=0; x &lt;100000; x++) {
+
+    // do regular stuff here
+ 
+    // do something special every 9th time through
+    // the loop
+    if (x % 9 == 0) {
+        // important stuff here
+    }
+}
+</pre>
+
+<h4>
+Example 3: Prepare seconds for display as Hours, Minutes and seconds.</h4>
+
+<p>
+If you need to turn an elapsed number of seconds into Hours, Minutes and Seconds, modulo comes in handy.</p>
+
+<pre>
+hours:int   = seconds / 3600;
+minutes:int = (seconds / 60) % 60;
+seconds:int = seconds % 60;
+</pre>
+
+<p>
+starting with 582 seconds:</p>
+
+<pre>
+hours   = 582 / 3600 = 0 // integer would round this to 0
+minutes = (582 / 60) % 60 = (9.7) % 60 = 9
+seconds = 582 % 60 = 42
+</pre>
+
+<p>
+Thus, 582 seconds is 9 minutes, 42 seconds.</p>
+
+<h4>
+Example 4: Force a number to be a multiple of another number</h4>
+
+<p>
+Another way of thinking of this example is forcing a number to be evenly divisible by another number.</p>
+
+<p>
+Let's say you need to have a number that is always a multiple of 10. You can use modulo in this way to accomplish it:</p>
+
+<pre>
+multipleOfTen = x - (x % 10);
+</pre>
+
+<p>
+By subtracting the remainder of a value x divided by 10 from x we get a value that is always divisible by 10. It's a neat mathematical trick.</p>
+
+<p>
+For x=1 through x=9, for example, x%10 is always x. Thus:</p>
+
+<pre>
+multipleOfTen = 1 - (1 % 10) = 1 - (1) = 0;
+multipleOfTen = 2 - (2 % 10) = 2 - (2) = 0;
+multipleOfTen = 3 - (3 % 10) = 3 - (3) = 0;
+...
+multipleOfTen = 9 - (9 % 10) = 9 - (9) = 0;
+</pre>
+
+<p>
+once we hit 10, we get:</p>
+
+<pre>
+multipleOfTen = 10 - (10 % 10) = 10 - (0) = 10;
+</pre>
+
+<p>
+and once we hit 20 we get:</p>
+
+<pre>
+multipleOfTen = 20 - (20 % 10) = 20 - (0) = 20;
+</pre>
+
+<p>
+But...how is this useful? Well, imagine that you need to work with a data structure that is made up of values grouped in multiples. One such data structure is a ByteArray representing an audio file. Often times programming languages give you access to binary files as ByteArrays so that they are easy to operate upon (upload, write to the file system or perform data conversions).</p>
+
+<p>
+Now, if you record 32-bit audio, you're capturing data 4 bytes at a time. That means that every audio sample, the smallest unit of data, is 4 bytes wide. Indexes 0 through 3 of the ByteArray would represent one sample.</p>
+
+<p>
+If you were to split a byte array representing a 32-bit audio file in the middle of a 4-byte unit, you would "break" the audio file. When played back, you would either get an end of file error and/or it would sound like a screech.</p>
+
+<p>
+In order to safely edit the audio ByteArray, you can only edit in multiples of 4, at the beginning or end of a 4 byte block, not in the middle.</p>
+
+<p>
+So, let's say we want to trim some bytes from the start of the audio file. What's a safe starting index in the array?</p>
+
+<p>
+Since the data is chunked in groups of 4, we can say:</p>
+
+<pre>
+safeStartIndex = startIndex - (startIndex%4)
+</pre>
+
+<p>
+A start index of 0 would yield a safeStartIndex of:</p>
+
+<pre>
+safeStartIndex = 0 - (0%4) = 0 - (0) = 0
+</pre>
+
+<p>
+A start index of 1 would yield:</p>
+
+<pre>
+safeStartIndex = 1 - (1%4) = 1 - (1) = 0
+</pre>
+
+<p>
+A start index of 2 would yield:</p>
+
+<pre>
+safeStartIndex = 2 - (2%4) = 2 - (2) = 0
+</pre>
+
+<p>
+A start index of 3 would yield:</p>
+
+<pre>
+safeStartIndex = 3 - (3%4) = 3 - (3) = 0
+</pre>
+
+<p>
+A start index of 4 would yield:</p>
+
+<pre>
+safeStartIndex = 4 - (4%4) = 4 - (0) = 4
+</pre>
+
+<p>
+Notice that by using modulo, we can automatically adjust non-safe ByteArray indexes to an index which is divisible by 4 and won't split the audio file represented by our array in the wrong place (ie. in the middle of a sample group).</p>
+
+<h4>
+Final Words</h4>
+
+<p><a href="https://watchhogstories.wordpress.com/2008/08/11/coding-practices-the-modulus-operator/">The WatchHogStories blog</a> has another way of describing modulo which I really like. As Dotun, the author of the blog, says (with a slight modification):</p>
+
+<p>
+* a is zero or a positive number.<br/>
+* n is a positive number.<br/>
+* if a / n equals a whole number then a % n  always equals 0<br/>
+* if a is and less than n then a % n always equals a<br/>
+* if a is greater than n then a % n always equals a value between 1 and n-1</p>

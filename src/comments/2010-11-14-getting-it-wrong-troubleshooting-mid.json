@@ -1,0 +1,29 @@
+[
+ {
+  "id": "54c3ffd1e4b04453ba5be227",
+  "parent": "",
+  "author": "emegezeta",
+  "url": "",
+  "owner": false,
+  "date": "2010-11-15T13:53:27Z",
+  "body": "Hi, Fede, your blog is very interesting. It's a good idea to share with others your experiences with hardware and software troubleshooting and issues.<br/>I will make a link in my blog pointing to yours in \"Mis blogs favoritos\".<br/>Saludos,<br/>Emegezeta"
+ },
+ {
+  "id": "54c3ffd1e4b04453ba5be228",
+  "parent": "",
+  "author": "Fed",
+  "url": "",
+  "owner": true,
+  "date": "2010-11-15T15:45:53Z",
+  "body": "Thank you, emegezeta. I would have liked to write the blog in Spanish so that my <a href=\"http://puromac.com\" rel=\"nofollow ugc\">puromac</a> listeners could also learn from the experience, but my skills in writing Spanish are terrible.<br/><br/>I'm going to discuss this story in the next puromac podcast, however."
+ },
+ {
+  "id": "54c3ffd1e4b04453ba5be229",
+  "parent": "",
+  "author": "Alex",
+  "url": "",
+  "owner": false,
+  "date": "2010-11-15T18:57:13Z",
+  "body": "Interesting that the freezing would occur on your new hardware, but not when running on other machines from the same image.  I wonder if it the freezes would have occurred from another account."
+ }
+]

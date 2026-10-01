@@ -1,0 +1,22 @@
+---
+title: Using Regular Expressions to change case
+date: 2017-12-06T14:12:53Z
+url: /blog/2017/12/6/using-regular-expressions-to-change-case
+excerpt: You can change the case of text with Regular Expressions in some applications and programming languages by placing control strings in the replacement expression indicating the…
+---
+<p>You can change the case of text with Regular Expressions in some applications and programming languages by placing control strings in the replacement expression indicating the type of conversion you want.</p>
+<p>NOTE: The following examples were tested in <a href="https://www.barebones.com/products/bbedit/">BBEdit</a> which has a great grep search/replace functionality and which uses <code>\</code> to indicate capture groups rather than <code>$</code> as is common in other RegEx implementations.</p>
+<ul><li><code>\U</code>: Start converting all letters to uppercase. Ex:<ul><li>Source text: <code>Hello World</code></li><li>Selection RegEx: <code>(Hello) World</code></li><li>Replacement: <code>\U\1 World</code></li><li>Final value: HELLO WORLD</li><li>Comments: Notice <code>\U</code> starts uppercase conversion and affects all text following it, regardless of the capture group.</li></ul>
+
+</li><li><code>\L</code>: Start converting all letters to lowercase. Ex:<ul><li>Source text: <code>Hello World</code></li><li>Selection RegEx: <code>Hello World</code></li><li>Replacement: <code>\LHello World</code></li><li>Final value: <code>hello world</code></li><li>Comments: With or Without capture groups, the case control string <code>\L</code> affects all text that follows it. </li></ul>
+
+</li><li><code>\E</code>: End most recent conversion setting. Only necessary if you're not using additional control strings to change text case, but wish to stop the initial conversion at some point before the end of the replacement string.<ul><li>Example 1:<ul><li>Source text: <code>hEllo FuNnY WorlD</code></li><li>Selection RegEx: <code>([a-zA-Z]*) ([a-zA-Z]*) ([a-zA-Z]*)</code></li><li>Replacement: <code>\U\1 \2 \3</code></li><li>Final value: <code>HELLO FUNNY WORLD</code></li><li>Comments: The initial <code>\U</code> control string converts all characters that follow uppercase.</li></ul>
+
+</li><li>Example 2:<ul><li>Source text: <code>hEllo FuNnY WorlD</code></li><li>Selection RegEx: <code>([a-zA-Z]*) ([a-zA-Z]*) ([a-zA-Z]*)</code></li><li>Replacement: <code>\U\1 \L\2 \U\3</code></li><li>Final value: <code>HELLO funny WORLD</code></li><li>Comments: We set a conversion control character before each capture group, resetting the conversion that takes place.</li></ul>
+
+</li><li>Example 3:<ul><li>Source text: <code>hEllo FuNnY WorlD</code></li><li>Selection RegEx: <code>([a-zA-Z]*) ([a-zA-Z]*) ([a-zA-Z]*)</code></li><li>Replacement: <code>\U\1\E \2 \3</code></li><li>Final value: <code>HELLO FuNnY WorlD</code></li><li>Comments: A <code>\E</code> control string is used after the initial <code>\U\1</code> (which converts the first capture group to all caps). <code>\E</code> ends the uppercase conversion, leaving capture groups 2 and 3 unaffected by the initial <code>\U</code>. </li></ul>
+
+</li></ul>
+
+</li></ul>
+<p>More complete info at: <a href="https://www.regular-expressions.info/replacecase.html">https://www.regular-expressions.info/replacecase.html</a></p>

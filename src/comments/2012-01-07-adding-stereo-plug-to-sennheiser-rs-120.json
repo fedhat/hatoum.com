@@ -1,0 +1,146 @@
+[
+ {
+  "id": "54c3ffd1e4b04453ba5be1f9",
+  "parent": "",
+  "author": "John",
+  "url": "",
+  "owner": false,
+  "date": "2012-07-30T23:52:00Z",
+  "body": "This is amazing work! I am interested in installing a \"mute\" switch in much the same manner on my Sennheiser RS120 headphones. I am wondering if I can accomplish this using your wiring scheme, but removing the output jack (and wires leading the jack). Do you know if this would cause strain on the internal amplifier, to remove the \"load\" instead of routing it to another set of headphones? Anyway, I appreciate your attention to detail and clear diagrams. Thanks for posting this!"
+ },
+ {
+  "id": "54c3ffd1e4b04453ba5be1fa",
+  "parent": "",
+  "author": "Fed",
+  "url": "",
+  "owner": true,
+  "date": "2012-08-25T23:57:31Z",
+  "body": "Thanks John. (Sorry it's taken me so long to respond)<br/><br/>It won't cause any problems to remove the \"load\" from the amplifier, as long as the wiring you have in mind isn't creating a short circuit. However, I wonder if adding a mute button is necessary for headphones, given that the power button is just as accessible and accomplishes the same thing."
+ },
+ {
+  "id": "54c3ffd1e4b04453ba5be1fb",
+  "parent": "",
+  "author": "Raul",
+  "url": "",
+  "owner": false,
+  "date": "2013-01-04T18:02:01Z",
+  "body": "Very nice work indeed. I stumbled upon a pair of Sennheisers rs30 in an old attic but they had no base. Do you think it would be possible to mod them so that they could be used wired with a regular stereo jack? I mean the wireless circuitry would have to be bypassed and the stereo signal be linked to the stereo input of the headphones' internal amplifier. Can this be done? Any advice? Thanks.<br/><br/>Raul"
+ },
+ {
+  "id": "54c3ffd1e4b04453ba5be1fc",
+  "parent": "",
+  "author": "Federico Hatoum",
+  "url": "",
+  "owner": true,
+  "date": "2013-01-04T20:11:56Z",
+  "body": "Hi Raul. You could probably do what you're suggesting, though I don't know the internals of the RS30's, so I'm not sure. If that set is similar to RS120's, then there's a wireless receiver that should feed into the amplifier and headphones. It may not be worth the effort of rewiring the headphones in this case, however, given that you'd basically end up with a pair of regular headphones."
+ },
+ {
+  "id": "54c3ffd1e4b04453ba5be1fd",
+  "parent": "",
+  "author": "Raul",
+  "url": "",
+  "owner": false,
+  "date": "2013-01-05T06:22:13Z",
+  "body": "Hey, thanks for the prompt reply. I wouldn't mind the end result, be it a pair of regular headphones. Is there something I should look for if trying to identify where the wireless receiver part ends and the stereo amplifier starts? Then I could solder the cable directly onto the amplifier's input. I'm not that good with electronics, all I see is a maze of circuits. I am attaching a couple of links with photos of the pcb, maybe I'm in luck and you might spot the amplifier input. On the back, the three (but why 3 and not just 2?) colored wires run to the left speaker. The volume is on the right hand side and the \"tune\" is on the left and next to it there is a pair of pins sticking out which plug into the right speaker.<br/><br/>https://dl.dropbox.com/u/15119876/back.jpg<br/>https://dl.dropbox.com/u/15119876/front.jpg<br/><br/>Thank you for your patience.<br/>Raul"
+ },
+ {
+  "id": "54c3ffd1e4b04453ba5be1fe",
+  "parent": "",
+  "author": "Federico Hatoum",
+  "url": "",
+  "owner": true,
+  "date": "2013-01-05T19:46:16Z",
+  "body": "Looking at both sides of the pcb, I'm not sure where the amplifier input is either. I can't read the IC part numbers from your pictures, but if you could google them and see what they are. One of them is probably the amplifier and you can get a pinout PDF for it and figure out where the inputs and outputs are."
+ },
+ {
+  "id": "54c3ffd1e4b04453ba5be1ff",
+  "parent": "",
+  "author": "Raul",
+  "url": "",
+  "owner": false,
+  "date": "2013-01-05T20:29:39Z",
+  "body": "Wow, you were right. I googled the two serials and this is what I got:<br/><br/>the radio receiver<br/>http://www.datasheetcatalog.org/datasheets/320/199134_DS.pdf<br/><br/>and the amplifier:<br/>http://www.datasheetcatalog.org/datasheet/sony/a6801979.pdf<br/><br/>It is a cxa1622m amplifier. Now I see two \"IN\"'s on the IC pinout. On my stereo cable there will be 3 wires from the stereo jack. Should I try one to in1, one to in2 and the ground to gnd? <br/><br/>Raul<br/>"
+ },
+ {
+  "id": "54c3ffd1e4b04453ba5be200",
+  "parent": "",
+  "author": "Fed",
+  "url": "",
+  "owner": true,
+  "date": "2013-01-08T23:07:21Z",
+  "body": "That sounds like a reasonable approach. Good luck!"
+ },
+ {
+  "id": "54c3ffd1e4b04453ba5be201",
+  "parent": "",
+  "author": "Randy Johnson",
+  "url": "",
+  "owner": false,
+  "date": "2014-10-29T17:39:52Z",
+  "body": "Can you or Josh lay out the diagram for this?<br/>\"It was pointed out to me by my friend Josh, who knows more about electronics than I do, that I could have used a 4 conductor stereo jack and gotten rid of the toggle switch entirely. A 4 conductor jack acts like a switch as well. The act of inserting a stereo plug into the jack makes it behave like a switch being flipped, so that you can go from the internal speakers to the external audio jack without the need of a separate switch like I used.\"<br/>I have the EXACT same issue as you with the elliptical.  I googled it thinking no one would have had the same thought as me.  It blew my mind you did such a great write-up.  Great minds think alike apparently.  I had thought of this option or finding a separate receiver that used the same MHz as the RS120 base to plug buds into."
+ },
+ {
+  "id": "54c3ffd1e4b04453ba5be202",
+  "parent": "",
+  "author": "Randy Johnson",
+  "url": "",
+  "owner": false,
+  "date": "2014-10-29T17:42:07Z",
+  "body": "If anyone has done this mod and is interesting in selling their RS120.  It would be nice for me to have a second pair actually.  Either the toggle or the 4 conductor setup would be fine with me."
+ },
+ {
+  "id": "5f3c1a7f7607f8223383c203",
+  "parent": "",
+  "author": "neno",
+  "url": "",
+  "owner": false,
+  "date": "2020-08-18T18:14:23Z",
+  "body": "<p>I have a problem and I'll put my question here cause it looks like you know details about this headset. Wire that is connected to receiver had other side connected to what? I am fixing headset but don't know where to connect other end of that wire. Help will be highly appreciated and thanks in advance.</p>"
+ },
+ {
+  "id": "5f3c96b6e527ad70e394403d",
+  "parent": "5f3c1a7f7607f8223383c203",
+  "author": "Federico Hatoum",
+  "url": "",
+  "owner": true,
+  "date": "2020-08-19T03:04:22Z",
+  "body": "<p>Hi neno. I'm sorry to say but I don't remember where that wire connects. I looked over the wiring diagrams and pictures in my post to see if they would jog my memory, but they didn't.</p>"
+ },
+ {
+  "id": "5f3cde42431b73526c43ac62",
+  "parent": "5f3c96b6e527ad70e394403d",
+  "author": "neno",
+  "url": "",
+  "owner": false,
+  "date": "2020-08-19T08:09:38Z",
+  "body": "<p>Thanks for your answer...Googled it but couldn't find anything helpfull. Now I am stuck with dissasembled headset, left speaker (the one near batteries) is not working, not sure is it because of that wire.</p>"
+ },
+ {
+  "id": "5f3d6086e73be320043b664d",
+  "parent": "5f3cde42431b73526c43ac62",
+  "author": "Federico Hatoum",
+  "url": "",
+  "owner": true,
+  "date": "2020-08-19T17:25:26Z",
+  "body": "<p>I remembered that i have an old/broken pair of RS120's that I bought off of eBay for parts a long time ago. I'll open it up, take a couple of pictures and send that to you. Hopefully that'll help.</p>"
+ },
+ {
+  "id": "60e5d3e1c577e94675644b5f",
+  "parent": "",
+  "author": "Aik",
+  "url": "",
+  "owner": false,
+  "date": "2021-07-07T16:18:41Z",
+  "body": "<p>If you still want to powered the headphone, just connect input wire to volume pin 2 and 3 as input L and R, ground to ground. You will hear it louder (because you still using the batteries to powered the headphone)</p>"
+ },
+ {
+  "id": "63f5e6609c152d5aa7dd1219",
+  "parent": "",
+  "author": "DAYLSON PINHEIRO",
+  "url": "",
+  "owner": false,
+  "date": "2023-02-22T09:54:40Z",
+  "body": "<p>TENHO UM FONE EU GOSTARIA SABER SE É POSIVEL USAR UM CABO COM JEK P2 COMO UM FONE COMUM </p>"
+ }
+]

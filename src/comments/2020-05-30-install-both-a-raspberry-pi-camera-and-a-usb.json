@@ -1,0 +1,1019 @@
+[
+ {
+  "id": "5f4cb7ef7960e8706cc2cdbf",
+  "parent": "",
+  "author": "Roger",
+  "url": "",
+  "owner": false,
+  "date": "2020-08-31T08:42:23Z",
+  "body": "<p>Thanks for this detailed explanation! However, I get no response when connecting to my Logitech C925e on :8081. I've double-checked all of the changes, and they're OK.</p>\n<p>I notice that the green light on the camera only flashes once when I plug it into the Pi, as opposed to two flashes when I plug it into my PC. But when I run lsusb, I get \"Bus 001 Device 003: ID 046d:085b Logitech, Inc.\", so I guess it's connected.</p>\n<p>In dmesg I get this series of messages; other searches seem to suggest that these aren't a problem, but do you have any ideas?</p>\n<p>Either way, thanks for getting all this info together; it's amazing that this info isn't available (as far as I can tell) anywhere else.</p>\n<p>[ 4.455920] uvcvideo: Found UVC 1.00 device Logitech Webcam C925e (046d:085b)<br/>[ 4.467913] uvcvideo 1-1.1:1.0: Entity type for entity Processing 3 was not initialized!<br/>[ 4.467932] uvcvideo 1-1.1:1.0: Entity type for entity Extension 6 was not initialized!<br/>[ 4.467946] uvcvideo 1-1.1:1.0: Entity type for entity Extension 12 was not initialized!<br/>[ 4.467961] uvcvideo 1-1.1:1.0: Entity type for entity Camera 1 was not initialized!<br/>[ 4.467974] uvcvideo 1-1.1:1.0: Entity type for entity Extension 8 was not initialized!<br/>[ 4.467988] uvcvideo 1-1.1:1.0: Entity type for entity Extension 9 was not initialized!<br/>[ 4.468001] uvcvideo 1-1.1:1.0: Entity type for entity Extension 10 was not initialized!<br/>[ 4.468015] uvcvideo 1-1.1:1.0: Entity type for entity Extension 11 was not initialized!<br/>[ 4.468387] input: Logitech Webcam C925e as /devices/platform/scb/fd500000.pcie/pci0000:00/0000:00:00.0/0000:01:00.0/usb1/1-1/1-1.1/1-1.1:1.0/input/input0<br/>[ 4.468625] usbcore: registered new interface driver uvcvideo</p>"
+ },
+ {
+  "id": "5f4cb9850f239b75b2ca2842",
+  "parent": "",
+  "author": "Roger",
+  "url": "",
+  "owner": false,
+  "date": "2020-08-31T08:49:09Z",
+  "body": "<p>A related post at https://community.octoprint.org/t/how-can-i-configure-dual-cameras-1-pi-camera-and-1-usb-camera-on-a-dual-printer-setup/694/14 suggests the need to add the following two lines to crontab (with different port numbers). Do you think this step is necessary?</p>\n<p>@reboot /home/pi/mjpg-streamer/mjpg_streamer -i \"/home/pi/mjpg-streamer/input_raspicam.so -x 1024 -y 768 -mm matrix -fps 3\" -o \"/home/pi/mjpg-streamer/output_http.so -w ./www -p 8801\"</p>\n<p>@reboot /home/pi/mjpg-streamer/mjpg_streamer -i \"/home/pi/mjpg-streamer/input_uvc.so -f 15 -r 1280x720\" -o \"/home/pi/mjpg-streamer/output_http.so -w ./www -p 8800\"</p>"
+ },
+ {
+  "id": "5f4d25af158a2d267932c966",
+  "parent": "5f4cb9850f239b75b2ca2842",
+  "author": "Federico Hatoum",
+  "url": "",
+  "owner": true,
+  "date": "2020-08-31T16:30:39Z",
+  "body": "<p>I don't think this step is necessary, but it's probably a nice to have. Whenever I was working on getting the cameras to work, I had to reboot often.</p>"
+ },
+ {
+  "id": "5f4d27b5bb0cb526916eec2e",
+  "parent": "5f4cb7ef7960e8706cc2cdbf",
+  "author": "Federico Hatoum",
+  "url": "",
+  "owner": true,
+  "date": "2020-08-31T16:39:17Z",
+  "body": "<p>I had similar issues when working through getting both cameras set up. There are a few things I would try:<br/>1. I know you double-checked everything, but check again. More than once I had an errant space or semicolon make its way into the scripts which made them not work correctly.<br/>2. Try lowering the resolution of your webcam to 640x480. It just might be set to something that's making it choke.<br/>3. Try getting the webcam to work by itself, without the PI cam.<br/>4. See if you can successfully switch the PI cam to a different port.<br/>5. Reboot between changes.</p>\n<p>Hope one of those helps!</p>"
+ },
+ {
+  "id": "5f4d746856777619e286f451",
+  "parent": "",
+  "author": "Roger",
+  "url": "",
+  "owner": false,
+  "date": "2020-08-31T22:06:32Z",
+  "body": "<p>Thanks for your replies, Federico!</p>"
+ },
+ {
+  "id": "5f5cf9b9c7f1b1361451a56f",
+  "parent": "",
+  "author": "banana",
+  "url": "",
+  "owner": false,
+  "date": "2020-09-12T16:39:21Z",
+  "body": "<p>The issue i am seeing is that when i open up webcamd it doesn't show me:</p>\n<p><strong>add video device into options</strong></p>\n<p>options=”$options -d /dev/$device”<br/>I wound up skipping this and everything else was able to be edited. The pi cam works on the instance it should, but the usb camera doesn't.</p>"
+ },
+ {
+  "id": "5fb4027879938813b01bb6c6",
+  "parent": "",
+  "author": "David Benware",
+  "url": "",
+  "owner": false,
+  "date": "2020-11-17T17:03:52Z",
+  "body": "<p>I have a question in step 6 backend webcam<br/>do I need to replace the entry or should there be backend webcam and backend webcam2?<br/>when I got finished I was not able to connect to the PI getting a network error.<br/>I was able to see in a web browser both cameras.<br/>not sure what I did wrong</p>"
+ },
+ {
+  "id": "5fb424e3b2154e397478b4f4",
+  "parent": "5fb4027879938813b01bb6c6",
+  "author": "Federico Hatoum",
+  "url": "",
+  "owner": true,
+  "date": "2020-11-17T19:30:43Z",
+  "body": "<p>Hi David.</p>\n<p>You should create a new entry for \"webcam2\", leaving the \"webcam\" untouched. Here are the two entries in my haproxy.cfg file:</p>\n<p>backend webcam<br/> reqrep ^([^\\ :]*)\\ /webcam/(.*) \\1\\ /\\2<br/> server webcam1 127.0.0.1:8080<br/> errorfile 503 /etc/haproxy/errors/503-no-webcam.http</p>\n<p>backend webcam2<br/> reqrep ^([^\\ :]*)\\ /webcam2/(.*) \\1\\ /\\2<br/> server webcam1 127.0.0.1:8081<br/> errorfile 503 /etc/haproxy/errors/503-no-webcam.http</p>"
+ },
+ {
+  "id": "6005dcddce24650c88467788",
+  "parent": "",
+  "author": "Elias",
+  "url": "https://hatoum.com/blog/2020/5/27/install-both-a-raspberry-pi-camera-and-a-usb-camera-on-octopi-017",
+  "owner": false,
+  "date": "2021-01-18T19:09:17Z",
+  "body": "<p>I did everything you said, but it didn't work, I'm getting this error when I do \"systemctl status webcamd2.service\"<br/>● webcamd2.service - the OctoPi webcam daemon with the user specified config<br/> Loaded: loaded (/etc/systemd/system/webcamd2.service; enabled; vendor preset: enabled)<br/> Active: failed (Result: start-limit-hit) since Mon 2021-01-18 18:49:52 GMT; 16min ago<br/> Process: 593 ExecStart=/root/bin/webcamd2 (code=exited, status=0/SUCCESS)</p>\n<p>Jan 18 18:49:52 octopi systemd[1]: webcamd2.service: Service RestartSec=100ms expired, scheduling restart.<br/>Jan 18 18:49:52 octopi systemd[1]: webcamd2.service: Scheduled restart job, restart counter is at 5.<br/>Jan 18 18:49:52 octopi systemd[1]: Stopped the OctoPi webcam daemon with the user specified config.<br/>Jan 18 18:49:52 octopi systemd[1]: webcamd2.service: Start request repeated too quickly.<br/>Jan 18 18:49:52 octopi systemd[1]: webcamd2.service: Failed with result 'start-limit-hit'.<br/>Jan 18 18:49:52 octopi systemd[1]: Failed to start the OctoPi webcam daemon with the user specified config.</p>"
+ },
+ {
+  "id": "6005e08ace24650c8846db72",
+  "parent": "",
+  "author": "elias",
+  "url": "https://hatoum.com/blog/2020/5/27/install-both-a-raspberry-pi-camera-and-a-usb-camera-on-octopi-017",
+  "owner": false,
+  "date": "2021-01-18T19:24:58Z",
+  "body": "<p>Ayyyyyyyyyyyyyyyyyyyyyyyyyyyy it worked!!!!!!!!!<br/>TYSM<br/>(I had to remove the -f parameter on the webcamd2, after that it worked :p)</p>"
+ },
+ {
+  "id": "60096eec7717a07259a2bbff",
+  "parent": "",
+  "author": "m3iaz",
+  "url": "",
+  "owner": false,
+  "date": "2021-01-21T12:09:16Z",
+  "body": "<p>In my case 2 cameras (pi + USB) are not working together.<br/>I can see that webcamd2.service filed to start.</p>\n<p>If I stop webcamd.service and start webcamd2 and switch to USB but still using port 8080.<br/>Of Course I can start both streams manually with mjpeg_streamer with correct ports setting.</p>\n<p>After long research I've found problem in webcamd/webcamd2 script.<br/>When settings from octopi.txt are imported to array looks like every space/\" \" is recognized as end of string so<br/>camera_http_options=”-p 8080”<br/>just send \"-p\" and in this case both services try to put stream on the same port.</p>\n<p>it can be observed when ./webcamd</p>\n<p>I have just base knowledge of linux base systems but maybe someone can repair it.</p>\n<p>PS sorry for my bad english...</p>\n<p>I have found another problem</p>"
+ },
+ {
+  "id": "6009db11fffde40f9dfa6abc",
+  "parent": "60096eec7717a07259a2bbff",
+  "author": "Federico Hatoum",
+  "url": "",
+  "owner": true,
+  "date": "2021-01-21T19:50:41Z",
+  "body": "<p>Hi m3iaz!</p>\n<p>Your English is great. :D Thank you for the information.</p>\n<p>The settings I listed in the post work for me, so I'd like to figure out why you're having problems. Ex: When I go to http://octopi.local:8080/ and http://octopi.local:8081/ on my local network, I can see images from both cameras.</p>\n<p>So, I have couple of questions for you to see if we can figure out what's going on:<br/>1. Are you using Octopi 0.17?<br/>2. Did you create a new octopi2.txt file?<br/>3. Are you copying and pasting values from the blog post into your octopi.txt and webcamd.service files, or are you typing them in directly when you edit the files? Sometimes copying and pasting causes strange errors because invisible characters get copied over.</p>"
+ },
+ {
+  "id": "6009db49646375468e41e59d",
+  "parent": "6005e08ace24650c8846db72",
+  "author": "Federico Hatoum",
+  "url": "",
+  "owner": true,
+  "date": "2021-01-21T19:51:37Z",
+  "body": "<p>Glad you got it working, Elias!<br/>Question for you... did you remove the \"-f\" parameter from octopi2.txt? What kind of camera is it?</p>"
+ },
+ {
+  "id": "600a9210531e3f7f879e71f2",
+  "parent": "6009db11fffde40f9dfa6abc",
+  "author": "m3iaz",
+  "url": "",
+  "owner": false,
+  "date": "2021-01-22T08:51:28Z",
+  "body": "<p>Hi federico<br/>I did it in all possible ways.<br/>At the end, due to problem with raspi cam (made a lot of test with connected/unconnected and at the end I flip flat cable...), I've also reinstall Octoprint in total.</p>\n<p>As USB it is connected endoscope camera which is found as 2 devices: Video1 and Video2. SN was 0 so I had to use /dev/video1 instead of Your device.</p>\n<p>I have found that ANY fault done in configuration files put all in default where raspi camera only worked.</p>\n<p>My final solution<br/>octopi.txt - USB camera with pointed -d /device/video1 @8080<br/>octopi2.txt - raspi @8081</p>\n<p>webcamd - I just add port no in script next to final camera type recognition.</p>\n<ol>\n<li>I modify webcamd with:</li>\n</ol>\n<p><strong>options=”$options -d /dev/$device”</strong></p>\n<p>-----------------------------------------------------------------------<br/>function startRaspi {<br/> logger -s \"Starting Raspberry Pi camera\"<br/> runMjpgStreamer \"$MJPGSTREAMER_INPUT_RASPICAM $camera_raspi_options 8081\"</p>\n<p><strong>}</strong></p>\n<pre><code>logger -s &amp;quot;Starting USB webcam&amp;quot;\nrunMjpgStreamer &amp;quot;$MJPGSTREAMER_INPUT_USB $options 8080&amp;quot;\n</code></pre>\n<p>}</p>\n<ol>\n<li>cp webcamd webcamd2</li>\n<li>sudo nano ;-) webcamd2 and<br/>cfg_files+=/boot/octopi2.txt</li>\n<li>\n<p>all other points from Your solution</p></li>\n</ol>\n<p>I believe there is more clean way to add port no directly from octopi.txt than what I did.<br/>Anyway in my place there is an sentence: \"if something is stupid but working means that it is NOT stupid\"... </p>"
+ },
+ {
+  "id": "600afb09ebb6be373c0f3a91",
+  "parent": "600a9210531e3f7f879e71f2",
+  "author": "Federico Hatoum",
+  "url": "",
+  "owner": true,
+  "date": "2021-01-22T16:19:21Z",
+  "body": "<p>Thank you for listing your solution, m3iaz!</p>"
+ },
+ {
+  "id": "600b258ec67d622224f249cb",
+  "parent": "600afb09ebb6be373c0f3a91",
+  "author": "m3iaz",
+  "url": "",
+  "owner": false,
+  "date": "2021-01-22T19:20:46Z",
+  "body": "<p>can You please clean a bit my last post? I used some markers to made it a bit more clear but it looks like some custom bbcode made bad job...</p>"
+ },
+ {
+  "id": "600b83f86d32a72dc7cd4438",
+  "parent": "600b258ec67d622224f249cb",
+  "author": "Federico Hatoum",
+  "url": "",
+  "owner": true,
+  "date": "2021-01-23T02:03:36Z",
+  "body": "<p>Unfortunately, I'm not able to edit your post.</p>"
+ },
+ {
+  "id": "600daf4f033475725829cdf7",
+  "parent": "",
+  "author": "Jeremy D Meyer",
+  "url": "",
+  "owner": false,
+  "date": "2021-01-24T17:33:03Z",
+  "body": "<p>This guide is great! Everything worked as it's written except I had to go back to my original octopi.txt and set \"camera=”auto”\" to \"camera=”raspi”\".</p>\n<p>Good job!</p>"
+ },
+ {
+  "id": "600de9fc00b5600e9be7b472",
+  "parent": "",
+  "author": "Jeremy D Meyer",
+  "url": "",
+  "owner": false,
+  "date": "2021-01-24T21:43:24Z",
+  "body": "<p>Well, everything was working fine until I disconnected it. I'm not sure why it work and then suddenly quit. The \"raspi\" camera is still working fine on port 8080 but the USB endoscope seems to be having issues.</p>\n<p>Here is my webcamd2 log:</p>\n<p>pi@octopi:~ $ systemctl status webcamd2.service<br/>● webcamd2.service - the OctoPi webcam daemon with the user specified config<br/> Loaded: loaded (/etc/systemd/system/webcamd2.service; enabled; vendor preset: enabled)<br/> Active: active (running) since Sun 2021-01-24 21:29:52 GMT; 2min 30s ago<br/> Process: 303 ExecStart=/root/bin/webcamd2 (code=exited, status=0/SUCCESS)<br/> Main PID: 411 (mjpg_streamer)<br/> Tasks: 23 (limit: 2077)<br/> Memory: 3.1M<br/> CGroup: /system.slice/webcamd2.service<br/> └─411 ./mjpg_streamer -o output_http.so -w ./www-octopi -p 8081 -i input_uvc.so -r 640x480 -f 10</p>\n<p>Jan 24 21:29:51 octopi mjpg_streamer[411]: MJPG-streamer [411]: commands.............: enabled<br/>Jan 24 21:29:51 octopi mjpg_streamer[411]: MJPG-streamer [411]: starting input plugin input_uvc.so<br/>Jan 24 21:29:51 octopi mjpg_streamer[411]: MJPG-streamer [411]: starting output plugin: output_http.so (ID: 00)<br/>Jan 24 21:29:52 octopi webcamd2[303]: Done bring up all configured video device<br/>Jan 24 21:29:52 octopi webcamd2[303]: Goodbye...<br/>Jan 24 21:29:52 octopi systemd[1]: Started the OctoPi webcam daemon with the user specified config.<br/>Jan 24 21:29:58 octopi webcamd2[303]: i: select() timeout<br/>Jan 24 21:29:58 octopi webcamd2[303]: i: cleaning up resources allocated by input thread<br/>Jan 24 21:29:58 octopi mjpg_streamer[411]: MJPG-streamer [411]: select() timeout<br/>Jan 24 21:29:58 octopi mjpg_streamer[411]: MJPG-streamer [411]: cleaning up resources allocated by input thread</p>\n<p>Nothing stands out to me as being a problem.</p>\n<p>Here is my octopi2.txt file<br/>camera=\"usb\"<br/>camera_usb_options=”-d /dev/Nozzlecam -r 640x480 -f 10”<br/>camera_http_webroot=\"./www-octopi\"<br/>camera_http_options=\"-p 8081\"</p>\n<p>Have any advice or other things I could look at to troubleshoot?</p>"
+ },
+ {
+  "id": "600f76b06c35a2209bab735c",
+  "parent": "600de9fc00b5600e9be7b472",
+  "author": "Federico Hatoum",
+  "url": "",
+  "owner": true,
+  "date": "2021-01-26T01:56:00Z",
+  "body": "<p>Hi Jeremy,</p>\n<p>Looking at your log, nothing comes to mind. However, I just noticed that you're connecting an endoscope like m3iaz in the comments below.</p>\n<p>He ended up having to put his endoscope first (via octopi.txt) and his raspi cam second (in octopi2.txt). I don't know why that was necessary for him, but perhaps his comments would be helpful to you.</p>"
+ },
+ {
+  "id": "6011c4b1b5b9d5038e3b2648",
+  "parent": "",
+  "author": "David Wheeler",
+  "url": "",
+  "owner": false,
+  "date": "2021-01-27T19:53:21Z",
+  "body": "<p>i followed all the sets now i cant access the webend of OctoPi. I can still SHH in, any ideas?</p>"
+ },
+ {
+  "id": "60121cb061be982b81a614ce",
+  "parent": "6011c4b1b5b9d5038e3b2648",
+  "author": "Jeremy D Meyer",
+  "url": "",
+  "owner": false,
+  "date": "2021-01-28T02:08:48Z",
+  "body": "<p>Happened to me. I've been messing with this stuff for days. I think its safe to say this process of now dated as Octoprint updates has broken it.</p>"
+ },
+ {
+  "id": "601305e0dc997f7652f5d341",
+  "parent": "6011c4b1b5b9d5038e3b2648",
+  "author": "Federico Hatoum",
+  "url": "",
+  "owner": true,
+  "date": "2021-01-28T18:43:44Z",
+  "body": "<p>Hi David,</p>\n<p>So that I can investigate and update the blog post, I have a few questions for you:<br/>1. What version of OctoPi are you running? I see that version 0.18 came out recently, which I haven't installed yet.<br/>2. What version of OctoPrint are you running? I'm running 1.5.3.<br/>3. When you say that you can't access the webend of OctoPi, do you mean OctoPi or OctoPrint?</p>"
+ },
+ {
+  "id": "601306bc11dc264ca37a06ee",
+  "parent": "60121cb061be982b81a614ce",
+  "author": "Federico Hatoum",
+  "url": "",
+  "owner": true,
+  "date": "2021-01-28T18:47:24Z",
+  "body": "<p>Hi Jeremy,</p>\n<p>Like I asked David, can you answer a few questions so that I can update the blog post?<br/>1. What version of OctoPi are you running? I see that version 0.18 came out recently, which I haven't installed yet. I'm still running 0.17<br/>2. What version of OctoPrint are you running? I'm running 1.5.3.<br/>3. When you say \"happened to me\", what do you mean exactly?</p>\n<p>Both of the cameras I have connected to my Pi are working correctly, so I'm looking for configuration differences that would account for the issues that people are experiencing.</p>"
+ },
+ {
+  "id": "60130b6b0bd3ce05923b2fbf",
+  "parent": "601306bc11dc264ca37a06ee",
+  "author": "Jeremy D Meyer",
+  "url": "",
+  "owner": false,
+  "date": "2021-01-28T19:07:23Z",
+  "body": "<p>I just upgraded to OctoPi 18 last night but when trying your guide for the first time using 17 (not sure the version of Octoprint) I lost the ability to access the GUi altogether even though I could still access the Pi via SSH.</p>\n<p>I'm going to assume it was something I did incorrectly involving the haproxy.cfg.</p>\n<p>I tried using this guide with Octopi 18 last night and tried setting up the usb endoscope first (using octopi.txt) but when the raspi cam is plugged in neither cams work. When I just have the USB endoscope plugged in neither work.</p>\n<p>I haven't done any troubleshooting on the latest attempt yet as it was getting late.</p>\n<p>I have been reading all the comments from Chris's latest video and did try adding ATTR{index}==0 to the USB-99 rules file thinking it may help but obviously it did not in my case. </p>\n<p>It seems like lots of people in the comments are also having problems with it either not working or webcam services not always starting correctly.</p>\n<p>For now I'm just going to run my USB endoscope on a completely separate Pi until a better and more reliable option is available....unless you have a better option?</p>"
+ },
+ {
+  "id": "60130bf93f3b892ee6f6c2ed",
+  "parent": "601306bc11dc264ca37a06ee",
+  "author": "Jeremy D Meyer",
+  "url": "",
+  "owner": false,
+  "date": "2021-01-28T19:09:45Z",
+  "body": "<p>I meant to say when I have both cameras plugged in neither work. But when I have just the USB endoscope it works.</p>"
+ },
+ {
+  "id": "60130ff67f9b323d96f21e18",
+  "parent": "60130bf93f3b892ee6f6c2ed",
+  "author": "Federico Hatoum",
+  "url": "",
+  "owner": true,
+  "date": "2021-01-28T19:26:46Z",
+  "body": "<p>Thank you, Jeremy. This is very helpful.<br/>I'll set some time aside this weekend and see if I can replicate what people are seeing and then update the post.</p>"
+ },
+ {
+  "id": "6013113ab772205155278eb7",
+  "parent": "60130ff67f9b323d96f21e18",
+  "author": "Jeremy D Meyer",
+  "url": "",
+  "owner": false,
+  "date": "2021-01-28T19:32:10Z",
+  "body": "<p>Sounds good. For what it's worth I found your guide to be the easiest to follow and the fact you wrote it while explaining what each step does was very helpful with learning how this stuff works. </p>\n<p>Also, thanks for getting back to me. I still can't believe that I had both cameras working at one time and then they only stopped because I had to unplug one to tidy up the cables.</p>"
+ },
+ {
+  "id": "6014593e33b96825420fe3a1",
+  "parent": "",
+  "author": "Andrew",
+  "url": "",
+  "owner": false,
+  "date": "2021-01-29T18:51:42Z",
+  "body": "<p>I just wanted to let you know that your steps were flawless. Thanks! I'm using this with the multicam plugin and it works great. </p>"
+ },
+ {
+  "id": "60147d3a9f622d75b345c838",
+  "parent": "6014593e33b96825420fe3a1",
+  "author": "Federico Hatoum",
+  "url": "",
+  "owner": true,
+  "date": "2021-01-29T21:25:14Z",
+  "body": "<p>Thank you for the feedback, Andrew! Out of curiosity, are you running Octopi 0.17?</p>"
+ },
+ {
+  "id": "6014bb76da94a961a3b4c54e",
+  "parent": "",
+  "author": "Mike Hust",
+  "url": "",
+  "owner": false,
+  "date": "2021-01-30T01:50:46Z",
+  "body": "<p>Hello im new to all this tbh but im having some issues and i think it might be related to octopi 0.18. i follow these steps and double checked everything. cant get both streams to work. </p>"
+ },
+ {
+  "id": "6032b83bae17b8724c920152",
+  "parent": "",
+  "author": "Gabriel Sanchez",
+  "url": "",
+  "owner": false,
+  "date": "2021-02-21T19:44:59Z",
+  "body": "<p>Hello, thanks for the detailed instructions!, i have octopi 0.17 and unfortunately it's not corking for me, the original pi webcam continues to work, but the C920 I'm trying to add does not work.. it seems like there might be an issue on starting the port on 8081, cause if i go to the 8080 port it works, but the 8081 port is unresponsive... I have checked the configs twice and I think i'm following to the step but not sure what i'm lacking.</p>\n<p>one interesting thing i noticed is that my original octopi.txt file did not have an entry with<br/>camera=\"auto\"<br/>or<br/>camera=\"raspi\" </p>\n<p>to be changed, so i just added the entry and used the parameters as indicated....</p>"
+ },
+ {
+  "id": "6033e79c03dad03ad2e9e116",
+  "parent": "6032b83bae17b8724c920152",
+  "author": "Federico Hatoum",
+  "url": "",
+  "owner": true,
+  "date": "2021-02-22T17:19:24Z",
+  "body": "<p>Hi Gabriel<br/>When you say the C920 works on port 8080, but not 8081, is the PI cam also connected both times? And, how are you switching the port?</p>\n<p>Regarding the camera property in octopi.txt, that makes sense. Those properties are set when you configure Octopi using a script.</p>"
+ },
+ {
+  "id": "6033f78b9dad1d3c065b58f7",
+  "parent": "6033e79c03dad03ad2e9e116",
+  "author": "Federico Hatoum",
+  "url": "",
+  "owner": true,
+  "date": "2021-02-22T18:27:23Z",
+  "body": "<p>And, if you didn't use the config script, the properties won't be there.</p>"
+ },
+ {
+  "id": "6033f8935024c831137c9f5e",
+  "parent": "6033e79c03dad03ad2e9e116",
+  "author": "Gabriel Sanchez",
+  "url": "",
+  "owner": false,
+  "date": "2021-02-22T18:31:47Z",
+  "body": "<p>My apologies, Federico, what i meant is that the raspberry cam is still working, but the logitech c920 is not. i can share the files if you want to take a look?</p>\n<p>thanks!<br/>Gabe</p>"
+ },
+ {
+  "id": "6033f8fb2e8134652f10e2ff",
+  "parent": "6033e79c03dad03ad2e9e116",
+  "author": "Gabriel Sanchez",
+  "url": "",
+  "owner": false,
+  "date": "2021-02-22T18:33:31Z",
+  "body": "<p>BTW, iI forgot to mention, i get to the step 4 no issues, i see the device listed under /dev</p>"
+ },
+ {
+  "id": "6033fe75bd4f70082abb55c1",
+  "parent": "6033e79c03dad03ad2e9e116",
+  "author": "Gabriel Sanchez",
+  "url": "",
+  "owner": false,
+  "date": "2021-02-22T18:56:53Z",
+  "body": "<p>it might be an issue on starting the service:<br/>&gt; sudo systemctl status webcamd2<br/>● webcamd2.service - the OctoPi webcam daemon with the user specified config<br/> Loaded: loaded (/etc/systemd/system/webcamd2.service; enabled; vendor preset: enabled)<br/> Active: failed (Result: start-limit-hit) since Sun 2021-02-21 13:58:28 CST; 22h ago<br/> Process: 598 ExecStart=/root/bin/webcamd2 (code=exited, status=0/SUCCESS)</p>\n<p>Feb 21 13:58:28 octopi systemd[1]: webcamd2.service: Service RestartSec=100ms expired, scheduling restart.<br/>Feb 21 13:58:28 octopi systemd[1]: webcamd2.service: Scheduled restart job, restart counter is at 5.<br/>Feb 21 13:58:28 octopi systemd[1]: Stopped the OctoPi webcam daemon with the user specified config.<br/>Feb 21 13:58:28 octopi systemd[1]: webcamd2.service: Start request repeated too quickly.<br/>Feb 21 13:58:28 octopi systemd[1]: webcamd2.service: Failed with result 'start-limit-hit'.<br/>Feb 21 13:58:28 octopi systemd[1]: Failed to start the OctoPi webcam daemon with the user specified config.</p>"
+ },
+ {
+  "id": "6033fef7e9ed65086db97f44",
+  "parent": "6033f8935024c831137c9f5e",
+  "author": "Federico Hatoum",
+  "url": "",
+  "owner": true,
+  "date": "2021-02-22T18:59:03Z",
+  "body": "<p>I sent you an email so that you can share the files with me. Let's see if I can help.</p>"
+ },
+ {
+  "id": "603555d02e93bd542b8cf02c",
+  "parent": "6033e79c03dad03ad2e9e116",
+  "author": "Gabriel Sanchez",
+  "url": "",
+  "owner": false,
+  "date": "2021-02-23T19:21:52Z",
+  "body": "<p>working now! it seemed like the service was not starting for some reason.. i dunno why!</p>"
+ },
+ {
+  "id": "6036cf238f30ff30170f8a11",
+  "parent": "603555d02e93bd542b8cf02c",
+  "author": "Federico Hatoum",
+  "url": "",
+  "owner": true,
+  "date": "2021-02-24T22:11:47Z",
+  "body": "<p>Oh, good! Yeah...I had the same experience and it's very unsatisfying to not know why it worked.</p>"
+ },
+ {
+  "id": "6036cf23ed8110570a9c00b6",
+  "parent": "603555d02e93bd542b8cf02c",
+  "author": "Federico Hatoum",
+  "url": "",
+  "owner": true,
+  "date": "2021-02-24T22:11:47Z",
+  "body": "<p>Oh, good! Yeah...I had the same experience and it's very unsatisfying to not know why it worked.</p>"
+ },
+ {
+  "id": "605e70aa64b29259ab08c58e",
+  "parent": "",
+  "author": "Kyle",
+  "url": "",
+  "owner": false,
+  "date": "2021-03-26T23:39:22Z",
+  "body": "<p>Incredibly well written and worked flawlessly to set up a cheap endoscope for me using OctoPrint 0.18. Thank you so much!</p>"
+ },
+ {
+  "id": "605f87f5893521348a4f1293",
+  "parent": "605e70aa64b29259ab08c58e",
+  "author": "Federico Hatoum",
+  "url": "",
+  "owner": true,
+  "date": "2021-03-27T19:31:01Z",
+  "body": "<p>Thanks for the feedback, Kyle! I really appreciate it and am glad you got it working. 😀</p>"
+ },
+ {
+  "id": "606392b473993c114719a330",
+  "parent": "",
+  "author": "dzik",
+  "url": "",
+  "owner": false,
+  "date": "2021-03-30T21:05:56Z",
+  "body": "<p>Boss, could you explain me why sometimes my usb camera changed video1 to video2 or even video 3 without usb port change?. Of course while Im not using my printer I switch off pi.</p>"
+ },
+ {
+  "id": "60646a9f8f2fcc57427fb4c7",
+  "parent": "6011c4b1b5b9d5038e3b2648",
+  "author": "SM26",
+  "url": "",
+  "owner": false,
+  "date": "2021-03-31T12:27:11Z",
+  "body": "<p>I'm getting the same problem, have you managed to sort it out?</p>"
+ },
+ {
+  "id": "60648668c45f5e76322d3d19",
+  "parent": "606392b473993c114719a330",
+  "author": "Federico Hatoum",
+  "url": "",
+  "owner": true,
+  "date": "2021-03-31T14:25:44Z",
+  "body": "<p>I'm not 100% certain, but my understanding is that the order in which devices and ports are visible to linux at startup is not guaranteed. So, whichever usb camera is \"sees\" first will be assigned to whichever usb port it \"sees\" first.</p>"
+ },
+ {
+  "id": "6065747194265d017ca5be48",
+  "parent": "60646a9f8f2fcc57427fb4c7",
+  "author": "SM26",
+  "url": "",
+  "owner": false,
+  "date": "2021-04-01T07:21:21Z",
+  "body": "<p>God damn me!!!<br/>found out what was wrong.</p>\n<p>Inside the Haproxy file.<br/><code>use_backend webcam2 if &amp;#123; path_beg /webcam2/ &amp;#125; \n</code></p>\n<p>It's USE<br/>not USB<br/>why am I stupid? IDK.</p>"
+ },
+ {
+  "id": "606880781d41fc343008b6ad",
+  "parent": "60648668c45f5e76322d3d19",
+  "author": "dzik",
+  "url": "",
+  "owner": false,
+  "date": "2021-04-03T14:49:28Z",
+  "body": "<p>So we cannot assign it permamently....</p>"
+ },
+ {
+  "id": "606dfa66bf09772098a95a10",
+  "parent": "6065747194265d017ca5be48",
+  "author": "Federico Hatoum",
+  "url": "",
+  "owner": true,
+  "date": "2021-04-07T18:31:02Z",
+  "body": "<p>We all make mistakes like that! The important thing is that you caught it.</p>"
+ },
+ {
+  "id": "606dfb398cf6df6d115d7595",
+  "parent": "606880781d41fc343008b6ad",
+  "author": "Federico Hatoum",
+  "url": "",
+  "owner": true,
+  "date": "2021-04-07T18:34:33Z",
+  "body": "<p>No, we can't. However, video for linux (v4l), which is the process/system that the cameras run on, does give them permanent IDs.<br/>Problem is that the octopi scripts don't know how to read those values. This is why we set up those simlinks in 99-USB using device and vendor IDs.</p>"
+ },
+ {
+  "id": "6073e7f473df1712a2e588d3",
+  "parent": "",
+  "author": "Jeremy Bana",
+  "url": "",
+  "owner": false,
+  "date": "2021-04-12T06:25:56Z",
+  "body": "<p>Thank you for this guide. I got it working with octoprint version 1.5.3 and octopi version 0.17.0 and a cheap endoscope off of amazon. Weirdly I had to edit /etc/udev/rules.d/99-com.rules instead of 99-usb.rules. But following your instructions worked perfectly. </p>\n<p>One hiccup I had was when I put the micro usb that connects to my printer from the pi on the other usb 3.0 it stopped recognizing the hub my endoscope was on. Which was another oddity, it seems to require a hub to be recognized. </p>"
+ },
+ {
+  "id": "6087d8401dc4d01576c01f47",
+  "parent": "606dfb398cf6df6d115d7595",
+  "author": "dzik",
+  "url": "",
+  "owner": false,
+  "date": "2021-04-27T09:24:16Z",
+  "body": "<p>Ok lets say that for me does not matter which camera will be first (pi or usb) but I need to make it very reliable. Currently, one time, pi can wake up with both cameras actived but after restart, only pi camera is available (I have led indication on usb camera so its easy to check that it works or not). Maybe usb cable is damaged... need to replace. Anyway Thank you for this tutorial - its very useful</p>"
+ },
+ {
+  "id": "608b6eb922c53275b9b1a4da",
+  "parent": "6087d8401dc4d01576c01f47",
+  "author": "Federico Hatoum",
+  "url": "",
+  "owner": true,
+  "date": "2021-04-30T02:43:05Z",
+  "body": "<p>I share your frustration with video for linux (v4l) -- which is the system that manages the cameras. I've experienced these kinds of issues as well.</p>\n<p>One possible solution is using \"static\" paths to cameras that v4l creates. When you attach a v4l device to a PI, v4l creates entries under <code>/dev/v4l/by-path</code>. I tried using those paths, as they are unchanging, even if you move a camera to a different USB port. Unfortunately, the octopi scripts that manage camera connections don't work in the non-standard <code>/dev/videoX</code> paths.</p>"
+ },
+ {
+  "id": "60b432fce919257e25eff68f",
+  "parent": "",
+  "author": "E King",
+  "url": "",
+  "owner": false,
+  "date": "2021-05-31T00:51:08Z",
+  "body": "<p>This is a terrific tutiorial, thank you so much! So, following your steps I was able to get a webcam up and running, and can see it at :8081, but I can't figure out how to get octoprint to use this usb camera instead of the picam. How can I get this to be the \"main\" camera? Is there a way to use this cam to create the timelapses?? Can you create a timelapse from both cams?? </p>"
+ },
+ {
+  "id": "60b45683fd5f411b4608b830",
+  "parent": "60b432fce919257e25eff68f",
+  "author": "Federico Hatoum",
+  "url": "",
+  "owner": true,
+  "date": "2021-05-31T03:22:43Z",
+  "body": "<p>Thank you and congrats on getting the cameras working. :D </p>\n<p>To make the usb cam the main webcam, either change the \"Webcam\" Stream URL under Settings: Features: Webcam &amp; Timelapse, or install the MultiCam Octoprint plugin. (https://plugins.octoprint.org/plugins/multicam/)</p>\n<p>You can configure which camera is used for timelapses under the same config tab, but you can only make timelapses from one camera at a time.</p>"
+ },
+ {
+  "id": "60b4ff15be5ecf21b36a9d96",
+  "parent": "60b45683fd5f411b4608b830",
+  "author": "E King",
+  "url": "",
+  "owner": false,
+  "date": "2021-05-31T15:21:57Z",
+  "body": "<p>Amazing, thanks again! </p>\n<p>Just in case anyone else is a little confused after this, the url to add to the multicam extension would be: http://192.168.1.72:8081/?action=stream.</p>\n<p>Federico, much appreciated, truly helpful and well done!!</p>"
+ },
+ {
+  "id": "60bfa311dc53796ee0704f24",
+  "parent": "60b4ff15be5ecf21b36a9d96",
+  "author": "Federico Hatoum",
+  "url": "",
+  "owner": true,
+  "date": "2021-06-08T17:04:17Z",
+  "body": "<p>👍🏼😀</p>"
+ },
+ {
+  "id": "60da69a628313122d80382ee",
+  "parent": "",
+  "author": "Thomas L.",
+  "url": "",
+  "owner": false,
+  "date": "2021-06-29T00:30:30Z",
+  "body": "<p>Thank you for this! I was following the video you mentioned, he does have a few of them, and I found it rather frustrating having to pause and rewind at each step. I found your instructions though and they worked perfectly! </p>\n<p>I did get tied up at one part, simply because I wasn't using my critical thinking skills lol but on the steps outlining the adjustments that needed to be made to the octopi.txt and octopi2.txt files, it was never specified to uncomment the camera=\"raspi\" and camera=\"usb\" lines even though we were directed to change them, sooooo I didn't and I broke it. It was a silly mistake on my part, and a very easy thing to assume to do. But after going back through the steps I figured it out and it all looks great now! I was able to adjust the resolution of the pi cam as well and they're both perfect.</p>\n<p>Very well written and excellent help in the comments! Thank you!</p>"
+ },
+ {
+  "id": "60e2968921ee9b41d5b76f65",
+  "parent": "60da69a628313122d80382ee",
+  "author": "Federico Hatoum",
+  "url": "",
+  "owner": true,
+  "date": "2021-07-05T05:20:09Z",
+  "body": "<p>Thank you for the feedback, Thomas. Good suggestion. I added a comment about making sure the camera line is uncommented.</p>"
+ },
+ {
+  "id": "60f0d4781c98e64adee3e5f9",
+  "parent": "",
+  "author": "Mr Richard Kaprielian",
+  "url": "",
+  "owner": false,
+  "date": "2021-07-16T00:36:08Z",
+  "body": "<p>Absolutely amazing tutorial... Thank you...<br/>I did have one problem at first and couldn't access the USB cam due to me putting camera_http_options=\"-r 8080\" in octopi.txt once this was change to camera_http_options=\"-p 8080\" it works great. Even better with mulitcam.</p>\n<p>For all people that are having problems check and recheck all the edited lines that have been done.</p>"
+ },
+ {
+  "id": "60f1d52fa2a54e0b33aa2ef1",
+  "parent": "60f0d4781c98e64adee3e5f9",
+  "author": "Federico Hatoum",
+  "url": "",
+  "owner": true,
+  "date": "2021-07-16T18:51:27Z",
+  "body": "<p>Thanks Richard. I'm glad you found the tutorial useful. And thank you for sharing your experience. As you saw, configuration files are tricky and putting a \"-r\" flag where a \"-p\" flag should go will break everything.</p>"
+ },
+ {
+  "id": "60f3e998bf9212646c40a60f",
+  "parent": "60f1d52fa2a54e0b33aa2ef1",
+  "author": "Mr Richard Kaprielian",
+  "url": "",
+  "owner": false,
+  "date": "2021-07-18T08:43:04Z",
+  "body": "<p>A quick question, if i wanted to revert back to just the USB cam.. what would be the procedure? Would i reverse the tutorial?</p>"
+ },
+ {
+  "id": "60f597e5bf110d63cc7a0050",
+  "parent": "60f3e998bf9212646c40a60f",
+  "author": "Federico Hatoum",
+  "url": "",
+  "owner": true,
+  "date": "2021-07-19T15:19:01Z",
+  "body": "<p>The very simplest way is to disconnect the Raspberry PI Camera from your RPI, and removing the RaspiCam entry from Octoprint's Multicam plugin and restart your PI.</p>\n<p>The scripts you created using the tutorial will still run, but since the RaspiCam is no longer connected, it will get ignored.</p>"
+ },
+ {
+  "id": "60ff4e1de397c85b84c1b857",
+  "parent": "",
+  "author": "Alex Balcanquall",
+  "url": "",
+  "owner": false,
+  "date": "2021-07-27T00:06:53Z",
+  "body": "<p>Don't set the FPS flag for the sub cam, remove that option all together.<br/>It disables mjpeg streaming from the camera and crucifies frame rate. TBH i have no clue why every article says to use it when they should say remove it. https://github.com/jacksonliam/mjpg-streamer/blob/master/mjpg-streamer-experimental/plugins/input_uvc/README.md</p>"
+ },
+ {
+  "id": "6100da1af633c15025ac6302",
+  "parent": "60ff4e1de397c85b84c1b857",
+  "author": "Federico Hatoum",
+  "url": "",
+  "owner": true,
+  "date": "2021-07-28T04:16:26Z",
+  "body": "<p>Not sure what to tell you, but I just tested my octopi install by setting the frame rate on the USB camera to various values and removing it completely. mjpeg was not disabled with any setting. </p>\n<p>Also, the -f flag doesn't \"crucify\" frame rate -- it lowers it from a maximum, in order to lower CPU usage -- as it's designed to do.</p>\n<p>That said, CPU usage was only slightly lower when I set the framerate to 10 fps compared to not having the flag on at all.</p>"
+ },
+ {
+  "id": "61045178c23a0456e8373f91",
+  "parent": "",
+  "author": "Zdeněk Hornych",
+  "url": "",
+  "owner": false,
+  "date": "2021-07-30T19:22:32Z",
+  "body": "<p>Federico, thank you very much. It is brilliant tutorial and how to. I have 2 printers and only one OctoPrint, but now I have one camera (RaspiCam) for one printer and another camera (USB) for second printer. It is quite perfect. Zdenek Hornych</p>"
+ },
+ {
+  "id": "610493fdb2c7df32a7ecd0f7",
+  "parent": "61045178c23a0456e8373f91",
+  "author": "Federico Hatoum",
+  "url": "",
+  "owner": true,
+  "date": "2021-07-31T00:06:21Z",
+  "body": "<p>You're welcome Zdeněk! I'm glad you found it useful. Enjoy your two printers. I'm jealous! 😀</p>"
+ },
+ {
+  "id": "6106e0f6edcea71eeb7d30a0",
+  "parent": "",
+  "author": "Jean luc, France",
+  "url": "",
+  "owner": false,
+  "date": "2021-08-01T17:59:18Z",
+  "body": "<p>Hello,<br/>I just followed your tutorial to manage 2 webcams. I have a Picam V2 and a logitech C922 Pro USB installed on a Raspberry Pi3B +, Octoprint 1.6.1 and Octopi 0.18.0 + Octodash, and SUPER everything worked the first time ! Super Tuto and that allowed me to understand a lot more. At TOP !<br/>Jean luc.G FRANCE </p>"
+ },
+ {
+  "id": "6106e6f174c40b1518d9c8ce",
+  "parent": "6106e0f6edcea71eeb7d30a0",
+  "author": "Federico Hatoum",
+  "url": "",
+  "owner": true,
+  "date": "2021-08-01T18:24:49Z",
+  "body": "<p>Merci, Jean Luc! I've thought about using Octodash because it's so cool, but never got around to it. Glad you found the tutorial useful!</p>"
+ },
+ {
+  "id": "6107eb33ad58134b442f49e5",
+  "parent": "",
+  "author": "Jean luc",
+  "url": "",
+  "owner": false,
+  "date": "2021-08-02T12:55:15Z",
+  "body": "<p>I installed Octodash with a 7 \"Raspberry screen, more expensive but it's easier to install, less conflict to manage.<br/>If you are interested, I will indicate 2 links to watch: https://maker-tutorials.com/en/official-raspberry-pi-7-touch-screen-lcd-display-assembly-guide-install-and-tips/<br/>+ https://github.com/UnchartedBull/OctoDash + a link on my GoogleDrive : https://drive.google.com/file/d/1YeUh0NmcKM_7a-j6ApAg_dRrIAvQs4R1/view?usp=sharing<br/>to download the tuto I followed but it is French ! and operation of the first blow. </p>"
+ },
+ {
+  "id": "6108193bbcdf7f2a7173abf4",
+  "parent": "6107eb33ad58134b442f49e5",
+  "author": "Federico Hatoum",
+  "url": "",
+  "owner": true,
+  "date": "2021-08-02T16:11:39Z",
+  "body": "<p>I'll take a look, Jean luc. Thank you!</p>"
+ },
+ {
+  "id": "6114fab216493f5d053d4fea",
+  "parent": "",
+  "author": "Andy",
+  "url": "",
+  "owner": false,
+  "date": "2021-08-12T10:40:50Z",
+  "body": "<p>Fantastic instructions, which i believe I have followed perfectly but unfortunately still not working.<br/>I have an issue where when I<br/>systemctl status webcamd2.service<br/>it shows the HTTP TCP Port to be 8080 and I have gone back and checked everything and cannot find where I have made the mistake.<br/>Any help would be greatly appreciated.</p>"
+ },
+ {
+  "id": "6115dba88f57140bf3705005",
+  "parent": "6114fab216493f5d053d4fea",
+  "author": "Andy",
+  "url": "",
+  "owner": false,
+  "date": "2021-08-13T02:40:40Z",
+  "body": "<p>After several reboots and checking everything several times (but not changing anything) it has started to work.<br/>WOW it is exactly what I wanted.<br/>Now for some reason I cannot get the USB camera to work in the MultiCam plugin for OctoPrint.</p>\n<p>Any tips or tricks?</p>"
+ },
+ {
+  "id": "6116948158120957a2dd5ef5",
+  "parent": "6115dba88f57140bf3705005",
+  "author": "Federico Hatoum",
+  "url": "",
+  "owner": true,
+  "date": "2021-08-13T15:49:21Z",
+  "body": "<p>I've had that experience too: changes only take effect after multiple reboots. I don't know why that's the case.<br/>Regarding the MultiCam plugin...<br/>First, confirm that you can view output from both cameras in a browser by visiting the stream URLs for your PI Cam and your USB camera. Then, you add the stream URLs to your MultiCam configuration. Here are my URL strings. If you don't have a local domain set up, you can use your PI's IP address:<br/>http://octopi.local:8080/?action=stream<br/>http://octopi.local:8081/?action=stream</p>"
+ },
+ {
+  "id": "61362ec028aa1f5dc6ae3ba2",
+  "parent": "",
+  "author": "beken",
+  "url": "",
+  "owner": false,
+  "date": "2021-09-06T15:07:44Z",
+  "body": "<p>Everything explained very nicely. Unfortunately, it doesn't work for me anyway. I did everything exactly as described. I even reinstalled octopi several times, unfortunately it still doesn't work.</p>"
+ },
+ {
+  "id": "61365129163d6f7b3ade3a6d",
+  "parent": "61362ec028aa1f5dc6ae3ba2",
+  "author": "Federico Hatoum",
+  "url": "",
+  "owner": true,
+  "date": "2021-09-06T17:34:33Z",
+  "body": "<p>What doesn't work, specifically? The PI cam, the USB cam?<br/>Have you tried different troubleshooting steps? For example, do you see the symbolic link for your USB camera in the /dev directory? What happens when you visit the streaming webpage for your cameras? (ex: http://octopi.local:8081/?action=stream).<br/>You need to methodically step through the tutorial, making sure that each step was successful before moving on to the next.<br/>By the way, reinstalling octopi is not necessary. Once it's installed, reinstalling just makes you lose all your progress.</p>"
+ },
+ {
+  "id": "615db450a811ca7218c8bb0f",
+  "parent": "",
+  "author": "James",
+  "url": "",
+  "owner": false,
+  "date": "2021-10-06T14:36:00Z",
+  "body": "<p>Ive follow this step by step twice and both times by Pi cam works ok but when i search for 8081 port it cannot see the NexiGo N660 camera.<br/>The info i get from the system status is:<br/>pi@octopi:~ $ systemctl status webcamd2.service<br/>● webcamd2.service - the OctoPi webcam daemon with the user specified config<br/> Loaded: loaded (/etc/systemd/system/webcamd2.service; enabled; vendor pre<br/> Active: failed (Result: start-limit-hit) since Wed 2021-10-06 15:24:52 BS<br/> Process: 583 ExecStart=/root/bin/webcamd2 (code=exited, status=0/SUCCESS)</p>\n<p>Oct 06 15:24:52 octopi systemd[1]: webcamd2.service: Service RestartSec=100m<br/>Oct 06 15:24:52 octopi systemd[1]: webcamd2.service: Scheduled restart job,<br/>Oct 06 15:24:52 octopi systemd[1]: Stopped the OctoPi webcam daemon with the<br/>Oct 06 15:24:52 octopi systemd[1]: webcamd2.service: Start request repeated<br/>Oct 06 15:24:52 octopi systemd[1]: webcamd2.service: Failed with result 'sta<br/>Oct 06 15:24:52 octopi systemd[1]: Failed to start the OctoPi webcam daemon<br/>lines 1-11/11 (END)<br/>● webcamd2.service - the OctoPi webcam daemon with the user specified config<br/> Loaded: loaded (/etc/systemd/system/webcamd2.service; enabled; vendor preset: enabled)<br/> Active: failed (Result: start-limit-hit) since Wed 2021-10-06 15:24:52 BST; 6min ago<br/> Process: 583 ExecStart=/root/bin/webcamd2 (code=exited, status=0/SUCCESS)</p>\n<p>Oct 06 15:24:52 octopi systemd[1]: webcamd2.service: Service RestartSec=100ms expired, scheduling restart.<br/>Oct 06 15:24:52 octopi systemd[1]: webcamd2.service: Scheduled restart job, restart counter is at 5.<br/>Oct 06 15:24:52 octopi systemd[1]: Stopped the OctoPi webcam daemon with the user specified config.<br/>Oct 06 15:24:52 octopi systemd[1]: webcamd2.service: Start request repeated too quickly.<br/>Oct 06 15:24:52 octopi systemd[1]: webcamd2.service: Failed with result 'start-limit-hit'.<br/>Oct 06 15:24:52 octopi systemd[1]: Failed to start the OctoPi webcam daemon with the user specified config.</p>"
+ },
+ {
+  "id": "61601bff4aa5ec6aa1edd276",
+  "parent": "",
+  "author": "DIYLover",
+  "url": "",
+  "owner": false,
+  "date": "2021-10-08T10:22:55Z",
+  "body": "<p>Fantastic! Your tutorial is amazing!!! Thx man you saved my day</p>"
+ },
+ {
+  "id": "61647bf13c900174462b8593",
+  "parent": "615db450a811ca7218c8bb0f",
+  "author": "Federico Hatoum",
+  "url": "",
+  "owner": true,
+  "date": "2021-10-11T18:01:21Z",
+  "body": "<p>Do you see the symbolic link for your USB camera in the /dev directory? That needs to be working before the rest of it can work.</p>"
+ },
+ {
+  "id": "6165f5cf4df58673e4b06336",
+  "parent": "61601bff4aa5ec6aa1edd276",
+  "author": "Federico Hatoum",
+  "url": "",
+  "owner": true,
+  "date": "2021-10-12T20:53:35Z",
+  "body": "<p>Thank you!</p>"
+ },
+ {
+  "id": "616efd39a963852c228ca2b6",
+  "parent": "",
+  "author": "Keith",
+  "url": "",
+  "owner": false,
+  "date": "2021-10-19T17:15:37Z",
+  "body": "<p>Like you, I went through a tonne of Youtube videos to no avail. Followed your instructions, picam and C270 now doing as required. You absolute legend. Great write up and thank you very much</p>"
+ },
+ {
+  "id": "6172f9e63b6afb419b6d23eb",
+  "parent": "",
+  "author": "Ever",
+  "url": "",
+  "owner": false,
+  "date": "2021-10-22T17:50:30Z",
+  "body": "<p>Thank you so much for this tutorial, ive got an issue though, I can no longer get my pi cam to turn on. The little red light is off and I'm not sure what caused it. I do have my endoscop camera working now though!</p>"
+ },
+ {
+  "id": "61737f7327ee16549b581cee",
+  "parent": "616efd39a963852c228ca2b6",
+  "author": "Federico Hatoum",
+  "url": "",
+  "owner": true,
+  "date": "2021-10-23T03:20:19Z",
+  "body": "<p>Yay! I'm glad the write up was so useful. :D </p>"
+ },
+ {
+  "id": "617380f5e040ca50ff4cbf96",
+  "parent": "6172f9e63b6afb419b6d23eb",
+  "author": "Federico Hatoum",
+  "url": "",
+  "owner": true,
+  "date": "2021-10-23T03:26:45Z",
+  "body": "<p>That sounds like a hardware issue, not software. Have you tried reseating the ribbon cable for the pi cam? Maybe it pulled out a bit while you were setting up everything.</p>"
+ },
+ {
+  "id": "61bd63a40c30877be16fef39",
+  "parent": "",
+  "author": "Coulter",
+  "url": "",
+  "owner": false,
+  "date": "2021-12-18T04:29:24Z",
+  "body": "<p>Hi, everything is working for me but my stream URL does not work and the snapshot URL does. how do I fix this? So this overall does not let my camera work.</p>"
+ },
+ {
+  "id": "621679c8b318aa4e6ab35fe6",
+  "parent": "",
+  "author": "HermannSW",
+  "url": "",
+  "owner": false,
+  "date": "2022-02-23T18:15:36Z",
+  "body": "<p>Thanks very much for these good instructions.<br/>My borescope USB2.0 camera has no serialNumber, as stated here under troubleshooting removing serial entry worked.<br/>Then webcamd2 service did not start (init_VideoIn failed), as stated above I powered my Pi3A+ down, switched USB cables in mini USB hub (Pi3A+ has only 1 USB interface by default) and powered again.<br/>After that borescope camera works on port 8081 !!<br/>Until now I used gstreamer pipeline on my OctoPi (https://forum.prusaprinters.org/forum/user-mods-octoprint-enclosures-nozzles/simple-nozzle-camera-borescope-holder-for-prusa-mini/#post-582439) and viewed it with vlc (tcp://octopi3ap:8887) on Linux, or vlc app on smartphone (the borescope camera provides detailed nozzle view).<br/>So now both cameras are served with mjpg-streamer.<br/>I hoped to have either both camera views shown in OctoPrint webgui, or have a toggle there to switch between both cameras ...</p>"
+ },
+ {
+  "id": "6216d48686d6db29c4063721",
+  "parent": "621679c8b318aa4e6ab35fe6",
+  "author": "Federico Hatoum",
+  "url": "",
+  "owner": true,
+  "date": "2022-02-24T00:42:46Z",
+  "body": "<p>Congratulations Hermann! I'm glad to hear that you got your borescope camera working. To view both of my cameras in the OctoPi UI, I use the MultiCam plugin. </p>"
+ },
+ {
+  "id": "62194a6a90e3625d3aa70ac8",
+  "parent": "6216d48686d6db29c4063721",
+  "author": "HermannSW",
+  "url": "",
+  "owner": false,
+  "date": "2022-02-25T21:30:18Z",
+  "body": "<p>Thanks, I did that, and it works perfectly. See the animated .gif at end of this posting — cool:<br/>https://forum.prusaprinters.org/forum/user-mods-octoprint-enclosures-nozzles/simple-nozzle-camera-borescope-holder-for-prusa-mini/#post-585166</p>"
+ },
+ {
+  "id": "621b3f613dbc3174ca61d326",
+  "parent": "6216d48686d6db29c4063721",
+  "author": "HermannSW",
+  "url": "",
+  "owner": false,
+  "date": "2022-02-27T09:07:45Z",
+  "body": "<p>Thanks Frederico, MultiCam worked nice, with only small default camera quirk. Find at bottom of that posting a nice (scaled to 50% size) peek screenrecorder animation. It shows switching between Raspberry v1 scene camera and borescope nozzle camera view by pressing on \"RaspberrySceneCam\" or \"BorescopeNozzleCam\" buttons (bottom right):<br/>https://forum.prusaprinters.org/forum/user-mods-octoprint-enclosures-nozzles/simple-nozzle-camera-borescope-holder-for-prusa-mini/#post-585166</p>"
+ },
+ {
+  "id": "621c169499a15236ce1e74f5",
+  "parent": "621b3f613dbc3174ca61d326",
+  "author": "Federico Hatoum",
+  "url": "",
+  "owner": true,
+  "date": "2022-02-28T00:25:56Z",
+  "body": "<p>That's great! I'm glad it worked for you. And thank you for linking to my blog post on prusaprinters.org. 😀</p>"
+ },
+ {
+  "id": "62251e4ce3cd1828c1d6c5df",
+  "parent": "621c169499a15236ce1e74f5",
+  "author": "HermannSW",
+  "url": "",
+  "owner": false,
+  "date": "2022-03-06T20:49:16Z",
+  "body": "<p>Hi Frederico,<br/>I added another borescope, and it has identical values to first borescope. After reboot the udev rule now selectes newly added camera, and not nozzle camera anymore. Find current udev rule and both camera dmesg entries here — any chance to get both matched and being able to toggle between 3 cameras in OctoPrint?<br/>https://stamm-wilbrandt.de/en/forum/udev_borescope_identical.png</p>"
+ },
+ {
+  "id": "6229e7b5e898b713ceb1b8ff",
+  "parent": "",
+  "author": "itzik ovadia",
+  "url": "",
+  "owner": false,
+  "date": "2022-03-10T11:57:41Z",
+  "body": "<p>thank u very much . you did great job. Very clearly and very accuarately .<br/>after spending a lot of days on this problem i mange to solved it succeeded thanks to you<br/>thank a lot</p>"
+ },
+ {
+  "id": "622e35e12ffc0172dffa462c",
+  "parent": "62251e4ce3cd1828c1d6c5df",
+  "author": "Federico Hatoum",
+  "url": "",
+  "owner": true,
+  "date": "2022-03-13T18:20:17Z",
+  "body": "<p>Hi Hermann. I looked into this, but didn't find a good solution. There is supposedly a way to map cameras to a specific USB port, so that you can differentiate between two cameras that either have the same serial number or no serial number. However, I wasn't able to get that working.</p>"
+ },
+ {
+  "id": "622e35fc8c82f32c2e0b6c9d",
+  "parent": "6229e7b5e898b713ceb1b8ff",
+  "author": "Federico Hatoum",
+  "url": "",
+  "owner": true,
+  "date": "2022-03-13T18:20:44Z",
+  "body": "<p>Hi itzik,<br/>I'm glad it worked for you!</p>"
+ },
+ {
+  "id": "6231e5835f9ce12a6f0d4fe5",
+  "parent": "",
+  "author": "Max",
+  "url": "",
+  "owner": false,
+  "date": "2022-03-16T13:26:27Z",
+  "body": "<p>I really tried everything now... Complete new system, all files new, checked everything a 100 times... My second won't startup!<br/>This is the failure i got now:</p>\n<p>● webcamd2.service - the OctoPi webcam daemon with the user specified config<br/> Loaded: loaded (/etc/systemd/system/webcamd2.service; enabled; vendor preset: enabled)<br/> Active: activating (start) since Wed 2022-03-16 14:24:04 CET; 1s ago<br/>Cntrl PID: 12368 (webcamd2)<br/> Tasks: 2 (limit: 3596)<br/> CGroup: /system.slice/webcamd2.service<br/> ├─12368 /bin/bash /root/bin/webcamd2<br/> └─12403 sleep 1</p>\n<p>Mar 16 14:24:05 octopi mjpg_streamer[12402]: MJPG-streamer [12402]: Format............: JPEG<br/>Mar 16 14:24:05 octopi mjpg_streamer[12402]: MJPG-streamer [12402]: TV-Norm...........: DEFAULT<br/>Mar 16 14:24:05 octopi mjpg_streamer[12402]: MJPG-streamer [12402]: www-folder-path......: ./www-octopi/<br/>Mar 16 14:24:05 octopi mjpg_streamer[12402]: MJPG-streamer [12402]: HTTP TCP port........: 8080<br/>Mar 16 14:24:05 octopi mjpg_streamer[12402]: MJPG-streamer [12402]: HTTP Listen Address..: 127.0.0.1<br/>Mar 16 14:24:05 octopi mjpg_streamer[12402]: MJPG-streamer [12402]: username:password....: disabled<br/>Mar 16 14:24:05 octopi mjpg_streamer[12402]: MJPG-streamer [12402]: commands.............: disabled<br/>Mar 16 14:24:05 octopi mjpg_streamer[12402]: MJPG-streamer [12402]: starting input plugin input_uvc.so<br/>Mar 16 14:24:05 octopi mjpg_streamer[12402]: MJPG-streamer [12402]: starting output plugin: output_http.so (ID: 00)<br/>Mar 16 14:24:05 octopi mjpg_streamer[12402]: MJPG-streamer [12402]: server_thread(): bind(8080) failed</p>"
+ },
+ {
+  "id": "6233ccd3f31c3924af6cc0d9",
+  "parent": "6231e5835f9ce12a6f0d4fe5",
+  "author": "Federico Hatoum",
+  "url": "",
+  "owner": true,
+  "date": "2022-03-18T00:05:39Z",
+  "body": "<p>Hi Max. What are the ports you have assigned to both cameras? In the instructions, I set camera 1 to port 8080 and camera 2 to port 8081. The output above shows an issue binding to port 8080. If you accidentally have both cameras bound to port 8080, then the second one won't work for sure.</p>"
+ },
+ {
+  "id": "624fec8124d3655be6d061a8",
+  "parent": "",
+  "author": "Adam",
+  "url": "",
+  "owner": false,
+  "date": "2022-04-08T08:04:17Z",
+  "body": "<p>Thank you for this amazing step by step tutorial. Really spectacular work. I have one issue though, tried searching through comments to see if there were similar ones, but couldnt find one, so here it goes.</p>\n<p>I have Raspi cam and a cheap USB endoscope one. There seems to be about 50/50 chance the endscope will work after I boot up Pi. Any reason for this? It can be pretty annoying starting up a print and finding out that the endoscope doesnt work. Although Raspi cam works 100% of the time.</p>"
+ },
+ {
+  "id": "6250d0df26231f77556aa503",
+  "parent": "624fec8124d3655be6d061a8",
+  "author": "Federico Hatoum",
+  "url": "",
+  "owner": true,
+  "date": "2022-04-09T00:18:39Z",
+  "body": "<p>Hi Adam. I have experienced the same issue. It seems to happen more with cheap cameras that don't have serial numbers. Unfortunately, I haven't found a solution to the problem.</p>"
+ },
+ {
+  "id": "62517af3978772320ff52ec9",
+  "parent": "",
+  "author": "Darren H",
+  "url": "",
+  "owner": false,
+  "date": "2022-04-09T12:24:19Z",
+  "body": "<p>Man! I have to say to you thank you so much for helping out with this! I was pulling my hair out trying to get everything to work, in having the PiCam and my Logitech USB cam working. But then this bible of yours you've written just blew my pants off with working the first time. Thank you immensely!</p>"
+ },
+ {
+  "id": "625191084aa61f202707757e",
+  "parent": "",
+  "author": "Nerijus",
+  "url": "",
+  "owner": false,
+  "date": "2022-04-09T13:58:32Z",
+  "body": "<p>Have an issue. After done everything I'm no longer able to connect to octoprint via octopi.local neighter ip. However I have octoeverywhere plugin instaled and there is no problem what so ever to conect to octoprint using this option. Where have I gone wrong? Pi version 0.18.0</p>"
+ },
+ {
+  "id": "6251981b6a27f422f7151765",
+  "parent": "62517af3978772320ff52ec9",
+  "author": "Federico Hatoum",
+  "url": "",
+  "owner": true,
+  "date": "2022-04-09T14:28:43Z",
+  "body": "<p>Glad you found it useful!</p>"
+ },
+ {
+  "id": "62519a6b31d1ee1fad11eecc",
+  "parent": "625191084aa61f202707757e",
+  "author": "Federico Hatoum",
+  "url": "",
+  "owner": true,
+  "date": "2022-04-09T14:38:35Z",
+  "body": "<p>I'm not sure what the cause of that would be. In my testing, while writing my post, I didn't experience any issues with bonjour discoverability. As far as I know, .local discoverability and video4linux setups are completely separate.</p>"
+ },
+ {
+  "id": "6253456356adc86f9217188c",
+  "parent": "",
+  "author": "Doug Chittum",
+  "url": "",
+  "owner": false,
+  "date": "2022-04-10T21:00:19Z",
+  "body": "<p>Greetings Just wanted to say I followed your instructions here and everything worked perfectly! I was pulling my hair out trying to get two cameras to work, (and that means something if you knew how little hair I have....). But your method worked perfect! Thank you for sharing!</p>"
+ },
+ {
+  "id": "6253463e006798613adb96cb",
+  "parent": "6253456356adc86f9217188c",
+  "author": "Federico Hatoum",
+  "url": "",
+  "owner": true,
+  "date": "2022-04-10T21:03:58Z",
+  "body": "<p>Thank you! I'm glad it worked for you.</p>"
+ },
+ {
+  "id": "62854edff71d5d5e6ea5322b",
+  "parent": "",
+  "author": "claude",
+  "url": "",
+  "owner": false,
+  "date": "2022-05-18T19:54:07Z",
+  "body": "<p>it worked great! i modified it a bit since i don't have a raspberry cam but i do have usb camera, as of now it works but freezes i suspecting that it doesn't have enough power, if anyone could suggest the specs of a good raspberry pi power supply that would be great</p>"
+ },
+ {
+  "id": "62c7232ea9cb0d1403296f7c",
+  "parent": "",
+  "author": "Joe",
+  "url": "",
+  "owner": false,
+  "date": "2022-07-07T18:17:18Z",
+  "body": "<p>Can this process be applied to Klipper on Raspberry Pi and MainsailOS?</p>"
+ },
+ {
+  "id": "62e76fc75504097401094faf",
+  "parent": "",
+  "author": "sergioiker",
+  "url": "",
+  "owner": false,
+  "date": "2022-08-01T06:16:39Z",
+  "body": "<p>Amazing explanation! Thank you so much.... but...<br/>After checking absolutely everything, I got this:</p>\n<p>I'm trying to get an endoscopy camera to run besides the raspi cam on my Octoprint setup.<br/>I have a resolution in both of 640 and a Frame rate of 10.</p>\n<p>Any ideas?</p>\n<p>Thank you so much in advance!<br/>pi@Ender3v2:/etc/systemd/system $ systemctl status webcamd2.service<br/>● webcamd2.service - the OctoPi webcam daemon with the user specified config<br/> Loaded: loaded (/etc/systemd/system/webcamd2.service; enabled; vendor preset: enabled)<br/> Active: activating (start) since Mon 2022-08-01 02:12:53 EDT; 1s ago<br/>Cntrl PID: 4856 (webcamd2)<br/> Tasks: 2 (limit: 4915)<br/> CGroup: /system.slice/webcamd2.service<br/> ├─4856 /bin/bash /root/bin/webcamd2<br/> └─4881 sleep 1</p>\n<p>Aug 01 02:12:53 Ender3v2 systemd[1]: Starting the OctoPi webcam daemon with the user specified config...<br/>Aug 01 02:12:53 Ender3v2 root[4879]: Starting USB webcam<br/>Aug 01 02:12:53 Ender3v2 mjpg_streamer[4880]: MJPG-streamer [4880]: starting application<br/>Aug 01 02:12:53 Ender3v2 mjpg_streamer[4880]: MJPG-streamer [4880]: MJPG Streamer Version: git rev: 5554f42c352ecfa7edaec6f<br/>Aug 01 02:12:53 Ender3v2 mjpg_streamer[4880]: MJPG-streamer [4880]: Using V4L2 device.: (null)<br/>Aug 01 02:12:53 Ender3v2 mjpg_streamer[4880]: MJPG-streamer [4880]: Desired Resolution: 640 x 480<br/>Aug 01 02:12:53 Ender3v2 mjpg_streamer[4880]: MJPG-streamer [4880]: Frames Per Second.: 10<br/>Aug 01 02:12:53 Ender3v2 mjpg_streamer[4880]: MJPG-streamer [4880]: Format............: JPEG<br/>Aug 01 02:12:53 Ender3v2 mjpg_streamer[4880]: MJPG-streamer [4880]: TV-Norm...........: DEFAULT<br/>Aug 01 02:12:53 Ender3v2 mjpg_streamer[4880]: MJPG-streamer [4880]: init_VideoIn failed<br/>lines 1-19/19 (END)</p>"
+ },
+ {
+  "id": "62f020a90c4cac3a1f30632b",
+  "parent": "62519a6b31d1ee1fad11eecc",
+  "author": "Reiner",
+  "url": "",
+  "owner": false,
+  "date": "2022-08-07T20:29:29Z",
+  "body": "<p>Hi Federico, have the same issue. Only difference is, I don't have octoeverywhere installed. I can reach the pi via ssh but cant access Octoprint via the webbrowser anymore. Could you figure out what the problem was?</p>"
+ },
+ {
+  "id": "6324ca0f5d57571633c39b65",
+  "parent": "",
+  "author": "Oldironside",
+  "url": "",
+  "owner": false,
+  "date": "2022-09-16T19:10:07Z",
+  "body": "<p>Hi, excellent breakdown and instruction, though im having an issue i hope you can help me with.<br/>I keep getting a fail with my raspi hq cam<br/>This is what im getting below-</p>\n<p>pi@octopi:~ $ systemctl status webcamd2.service<br/>● webcamd2.service - the OctoPi webcam daemon with the user specified config<br/> Loaded: loaded (/etc/systemd/system/webcamd2.service; enabled; vendor preset: enabled)<br/> Active: activating (auto-restart) since Fri 2022-09-16 20:07:46 BST; 2s ago<br/> Process: 5410 ExecStart=/root/bin/webcamd2 (code=exited, status=0/SUCCESS)<br/>pi@octopi:~ $ systemctl status webcamd.service<br/>● webcamd.service - the OctoPi webcam daemon with the user specified config<br/> Loaded: loaded (/etc/systemd/system/webcamd.service; enabled; vendor preset: enabled)<br/> Active: activating (auto-restart) (Result: exit-code) since Fri 2022-09-16 20:07:58 BST; 2s a<br/> Process: 5496 ExecStart=/root/bin/webcamd (code=exited, status=203/EXEC)<br/>pi@octopi:~ $</p>"
+ },
+ {
+  "id": "639aac3297996526d3044349",
+  "parent": "",
+  "author": "Bill Schwartz",
+  "url": "",
+  "owner": false,
+  "date": "2022-12-15T05:10:10Z",
+  "body": "<p>I got the 2 cameras working if I connect to the port just fine. I then added the multicam plugin and setup the second camera with /webcam2/?action=stream similar to how the raspi cam was showing. In the settings screen it shows fine but on my control screen when I click on the webcam nothing happens. any ideas on what i'm missing for multicam?</p>"
+ },
+ {
+  "id": "639bbff37d793168bba9976b",
+  "parent": "639aac3297996526d3044349",
+  "author": "Federico Hatoum",
+  "url": "",
+  "owner": true,
+  "date": "2022-12-16T00:46:43Z",
+  "body": "<p>I checked in my Multicam setup to see how it was configured, and my cams are listed like this:<br/>* http://octopi.local:8080/?action=stream<br/>* http://octopi.local:8081/?action=stream<br/>Make sure that you can view both streams in browser and to use that stream in the Multicam settings.</p>"
+ },
+ {
+  "id": "63ab983da86adb024809bdf4",
+  "parent": "",
+  "author": "Elliott",
+  "url": "",
+  "owner": false,
+  "date": "2022-12-28T01:13:33Z",
+  "body": "<p>For those who had issues getting to octopi at all after following this, I think it has something to do with the octopi.txt modification. I had set camera_http_options=\"-p 8080\" and had similar issues. When I just left #camera_http_options commented out it worked as expected.</p>"
+ },
+ {
+  "id": "649066a7fa52b32d605b4187",
+  "parent": "",
+  "author": "Elliott",
+  "url": "",
+  "owner": false,
+  "date": "2023-06-19T14:31:03Z",
+  "body": "<p>This setup is working for me, but the USB webcam is pulling down the voltage and giving me undervoltage alarms. When I unplug the USB webcam both cameras fail to load. Is there a simple way to disable this USB webcam without backtracking all these changes?</p>"
+ }
+]

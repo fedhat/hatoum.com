@@ -1,0 +1,73 @@
+---
+title: Search and replace across files using 'grep', 'xargs' and 'sed' in MacOSX
+date: 2010-11-12T04:42:00Z
+url: /blog/2010/11/search-and-replace-across-files-using.html
+excerpt: I wanted to improve my unix command-line skills and replace a string in a series of files for a work project. My goal was to use a single line to search for files in a directory…
+tags: command-line, macosx, unix
+---
+<p>I wanted to improve my unix command-line skills and replace a string in a series of files for a work project.</p>
+
+<p>My goal was to use a single line to search for files in a directory and apply a regular expression search and replace. After looking around for different ways to accomplish this in a single command, I settled on using 'grep, 'sed' along with xargs to help with piping output from one command to another. Even though I've used grep a lot, I didn't have as much experience with sed and xargs so I stood to learn something. </p>
+
+<h3>First, what do grep, sed and xargs do?</h3>
+
+<p>grep:<br/>
+I love grep. I use it all the time, as I'm sure do most programmers who spend any amount of time in the command line. This command searches a file or list of files, if supplied, or standard input if not, using a regular expression and outputs the line that matches the search. In fact, the word 'grep' comes from the first letters of words that describe what the command does: 'global regular expression print'.</p>
+
+<p>sed:<br/>
+sed stands for "stream editor" and it applies a search and replace regular expression (regex) to a list of files, if specified, or standard input (incoming text). Grep just searches, sed searches and replaces.</p>
+
+<p>xargs:<br/>
+This is more of a utility than a standalone command. It bundles output from one command to more easily pass it off to another. For that reason, it's often used with pipes ("|"), which as the name implies, pipe data from one command to another.</p>
+
+<h3>After reading some examples online and going over the man page for sed, I came up with this command:</h3>
+
+<pre><code>grep -rl FIND_TEXT * | xargs sed -i "" 's/FIND_TEXT/REPLACE_TEXT/g'</code></pre>
+
+<p>Let's break down the parts.</p>
+
+<pre><code>grep -rl FIND_TEXT *</code></pre>
+
+<p> Remember that I wanted a command to find a string in a series of documents and replace that string with another string. So, this command searches for given text in a list of files. I could have used 'find' instead, but I liked the idea of using grep to first get a list of files that I knew contained the string I wanted to replace.</p>
+
+<p>The -r switch tells grep to search recursively down through other directories if they exist and not just stop at the first layer. The 'l' (lowercase el) switch tells grep to alter its usual output (file name + line of text containing the regex match) and instead just output the relative path of the file.</p>
+
+<p>FIND_TEXT is the text we are searching for and the asterisk ("*") is a wildcard character meaning all files. If you placed a file name in place of *, grep would search only within that file.</p>
+
+<p>This command, if run alone, would return a list of paths for files that contain the string FIND_TEXT. Sample output if run alone (searching for the string "doggie" within all files starting a given directory)</p>
+
+<pre><code>&gt; grep -rl doggie *
+./my_file_called_foo.txt
+./another_file_with_the_word_doggie_inside_it.txt
+./folder1/file_about_dogs.txt</code></pre>
+
+<p>Next, we have a pipe ("|") which literally means pass the output of the grep command to the next command.</p>
+
+<pre><code>xargs sed -i "" 's/FIND_TEXT/REPLACE_TEXT/g'</code></pre>
+
+<p>In this usage, xargs takes the output from grep and calls the sed command. Using our sample output from above, it would be as if we had typed:</p>
+
+<pre><code>sed -i "" 's/FIND_TEXT/REPLACE_TEXT/g' ./my_file_called_foo.txt</code></pre>
+
+<p>The sed command itself does the actual work of searching and replacing the text. The -i flag means "edit in place", meaning edit the file itself. This flag should be followed by an extension to add to a backup file (ex: "-i .bak" would create a MyFile.txt.bak copy of the edited file). However, in my case, I didn't want to create backup files with the changed text. I wanted to edit the very file I was searching within. That's why I placed an empty string after the -i switch in the form of two double-quotes, indicating to not create a backup.</p>
+
+<p>'s/FIND_TEXT/REPLACE_TEXT/g' is the regular expression enclosed in single quotes. The expression means search (the 's') for FIND_TEXT and replace it with REPLACE_TEXT globally (everywhere it appears) within the file (the 'g'). </p>
+
+<h3>Different *nixes, different implementations. </h3>
+
+<p>Interestingly, the following version of the command, which I tried first, doesn't work in OSX, though it does work in Linux.</p>
+
+<pre><code>grep -rl FIND_TEXT * | xargs sed -i 's/FIND_TEXT/REPLACE_TEXT/g'
+^^^^^^^^^^ DOESN't work in OSX! ^^^^^^^^^^</code></pre>
+
+<p>When I ran the command I got:</p>
+
+<pre><code>sed: invalid command code</code></pre>
+
+<p>I had seen various examples that used sed as shown above and it seemed to work for the authors of the various blogs that I read, but they weren't using MacOSX. Even though terminal commands work very similarly between all the different *nix flavors, there are almost always differences in syntax and functionality.</p>
+
+<p>It seems that MacOSX is much stricter with regards to syntax and while the Linux sed command doesn't need to be explicitly given an empty string after an i switch, OSX expects an extension to follow -i, even if it's just "". </p>
+
+<p>And now you know why I specified "MacOSX" in the title of this blog post. :-)</p>
+
+<p>Happy searching and replacing.</p>

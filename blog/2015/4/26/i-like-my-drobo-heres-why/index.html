@@ -1,0 +1,152 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>To Drobo or not to Drobo · Federico Hatoum</title>
+  <meta name="description" content="Standard RAID systems require from some to a lot of management which I don&#x27;t want to do. Drobos have very low maintenance needs. Drobos accept drives of varying capacity and…">
+  <link rel="canonical" href="https://hatoum.com/blog/2015/4/26/i-like-my-drobo-heres-why/">
+  <meta name="color-scheme" content="light dark">
+  <meta name="theme-color" content="#f6f1e9" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#121417" media="(prefers-color-scheme: dark)">
+  <meta property="og:site_name" content="Federico Hatoum">
+  <meta property="og:title" content="To Drobo or not to Drobo · Federico Hatoum">
+  <meta property="og:description" content="Standard RAID systems require from some to a lot of management which I don&#x27;t want to do. Drobos have very low maintenance needs. Drobos accept drives of varying capacity and…">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://hatoum.com/blog/2015/4/26/i-like-my-drobo-heres-why/">
+  <meta property="og:image" content="https://hatoum.com/assets/img/home/lake.webp">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="icon" type="image/png" sizes="32x32" href="../../../../../assets/icons/favicon-32.png">
+  <link rel="apple-touch-icon" href="../../../../../assets/icons/apple-touch-icon.png">
+  <link rel="preload" href="../../../../../assets/fonts/inter-var.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="../../../../../assets/fonts/fraunces-var.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="../../../../../assets/css/site.css">
+  <link rel="alternate" type="application/rss+xml" title="Federico Hatoum — Blog" href="../../../../../blog/feed.xml">
+  <script>try{var t=localStorage.getItem('theme');if(t==='light'||t==='dark')document.documentElement.setAttribute('data-theme',t)}catch(e){}</script>
+  <script src="../../../../../assets/js/site.js" defer></script>
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "BlogPosting", "headline": "To Drobo or not to Drobo", "datePublished": "2015-05-03T22:52:20Z", "author": {"@type": "Person", "name": "Federico Hatoum", "url": "https://hatoum.com"}, "mainEntityOfPage": "https://hatoum.com/blog/2015/4/26/i-like-my-drobo-heres-why/"}</script>
+  <meta property="article:published_time" content="2015-05-03T22:52:20Z">
+</head>
+<body class="">
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-header">
+    <div class="wrap header-inner">
+      <a class="brand" href="../../../../../">
+        <img src="../../../../../assets/icons/dog.png" alt="" width="30" height="30">
+        <span>Federico Hatoum</span>
+      </a>
+      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav">
+        <span class="nav-toggle-bars" aria-hidden="true"></span><span class="visually-hidden">Menu</span>
+      </button>
+      <nav id="site-nav" class="site-nav" aria-label="Main">
+        <a href="../../../../../about/">About</a>
+        <a href="../../../../../blog/" aria-current="page">Blog</a>
+        <a href="../../../../../films/">Films</a>
+        <a href="../../../../../acting/">Acting</a>
+        <a href="../../../../../contact/">Contact</a>
+      </nav>
+      <button class="theme-toggle" type="button" aria-label="Switch to dark theme" title="Toggle theme">
+        <svg class="icon icon-moon" aria-hidden="true"><use href="../../../../../assets/icons/icons.svg#moon"></use></svg>
+        <svg class="icon icon-sun" aria-hidden="true"><use href="../../../../../assets/icons/icons.svg#sun"></use></svg>
+      </button>
+    </div>
+  </header>
+
+  <main id="main">
+<article class="post wrap-narrow">
+  <header class="post-header">
+    <p class="post-kicker"><a href="../../../../../blog/">Blog</a></p>
+    <h1>To Drobo or not to Drobo</h1>
+    <p class="post-meta"><time datetime="2015-05-03T22:52:20Z">May 3, 2015</time> · 6 min read</p>
+  </header>
+  <div class="prose">
+<h2>TL;DR</h2>
+
+<ul><li>Standard RAID systems require from some to a lot of management which I don't want to do. Drobos have very low maintenance needs.</li><li>Drobos accept drives of varying capacity and manufacturers making setup and storage updates easy.</li><li>There is a simple migration path between Drobo products, which means I can upgrade hardware around my data.</li><li>I treat my Drobo as I would any storage device, either single or multi-disk: I know that it's fallible and should never be the sole repository of important data. I use it only as a backup device and am not surprised or outraged if drives fail.</li></ul>
+
+<h2>Is Longer; Read if You Want</h2>
+
+<h2>Background:</h2>
+
+<p>A few years ago I wanted to buy an enclosure for backups. My various computers were accumulating an ever-increasing amount of of data in the form of pictures, movies, music, applications, emails and documents. It was no longer efficient to manually connect a backup drive to all the devices in my house, nor could I fit all my backups on the same drive.</p>
+
+<p>I decided I needed a drive enclosure that had RAID capabilities. My needs were fairly simple, in order of importance:</p>
+
+<ul><li>Low maintenance</li><li>Expandable architecture</li><li>Easy setup</li><li>Data security</li></ul>
+
+<p>In my work and on personal projects I gained experience with RAID 0, 1 and 5 systems.</p>
+
+<p>Without getting into specifics (<a href="https://en.wikipedia.org/wiki/Standard_RAID_levels" target="_blank" rel="noopener">you can learn more about RAID levels</a> from your friend and mine Wikipedia) I was looking for a RAID 5-like system.</p>
+
+<p>One thing I kept seeing during my research is that there were two camps: Drobo and everybody else. Particularly, there were many Drobo naysayers, with various arguments as to why Drobos were terrible. It seemed like the voices against Drobo were shrill and didn't have good arguments, so I decided to look into it. </p>
+
+<h2>Misinformation:</h2>
+
+<p>Drobo detractors have a standard set of arguments to support their assertion that Drobo's "BeyondRAID" is inferior to Synology/ QNAP/ Rosewill/ [VENDOR_NAME] solutions. They claim:</p>
+
+<blockquote>1. "Drobo's system is proprietary and therefore your data is locked-in."</blockquote>
+
+<p>This is a meaningless statement. <em>All</em> RAID systems are proprietary because none implement RAID specs in exactly the same way. If you buy a VendorX system and want to move a set of drives over to VendorY, you can't, even if both enclosures are set up to use RAID 5, for example. The truth is that once you buy into a particular vendor, Drobo included, you can't move a physical set of drives out of that ecosystem.</p>
+
+<p>Plus, within ecosystems, not all manufacturers make is easy to move drives to new hardware. Drobo has a well-defined migration path within their products and it's super easy to fairly easy to move data and/or drives from one system to another. For example, I had a 2nd Gen Drobo 4-Bay (USB 2.0 + Firewire 800) and bought a 3rd Gen Drobo 4-Bay (USB 3.0) for the increased throughput and data rebuilding speeds. I popped the drives out of my 2nd Gen and placed them into my 3rd Gen device and it worked perfectly.</p>
+
+<blockquote>2. "Drobos are unreliable and experience more unrecoverable data loss than traditional RAID systems."</blockquote>
+
+<p>No matter what flavor of RAID, if you have enough drive failures, it will be impossible to recover the data. The quality of the drives you place in your RAID system have much more to do with the reliability of your device than the manufacturer of the enclosure.</p>
+
+<p>The part of this statement that had a hint of truth is that with the first and second generation Drobos the rebuild time was so lengthy that it would be possible to have a second drive failure, a power outage or some other event that would ruin your data. That happened to me once (a second drive failure during rebuild) and my data was unrecoverable. However, I didn't care. I expect all storage devices fail, so I don't keep important data in just one place.</p>
+
+<p>New models of Drobo are much faster (at least 4 to 5 times faster) and have comparable rebuild times to other RAID systems. Also, all current Drobo models have built-in batteries to safely shut down during a power outage.</p>
+
+<blockquote>3. "Drobos are slow"</blockquote>
+
+<p>This was true about the first Drobos -- both throughput and rebuild/data management speeds were slow. Current Drobos are much faster and comparable to other RAID systems.</p>
+
+<p>However, this was largely a non-argument for me. I wanted a RAID system so that I could expand it to hold more than any single drive I could buy and if I got data protection along with, that was a bonus. Throughput speed was not a concern. If I wanted speed from a drive system, I wouldn't use any variant of RAID 5, instead opting for a striped (RAID 1) arrangement.</p>
+
+<h2>My decision:</h2>
+
+<p>After looking at arguments and data on both sides of the "To Drobo or Not To Drobo" debate, I opted to buy a Drobo 4-bay. To summarize everything above, here's why:</p>
+
+<ul><li><strong>Drobos have very low maintenance:</strong><br/>I don't have to worry about matching drives (neither size and nor manufacturer) and Drobos have a LEDs that tell me the status of all my drives at a glance. It tells me if a drive fails or if I'm running out of space.</li><li><strong>Increasing the amount of storage is very easy:</strong><br/>Pop one drive out, pop a larger drive in.</li><li><strong>Data migration is simple:</strong><br/>This was not something I looked at originally, but greatly appreciated when I wanted to migrate to a newer Drobo. You can physically move drives between an older and newer 4-bay Drobo, as I did, for example. Migrating between different models is slightly more work, but still very simple.</li></ul>
+
+<h2>Drive Recommendations:</h2>
+
+<p>Apart from my Drobo, I also have a no-name brand of USB 3 4-bay drive enclosure. I use it in place of 4 different enclosures, each with its own power supply (it runs in JBOD mode--Just a Bunch of Disks). I've experienced drive failures in my Drobo and even more in the USB 3 enclosure. I tried different manufacturers and types, but kept on having failures (about one every 3-4 months).</p>
+
+<p>Finally, I switched to the <a href="https://www.amazon.com/gp/product/B008JJLZ7G/ref=as_li_tl?ie=UTF8&amp;camp=1789&amp;creative=390957&amp;creativeASIN=B008JJLZ7G&amp;linkCode=as2&amp;tag=hatoum-20&amp;linkId=3HFH5WY2YRLRTGI4" target="_blank" rel="noopener">Western Digital RED series of RAID drives</a> and haven't had to replace drives yet. Really. I thought the whole "made especially for RAID systems" was marketing bullshit, but in my own experience it was true. </p>
+
+<h2>BTW: When <em>Not</em> To Get a Drobo, Synology, QNAP, etc</h2>
+
+<p>You'll be disappointed in your purchase, no matter what the manufacturer or technology they use unless you keep the following points in mind:</p>
+
+<ul><li>All storage fails eventually, even RAIDs:<br/>If you're thinking that a RAID-5 enclosure is going to keep your data safe, you're wrong. RAID is not magic and In fact, in some ways, RAID systems are more prone to failure than single drives.</li><li>RAID is not a backup:<br/>There is a difference between backing up your data and the data-redundancy you get with RAIDs (more, less or none depending on the RAID level). <br/>Data needs to be in <em>at least</em> 2 separate places (preferably 3, with one being offsite) to be safe. Referring to the first point, don't buy a RAID if your thought is to put all your pictures, movies, documents on one "data secure" device. You'll be so sad when you have 2 drive failures and lose everything. </li></ul>
+
+  </div>
+  
+  <nav class="pager" aria-label="More posts">
+    <a class="pager-prev" href="../../../../../blog/2015/3/24/sophomoric-but-fun/"><span>Older</span>Sophomoric but fun</a><a class="pager-next" href="../../../../../blog/2015/11/17/repair-20-year-old-coffee-maker/"><span>Newer</span>Repair: 30 year-old coffee maker</a>
+  </nav>
+</article>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap footer-inner">
+      <div class="footer-about">
+        <p class="footer-name">Federico Hatoum</p>
+        <p>Software developer, maker &amp; YouTuber in Los Angeles.</p>
+      </div>
+      <nav aria-label="Elsewhere">
+      <ul class="social">
+        <li><a href="https://www.youtube.com/channel/UCQGkNFXJCUBLkzMIShzf12g" title="Fed Learns To Make on YouTube" target="_blank" rel="noopener"><svg class="icon" aria-hidden="true"><use href="../../../../../assets/icons/icons.svg#youtube"></use></svg><span class="visually-hidden">Fed Learns To Make on YouTube</span></a></li>
+        <li><a href="https://github.com/fedhat" title="GitHub" target="_blank" rel="noopener"><svg class="icon" aria-hidden="true"><use href="../../../../../assets/icons/icons.svg#github"></use></svg><span class="visually-hidden">GitHub</span></a></li>
+        <li><a href="https://www.linkedin.com/pub/federico-hatoum/0/866/1a2" title="LinkedIn" target="_blank" rel="noopener"><svg class="icon" aria-hidden="true"><use href="../../../../../assets/icons/icons.svg#linkedin"></use></svg><span class="visually-hidden">LinkedIn</span></a></li>
+        <li><a href="https://www.facebook.com/583536348" title="Facebook" target="_blank" rel="noopener"><svg class="icon" aria-hidden="true"><use href="../../../../../assets/icons/icons.svg#facebook"></use></svg><span class="visually-hidden">Facebook</span></a></li>
+        <li><a href="../../../../../blog/feed.xml" title="Blog RSS feed"><svg class="icon" aria-hidden="true"><use href="../../../../../assets/icons/icons.svg#rss"></use></svg><span class="visually-hidden">Blog RSS feed</span></a></li>
+      </ul>
+      </nav>
+      <p class="footer-copy">© 2026 Federico Hatoum</p>
+    </div>
+  </footer>
+</body>
+</html>

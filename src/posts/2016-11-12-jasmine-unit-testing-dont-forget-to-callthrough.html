@@ -1,0 +1,66 @@
+---
+title: Jasmine unit testing: Don't forget to callThrough()
+date: 2016-11-12T16:55:36Z
+url: /blog/2016/11/12/jasmine-unit-testing-dont-forget-to-callthrough
+excerpt:  One of the great things about Jasmine, the Javascript unit testing library, is the spy. A spy lets you peek into the workings of the methods of Javascript objects. Just don't…
+---
+<figure><a href="https://jasmine.github.io/"><img src="/assets/img/blog/2016/jasmine-unit-testing-dont-forget-to-callthrough/01-image-asset.webp" alt="Jasmine" width="127" height="30" loading="lazy" decoding="async"></a></figure>
+
+<h2>TL;DR</h2>
+<p>One of the great things about Jasmine, the Javascript unit testing library, is the <code>spy</code>. A <code>spy</code> lets you peek into the workings of the methods of Javascript objects.
+Just don't forget to use <code>callThrough()</code> when you don't want to alter how the spied-upon function behaves. That's because a <code>spy</code> automatically replaces the spied function with a stub. If you want the spied-upon function to be called normally, add <code>.and.callThrough()</code> to your <code>spy</code> statement.</p>
+<h2>Jasmine spies are great</h2>
+<p>One of the great things about Jasmine, the Javascript unit testing library, is the spy. From <a href="https://jasmine.github.io/archives/2.5/introduction">Jasmine's documentation</a>:</p>
+<blockquote>
+<p>A spy can stub any function and tracks calls to it and all arguments. A spy only exists in the <code>describe</code> or <code>it</code> block in which it is defined, and will be removed after each spec.</p>
+</blockquote>
+<p>They are extremely useful for testing and should be part of every unit test writer's tool set. However, if you forget some basic truths about spies, you will get unexpected results and wonder why your beautiful tests don't work. Some examples:</p>
+<pre><code class="language-javascript">spyOn(myGreatJSLib, 'doSomething');
+myGreatJSLib.doSomething();
+// passes
+expect(myGreatJSLib.doSomething).toHaveBeenCalled();
+
+spyOn(myGreatJSLib, 'doAnotherThing');
+myGreatJSLib.doAnotherThing('value1', 10);
+// also passes
+expect(myGreatJSLib.doAnotherThing).toHaveBeenCalledWith('value1', 10);</code></pre>
+<h2><code>spyOn()</code> replaces functions</h2>
+<p>Jasmine's documentation adds:</p>
+<blockquote>
+<p>By chaining the spy with <code>and.callThrough</code>, the spy will still track all calls to it but in addition it will delegate to the actual implementation.</p>
+</blockquote>
+<p>This is an important piece of information to keep in mind, because, depending on what you're testing, your tests will appear to be working correctly, but your <code>expect</code> statements might fail unexpectedly.</p>
+<p>Imagine we're testing our awesome <code>RickAndMortyLib</code> which has a <code>getQuote(characterName)</code> function. Supplied with the values <code>Rick</code>, <code>Morty</code>, or <code>Summer</code>, the function will return a quote for that character. For the sake of this example, there is only one quote per character:</p>
+<ul><li>Rick: "Oh yeah, you gotta get schwifty."</li><li>Morty: "Don't even trip about your pants, dawg. We got an extra pair right here."</li><li>Summer: "God, Grandpa, you're such a dick."</li></ul>
+<p>Some examples:</p>
+<pre><code class="language-javascript">spyOn(RickAndMortyLib, 'getQuote');
+RickAndMortyLib.getQuote('Rick');
+// passes
+expect(RickAndMortyLib.getQuote).toHaveBeenCalledWith('Rick');
+
+// but....
+var rickQuote = RickAndMortyLib.getQuote('Rick');
+// FAILS
+expect(rickQuote).toBe('Oh yeah, you gotta get schwifty.');</code></pre>
+<p>Why did that last <code>expect</code> fail? Because the <code>spyOn()</code> call up top <em>replaces</em> <code>getQuote()</code> with a stub which can only confirm that it was called and/or called with specific arguments. We could fake a response with one of these two techniques:</p>
+<pre><code class="language-javascript">spyOn(RickAndMortyLib, 'getQuote').and.returnValue(
+                   'Morty, can you get to the left nipple?');
+var rickQuote = RickAndMortyLib.getQuote('Rick');
+// passes
+expect(rickQuote).toBe('Morty, can you get to the left nipple?');
+
+// or....
+spyOn(RickAndMortyLib, 'getQuote').and.callFake(function() {
+    return 'GRAAAAAASSSSSSS....tastes bad.'
+});
+// passes
+expect(rickQuote).toBe('GRAAAAAASSSSSSS....tastes bad.');</code></pre>
+<p>Those two tests pass, and the <code>and.returnValue()</code> and <code>and.callFake()</code> calls can be very useful in situations where it's impossible or difficult to supply whatever your library needs to complete the function call on its own. However, know that you're not really testing the function itself when you use a plain <code>spyOn()</code> call or when you chain <code>and.returnValue()</code> or <code>and.callFake()</code>.</p>
+<p>To really test the function call itself, you need to add <code>and.callThrough()</code>:</p>
+<pre><code class="language-javascript">spyOn(RickAndMortyLib, 'getQuote').and.callThrough();
+RickAndMortyLib.getQuote('Rick');
+// passes
+expect(RickAndMortyLib.getQuote).toHaveBeenCalledWith('Rick);
+var rickQuote = RickAndMortyLib.getQuote('Rick');
+// now this expect passes
+expect(rickQuote).toBe('Oh yeah, you gotta get schwifty.');</code></pre>

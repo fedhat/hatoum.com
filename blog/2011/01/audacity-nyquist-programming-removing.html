@@ -1,0 +1,232 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Audacity Nyquist Programming: Removing a 60hz hum · Federico Hatoum</title>
+  <meta name="description" content="My friend Flavio and I record a Spanish-language podcast dedicated to Apple products called Puromac. Since he currently lives in Puerto Rico and I&#x27;m in New York City, we talk…">
+  <link rel="canonical" href="https://hatoum.com/blog/2011/01/audacity-nyquist-programming-removing.html">
+  <meta name="color-scheme" content="light dark">
+  <meta name="theme-color" content="#f6f1e9" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#121417" media="(prefers-color-scheme: dark)">
+  <meta property="og:site_name" content="Federico Hatoum">
+  <meta property="og:title" content="Audacity Nyquist Programming: Removing a 60hz hum · Federico Hatoum">
+  <meta property="og:description" content="My friend Flavio and I record a Spanish-language podcast dedicated to Apple products called Puromac. Since he currently lives in Puerto Rico and I&#x27;m in New York City, we talk…">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://hatoum.com/blog/2011/01/audacity-nyquist-programming-removing.html">
+  <meta property="og:image" content="https://hatoum.com/assets/img/home/lake.webp">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="icon" type="image/png" sizes="32x32" href="../../../assets/icons/favicon-32.png">
+  <link rel="apple-touch-icon" href="../../../assets/icons/apple-touch-icon.png">
+  <link rel="preload" href="../../../assets/fonts/inter-var.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="../../../assets/fonts/fraunces-var.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="../../../assets/css/site.css">
+  <link rel="alternate" type="application/rss+xml" title="Federico Hatoum — Blog" href="../../../blog/feed.xml">
+  <script>try{var t=localStorage.getItem('theme');if(t==='light'||t==='dark')document.documentElement.setAttribute('data-theme',t)}catch(e){}</script>
+  <script src="../../../assets/js/site.js" defer></script>
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "BlogPosting", "headline": "Audacity Nyquist Programming: Removing a 60hz hum", "datePublished": "2011-01-03T01:45:00Z", "author": {"@type": "Person", "name": "Federico Hatoum", "url": "https://hatoum.com"}, "mainEntityOfPage": "https://hatoum.com/blog/2011/01/audacity-nyquist-programming-removing.html"}</script>
+  <meta property="article:published_time" content="2011-01-03T01:45:00Z">
+</head>
+<body class="">
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-header">
+    <div class="wrap header-inner">
+      <a class="brand" href="../../../">
+        <img src="../../../assets/icons/dog.png" alt="" width="30" height="30">
+        <span>Federico Hatoum</span>
+      </a>
+      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav">
+        <span class="nav-toggle-bars" aria-hidden="true"></span><span class="visually-hidden">Menu</span>
+      </button>
+      <nav id="site-nav" class="site-nav" aria-label="Main">
+        <a href="../../../about/">About</a>
+        <a href="../../../blog/" aria-current="page">Blog</a>
+        <a href="../../../films/">Films</a>
+        <a href="../../../acting/">Acting</a>
+        <a href="../../../contact/">Contact</a>
+      </nav>
+      <button class="theme-toggle" type="button" aria-label="Switch to dark theme" title="Toggle theme">
+        <svg class="icon icon-moon" aria-hidden="true"><use href="../../../assets/icons/icons.svg#moon"></use></svg>
+        <svg class="icon icon-sun" aria-hidden="true"><use href="../../../assets/icons/icons.svg#sun"></use></svg>
+      </button>
+    </div>
+  </header>
+
+  <main id="main">
+<article class="post wrap-narrow">
+  <header class="post-header">
+    <p class="post-kicker"><a href="../../../blog/">Blog</a></p>
+    <h1>Audacity Nyquist Programming: Removing a 60hz hum</h1>
+    <p class="post-meta"><time datetime="2011-01-03T01:45:00Z">January 2, 2011</time> · 5 min read</p>
+  </header>
+  <div class="prose">
+<p>
+  My friend Flavio and I record a Spanish-language podcast dedicated to Apple products called <a href="https://puromac.com/" target="_blank" rel="noopener">Puromac</a>. Since he currently lives in Puerto Rico and I'm in New York City, we talk over Skype and record the conversation using either <a href="https://www.rogueamoeba.com/audiohijackpro/" target="_blank" rel="noopener">Audio Hijack Pro</a> or <a href="https://web.archive.org/web/20111231105504/http://www.ecamm.com/mac/callrecorder/" target="_blank" rel="noopener">Call Recorder for Skype</a>.</p>
+
+<p>
+In our most recent episode, Flavio's mic produced an audible 60hz hum throughout the whole podcast. When he ran the audio file through <a href="https://web.archive.org/web/20111222043115/http://www.conversationsnetwork.org/levelator" target="_blank" rel="noopener">Levelator</a> (an excellent utility to adjust the levels of all audio within a file) the hum was made even louder. Before doing any post work on the audio file, I needed to remove the hum.</p>
+
+<p>
+I use <a href="https://www.audacityteam.org/" target="_blank" rel="noopener">Audacity</a> for my audio editing and while it has a very good Noise Removal tool, it was failing to pull out the hum completely, leaving a "thumping" effect over the audio. My guess is that the harmonics of the electrical hum (the frequency isn't a solid 60hz) were a problem for the Noise Removal tool.</p>
+
+<p>
+What I needed was a notch filter--a filter that removes a specific frequency from an audio signal. My plan was to use a notch filter to remove the bulk of the hum and then clean up the rest using Audacity's Noise Removal tool.</p>
+
+<p>
+Searching around the web, I found a Nyquist script that removed a 60hz hum along with an additional 4 of its harmonics.</p>
+
+<p>
+Audio samples (You will need headphones to hear the differences):</p>
+
+<ol><li> Original audio file with a noticeable hum.<br/>
+<p>[Audio sample no longer available: it was hosted on DivShare, a Flash-based service that has shut down.]</p>
+
+</li><li>An attempt to remove the hum using solely Audacity's Noise Removal  tool. You will notice there is still a hum in parts of the dialogue  which fades in and out.<br/>
+<p>[Audio sample no longer available: it was hosted on DivShare, a Flash-based service that has shut down.]</p>
+
+</li><li>The stereo Nyquist script below applied to the original file.<br/>
+<p>[Audio sample no longer available: it was hosted on DivShare, a Flash-based service that has shut down.]</p>
+
+</li><li>The stereo Nyquist script applied followed by Audacity's Noise Removal tool.<br/>
+<p>[Audio sample no longer available: it was hosted on DivShare, a Flash-based service that has shut down.]</p>
+
+</li></ol>
+
+<h3>What is Nyquist?</h3>
+
+<p>
+Nyquist is a programming language for use in audio and music applications developed at <a href="https://www.cmu.edu/" target="_blank" rel="noopener">Carnegie Mellon University</a> (my alma matter). Version 2.x of the language (which is what Audacity uses) is written in Lisp. Audacity's help page has a <a href="https://web.archive.org/web/20120102123012/http://audacity.sourceforge.net/help/nyquist" target="_blank" rel="noopener">very brief but informative introduction into Lisp</a>. I recommend reading it as it makes the Nyquist script below easier to understand. You can also visit the <a href="https://web.archive.org/web/20120114073159/http://www-2.cs.cmu.edu/~music/music.software.html" target="_blank" rel="noopener">Nyquist page at CMU</a> for more information.</p>
+
+<h3>Removing a 60hz hum with a Nyquist script:</h3>
+
+<p>
+Audacity doesn't have a full Nyquist development environment, but it  does have a plugin that allows you enter a Nyquist script to run and  debug.</p>
+
+<p>
+In Audacity, select a portion of the audio you want to clean. (You could select the whole thing, but since there is no preview function for Nyquist scripts, and my audio was more than a hour long, I selected a representative portion of the audio, ran the script, made sure it worked, pressed Command-Z  (on a Mac) to undo the script, selected the whole file then ran the script again. )</p>
+
+<p>
+If you're working with a mono audio tractk, select Effect:Nyquist Prompt... then in the window that pops up, enter the following script.<br/>
+<code><br/>
+(notch2<br/>
+(notch2<br/>
+(notch2<br/>
+(notch2<br/>
+(notch2<br/>
+s<br/>
+300 10)<br/>
+240 8)<br/>
+180 4)<br/>
+120 2)<br/>
+60 1)<br/>
+</code></p>
+
+<p>
+... Then click "OK".</p>
+
+<p>
+This runs a recursive set of notch filters (the notch2 function) on the audio signal, filtering out 60, 120, 180, 240 and 300 hz frequencies.</p>
+
+<p>
+For a stereo track, the script is more involved:<br/>
+<code><br/>
+(vector<br/>
+(notch2<br/>
+(notch2<br/>
+(notch2<br/>
+(notch2<br/>
+(notch2<br/>
+(aref s 0)<br/>
+300 10)<br/>
+240 8)<br/>
+180 4)<br/>
+120 2)<br/>
+60 1)<br/>
+(notch2<br/>
+(notch2<br/>
+(notch2<br/>
+(notch2<br/>
+(notch2<br/>
+(aref s 1)<br/>
+300 10)<br/>
+240 8)<br/>
+180 4)<br/>
+120 2)<br/>
+60 1) )<br/>
+</code></p>
+
+<p>
+This script is the same as the first, except that it handles 2 inputs via a vector (basically an array).</p>
+
+<p>
+If you still hear a little bit of hum (I did, though it was barely audible), use the Noise Removal filter in Audacity for that last bit of noise.</p>
+
+<h3>Examining the Nyquist script:</h3>
+
+<p>
+As I understand it, in Lisp everything is a function call. The format for all calls is:</p>
+
+<p><code>([FUNC_NAME] [ARGS...])</code></p>
+
+<p>
+The notch2 function is called like this:</p>
+
+<p><code>(notch2 s 60 1)</code></p>
+
+<p>
+Where "notch2" is the name of the function, "s" is the first argument referring to the audio signal (I guess Audacity calls it "s" and makes it available globally), "60" is the value in Hertz of the frequency to extract and "1" is the Q factor.</p>
+
+<p>
+The Nyquist and Audacity documentation don't talk much about what a Q factor is, except that it's the "depth and width" of the function, or the "fudge factor" around the frequency. My friend Taylor sent me this <a href="https://en.wikipedia.org/wiki/Q_factor" target="_blank" rel="noopener">Wikipedia article on Q factors</a> after seeing the original version of this blog posts in which I conceded ignorance on the subject. Essentially, a value below 1 creates a wider notch, while a value above it creates a narrower one. </p>
+
+<p>
+The script above could be written as:</p>
+
+<p><code>(notch2 (notch2 (notch2 (notch2 (notch2 s 300 10) 240 8) 180 4) 120 2) 60 1)</code></p>
+
+<p>
+Though it's a little harder to read, you get a better sense of the recursive nature of the call. The inner notch2 function call filters out 300hz with the signal "s" as the input. The output of that call is fed to the second notch2 call, which filters out 240hz. Then comes 180hz, 120hz and finally the outer call filters out the remaining 60hz signal from the audio.</p>
+
+<p>
+You can <a href="https://web.archive.org/web/20120107110707/http://wiki.audacityteam.org/index.php?title=Noise_Removal" target="_blank" rel="noopener">read more about noise removal in Audacity</a> on its Wiki page.</p>
+
+<h3>Prebuilt Nyquist filters:</h3>
+
+<p>
+After writing this blog entry I discovered that Audacity already has a notch filter routine already written as part of their <a href="https://web.archive.org/web/20120103174316/http://audacity.sourceforge.net/download/nyquistplugins" target="_blank" rel="noopener">downloadable library</a>, so that you can add it to Audacity's plug-ins folder. It's not clear to me why these plugins don't come installed by default.</p>
+
+<p>
+Looking at the code for <a href="https://web.archive.org/web/20111223004426/http://audacity.sourceforge.net/nyquist/notch.ny" target="_blank" rel="noopener">Audacity's notch.ny</a>, I don't think it handles harmonics like the script above, but it's certainly easier to use and knows the difference between a mono and stereo file.</p>
+
+<p>
+[UPDATED: More information about Q factors]
+</p>
+
+  </div>
+  
+  <nav class="pager" aria-label="More posts">
+    <a class="pager-prev" href="../../../blog/2010/12/supercharging-black-decker-chv1568-156.html"><span>Older</span>Supercharging a Black &amp; Decker CHV1568 15.6-Volt DustBuster</a><a class="pager-next" href="../../../blog/2011/03/firefox-4-destroyer-of-memory.html"><span>Newer</span>Firefox 4: Destroyer of Memory</a>
+  </nav>
+</article>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap footer-inner">
+      <div class="footer-about">
+        <p class="footer-name">Federico Hatoum</p>
+        <p>Software developer, maker &amp; YouTuber in Los Angeles.</p>
+      </div>
+      <nav aria-label="Elsewhere">
+      <ul class="social">
+        <li><a href="https://www.youtube.com/channel/UCQGkNFXJCUBLkzMIShzf12g" title="Fed Learns To Make on YouTube" target="_blank" rel="noopener"><svg class="icon" aria-hidden="true"><use href="../../../assets/icons/icons.svg#youtube"></use></svg><span class="visually-hidden">Fed Learns To Make on YouTube</span></a></li>
+        <li><a href="https://github.com/fedhat" title="GitHub" target="_blank" rel="noopener"><svg class="icon" aria-hidden="true"><use href="../../../assets/icons/icons.svg#github"></use></svg><span class="visually-hidden">GitHub</span></a></li>
+        <li><a href="https://www.linkedin.com/pub/federico-hatoum/0/866/1a2" title="LinkedIn" target="_blank" rel="noopener"><svg class="icon" aria-hidden="true"><use href="../../../assets/icons/icons.svg#linkedin"></use></svg><span class="visually-hidden">LinkedIn</span></a></li>
+        <li><a href="https://www.facebook.com/583536348" title="Facebook" target="_blank" rel="noopener"><svg class="icon" aria-hidden="true"><use href="../../../assets/icons/icons.svg#facebook"></use></svg><span class="visually-hidden">Facebook</span></a></li>
+        <li><a href="../../../blog/feed.xml" title="Blog RSS feed"><svg class="icon" aria-hidden="true"><use href="../../../assets/icons/icons.svg#rss"></use></svg><span class="visually-hidden">Blog RSS feed</span></a></li>
+      </ul>
+      </nav>
+      <p class="footer-copy">© 2026 Federico Hatoum</p>
+    </div>
+  </footer>
+</body>
+</html>

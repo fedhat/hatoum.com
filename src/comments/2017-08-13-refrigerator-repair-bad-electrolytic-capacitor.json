@@ -1,0 +1,65 @@
+[
+ {
+  "id": "5c9b7fa224a694dfe95ebbe5",
+  "parent": "",
+  "author": "barry",
+  "url": "",
+  "owner": false,
+  "date": "2019-03-27T13:50:26Z",
+  "body": "<p>Same capacitor went bad in my KitchenAid side-by-side built in refrigerator. My symptoms were the display inside the frig that shows the actual temp and set temp would not stay on. On power-up, all the display lights would flash on for a few seconds then turn off. Replacing the 220uf cap on the control board solved the problem. Thanks for taking the time to write this up. It was helpful.</p>"
+ },
+ {
+  "id": "5c9b8a85fa0d60282b7e1675",
+  "parent": "5c9b7fa224a694dfe95ebbe5",
+  "author": "Federico Hatoum",
+  "url": "",
+  "owner": true,
+  "date": "2019-03-27T14:36:53Z",
+  "body": "<p>I'm glad my post helped you resolve the problem with your refrigerator, and thank you for taking the time to post a comment.</p>"
+ },
+ {
+  "id": "5d09a9f0bbf88f000188e766",
+  "parent": "",
+  "author": "Darcy",
+  "url": "",
+  "owner": false,
+  "date": "2019-06-19T03:20:16Z",
+  "body": "<p>Same problem happened with my Kitchenaid side by side. My fridge started beeping occasionally and ultimately the compressor started to cut out intermittently. Thanks to you and Steve Jenkins I was able to identify that the same capacitor on the control board had failed. I was a bit intimidated by the delicate soldering so I took mine to a computer repair shop. 30 minutes and $30 later - problem is fixed. Fridge is running like new.</p>"
+ },
+ {
+  "id": "5da6ca383aaf2b7990a32e79",
+  "parent": "",
+  "author": "Evelyn Guo",
+  "url": "",
+  "owner": false,
+  "date": "2019-10-16T07:43:52Z",
+  "body": "<p>Hi Federico,</p>\n<p>I think I am experiencing the same problem, may I ask where did you buy the new capacitor?</p>"
+ },
+ {
+  "id": "5da94e53a2dc037095be5997",
+  "parent": "5da6ca383aaf2b7990a32e79",
+  "author": "Federico Hatoum",
+  "url": "",
+  "owner": true,
+  "date": "2019-10-18T05:32:03Z",
+  "body": "<p>Hi Evelyn,</p>\n<p>I had spare capacitors from other projects. However, you can buy capacitors online.</p>"
+ },
+ {
+  "id": "60fb07fc3baea461c083bc2e",
+  "parent": "",
+  "author": "Palisandr",
+  "url": "",
+  "owner": false,
+  "date": "2021-07-23T18:18:36Z",
+  "body": "<p>Thank you very much for the post! Exactly the same happened to my Kitchenaid side-by-side KSSC42FTS03 model. Chirping sound, identified the same bulging capacitor. Fortunately, I have an elderly friend, who knows what hot iron and soldering is and he had the needed capacitor (replaced the bad one with 220nF, 50V, 105C).</p>\n<p>Great, helpful post. Thank again.</p>"
+ },
+ {
+  "id": "60fb0f648cf22f794e406554",
+  "parent": "60fb07fc3baea461c083bc2e",
+  "author": "Federico Hatoum",
+  "url": "",
+  "owner": true,
+  "date": "2021-07-23T18:50:12Z",
+  "body": "<p>You're welcome! Glad you found the post useful.</p>"
+ }
+]

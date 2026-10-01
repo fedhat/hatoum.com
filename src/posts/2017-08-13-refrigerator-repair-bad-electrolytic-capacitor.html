@@ -1,0 +1,39 @@
+---
+title: Repair: Bad Electrolytic Capacitor Strikes Again, This Time In A Refrigerator Control Unit
+date: 2017-08-13T22:04:17Z
+url: /blog/2017/8/7/refrigerator-repair-bad-electrolytic-capacitor-strikes-again
+excerpt:  My Kitchen Aid model KBLC36FMS02 built-in refrigerator had been making odd sounds for a few weeks and then one day stopped cooling. I pulled the fridge out of its niche and…
+---
+<h2>TLDR;</h2>
+
+<p>My Kitchen Aid model KBLC36FMS02 built-in refrigerator had been making odd sounds for a few weeks and then one day stopped cooling. I pulled the fridge out of its niche and eventually pulled out the control board on top of condenser coil. When I Googled some of the numbers on the PCB (ex: "W10219463 control board fix"), I came across the blog of <a href="https://www.stevejenkins.com/blog/2014/03/how-to-fix-a-whirlpool-kitchenaid-w10219463-2307028-control-board-for-6/">Steve Jenkins</a>, who had an excellent post on the control board issue with all the information I needed to repair it. The problem with my control board came down to a faulty 220uf electrolytic capacitor. And as I learned from my friend <a href="https://josh.com">Josh</a> when I repaired a <a href="/blog/2015/11/17/repair-20-year-old-coffee-maker/">30-year old coffee maker</a>, electrolytic capacitors always go bad.</p>
+
+<h2>Details</h2>
+
+<p>When my refrigerator, a Kitchen Aid model KBLC36FMS02 started making odd sounds, I ignored it. A few weeks later, when it stopped cooling, I couldn't ignore it.</p>
+
+<p>My first thought was that the compressor had a leaked coolant and no longer worked. I pulled the refrigerator out of its niche and took apart the enclosure on top of the fridge which housed the compressor and condenser coil.</p>
+
+<p>Before taking apart the top housing, I had unplugged the refrigerator. Since I didn't see anything obviously wrong with the compressor, I plugged the fridge back in to see if that might reset the temperature sensors. The compressor started up and I saw frost appear on the output tube, so I guessed that the compressor was working correctly.</p>
+
+<p>Next I took a look at the condenser coils. I thought that maybe the refrigerator had turned itself off because, if the coils were sufficiently dirty, the fridge couldn't release heat. The coils <em>were</em> filthy, having never been cleaned in the 10 years since the fridge had been in operation.</p>
+
+<figure><a class="lightbox" href="/assets/img/blog/2017/refrigerator-repair-bad-electrolytic-capacitor/01-image-asset.webp"><img src="/assets/img/blog/2017/refrigerator-repair-bad-electrolytic-capacitor/01-image-asset.webp" alt="" width="1500" height="2000" loading="lazy" decoding="async"></a><figcaption>Dirty condenser coils</figcaption></figure>
+
+<p>I cleaned out the coils and started up the fridge again, but it was clear after a few minutes that it still wasn't cooling. That's when I noticed that the condenser coil fan wasn't spinning. So, my next guess as to what was wrong with the fridge was that the control board, which I could see above the condenser coils, had a problem with it. I removed the board and took a look at it.</p>
+
+<p>From my experience fixing a <a href="/blog/2015/11/17/repair-20-year-old-coffee-maker/">30-year old coffee maker</a> I learned that electrolytic capacitors often go bad. However, the capacitors on the board didn't look damaged or have any discharge like the ones I replaced in my old coffee maker.</p>
+
+<p>I Googled the numbers on the PCB of the control board, hoping to find if I could find a replacement board and how much it would cost. Ebay had several services that would either sell you a new board ($850!!) or repair existing boards ($70-$200).</p>
+
+<p>Then I came across <a href="https://www.stevejenkins.com/blog/2014/03/how-to-fix-a-whirlpool-kitchenaid-w10219463-2307028-control-board-for-6/">Steve Jenkins</a>' blog which had a post about the very control unit I was researching. Steve's post is excellent, with lots of useful information, including the fact that the failure condition I was experiencing is a well-known issue with the control board (model W10219463), and that two parts in particular fail on the board: a relay and an electrolytic capacitor.</p>
+
+<p>From Steve's blog I learned that the single 200uf capacitor on the board is the one to go bad and when I looked at it again, I noticed that even though there was no discharge from the capacitor, its top was bulging, just like Steve described.</p>
+
+<figure><a class="lightbox" href="/assets/img/blog/2017/refrigerator-repair-bad-electrolytic-capacitor/02-img-5806.webp"><img src="/assets/img/blog/2017/refrigerator-repair-bad-electrolytic-capacitor/02-img-5806.webp" alt="" width="1600" height="1119" loading="lazy" decoding="async"></a><figcaption>Bulging capacitor top</figcaption></figure>
+
+<p>I removed the bad capacitor and tested it, confirming that it did not hold anywhere near the charge it was supposed to. </p>
+
+<figure><a class="lightbox" href="/assets/img/blog/2017/refrigerator-repair-bad-electrolytic-capacitor/03-img-5807.webp"><img src="/assets/img/blog/2017/refrigerator-repair-bad-electrolytic-capacitor/03-img-5807.webp" alt="" width="1600" height="1455" loading="lazy" decoding="async"></a><figcaption>Low capacity on bad capacitor</figcaption></figure>
+
+<p>So, I replaced the bad 220uf capacitor with a fresh one, reinstalled the control board and started up the refrigerator. The compressor went on as did the fan! After a few minutes I confirmed that the fridge was cooling again. </p>

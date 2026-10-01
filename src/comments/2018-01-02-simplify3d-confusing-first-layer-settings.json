@@ -1,0 +1,119 @@
+[
+ {
+  "id": "5a566cb753450ad1023cd870",
+  "parent": "",
+  "author": "Rp",
+  "url": "",
+  "owner": false,
+  "date": "2018-01-10T19:42:47Z",
+  "body": "<p>Hi Federico,</p>\n<p>Thanks for posting this! Very helpful!<br/>One problem, when I click on the forum link at the bottom of the article, it brings me back to the article instead of the forum. If I copy and past it, I get to the forum.</p>\n<p>Thanks again!</p>"
+ },
+ {
+  "id": "5a5671bbe4966b5f251758e0",
+  "parent": "5a566cb753450ad1023cd870",
+  "author": "Federico Hatoum",
+  "url": "",
+  "owner": true,
+  "date": "2018-01-10T20:04:11Z",
+  "body": "<p>Thank you for pointing out the problem with the forum link, Rp. I've corrected it.<br/>Glad you found the post helpful!</p>"
+ },
+ {
+  "id": "5bd440440852291fdf4c25a1",
+  "parent": "",
+  "author": "Michael",
+  "url": "https://www.thingiverse.com/wersy/designs",
+  "owner": false,
+  "date": "2018-10-27T10:39:00Z",
+  "body": "<p>Hi Federico,<br/>Regarding layer width. Have you checked the Gcode?<br/>No matter which width I enter, the extruded quantity always remains the same.<br/>In this respect it works like the other slicers.</p>\n<p>Michael</p>"
+ },
+ {
+  "id": "5bd9de0d0ebbe80db3b624e7",
+  "parent": "5bd440440852291fdf4c25a1",
+  "author": "Federico Hatoum",
+  "url": "",
+  "owner": true,
+  "date": "2018-10-31T16:53:33Z",
+  "body": "<p>Hi Michael,</p>\n<p>I previously hadn't checked the Gcode for validation, though in my non-scientific tests, there did <em>appear</em> to be more plastic extruded.<br/>However, I just did a test with an old model and created two gcode files, one with layer width set to 100% and a second one set to 400%. The previews show much wider lines being drawn and I see in the gcode that the E commands for the first layer are different -- about 4x different.</p>"
+ },
+ {
+  "id": "5bda1509562fa73fc14f4a6d",
+  "parent": "",
+  "author": "Michael",
+  "url": "https://www.thingiverse.com/wersy/designs",
+  "owner": false,
+  "date": "2018-10-31T20:48:09Z",
+  "body": "<p>Can you send me your gcodes?</p>\n<p>I made two tests, one with 100% and one with 200%.<br/>The E value is almost the same.<br/>The 200% is even slightly less which is logical if you know how slicers handle thicker extrusion width.<br/>You can see my comments on rc-network: http://www.rc-network.de/forum/showthread.php/632131-Bau-des-DIY-3D-Druckers-Mika3D/page55<br/>It is comment #823</p>\n<p>I can send you my gcodes.</p>"
+ },
+ {
+  "id": "5bda1cd221c67c69e6b2678b",
+  "parent": "5bda1509562fa73fc14f4a6d",
+  "author": "Federico Hatoum",
+  "url": "",
+  "owner": true,
+  "date": "2018-10-31T21:21:22Z",
+  "body": "<p>Hi. I just sent you the two test files I generated. Hope they help.</p>"
+ },
+ {
+  "id": "5bdac1528a922d1e357eae58",
+  "parent": "",
+  "author": "Michael",
+  "url": "https://www.thingiverse.com/wersy/designs",
+  "owner": false,
+  "date": "2018-11-01T09:03:14Z",
+  "body": "<p>Thank you for your gcodes.<br/>In both cases the first layer ends with E 573.0794</p>"
+ },
+ {
+  "id": "5be45b8521c67c669e53758f",
+  "parent": "5bdac1528a922d1e357eae58",
+  "author": "Federico Hatoum",
+  "url": "",
+  "owner": true,
+  "date": "2018-11-08T15:51:33Z",
+  "body": "<p>I'm not sure what to tell you. The information I presented came from S3D's website and, at least in preview mode, when I change the first layer width, the preview shows a thicker, wider line. And when I print, I do indeed see a wider line.<br/>Perhaps that's accomplished differently than was described in S3D's website.</p>"
+ },
+ {
+  "id": "5ddd5ff1e6b17d4a8f045c17",
+  "parent": "",
+  "author": "Michael P",
+  "url": "",
+  "owner": false,
+  "date": "2019-11-26T17:25:05Z",
+  "body": "<p>FYI, Simplify3d has updated their First Layer Height settings in 4.1. Specifically \"Using a first layer height below 100% will now correctly reduce the amount of extruded material (alternatively, a negative global Z-axis offset can be used to lower the first layer while still extruding the same amount of material)\"</p>\n<p>Here's the full release notes: https://www.simplify3d.com/software/release-notes/</p>"
+ },
+ {
+  "id": "5dde00cc51c72e2c5ecc0d3a",
+  "parent": "5ddd5ff1e6b17d4a8f045c17",
+  "author": "Federico Hatoum",
+  "url": "",
+  "owner": true,
+  "date": "2019-11-27T04:51:24Z",
+  "body": "<p>I wasn't aware of that. Thank you for letting me know!</p>"
+ },
+ {
+  "id": "61bbd2b1d07b79547eda77fc",
+  "parent": "",
+  "author": "Don",
+  "url": "",
+  "owner": false,
+  "date": "2021-12-16T23:58:41Z",
+  "body": "<p>This used to be correct back in 2016. But I've analyzed the GCode produced. Both first layer height and first layer width change both the distances AND extrusion amounts, regardless of whether the percentage is above ore below 100.</p>"
+ },
+ {
+  "id": "61bce00464e1220497345688",
+  "parent": "61bbd2b1d07b79547eda77fc",
+  "author": "Federico Hatoum",
+  "url": "",
+  "owner": true,
+  "date": "2021-12-17T19:07:48Z",
+  "body": "<p>Thanks Don. I'll put a note in the post indicating that it no longer applies.</p>"
+ },
+ {
+  "id": "61bf66c2bc1f33115145a0b3",
+  "parent": "",
+  "author": "Don",
+  "url": "",
+  "owner": false,
+  "date": "2021-12-19T17:07:14Z",
+  "body": "<p>This information is mostly still valid except for First Layer Height less than 100% DOES reduce extrusion. See gcode below (from version 4.1.2):</p>\n<p>First Layer - Height 50%, Width 50%:<br/>; tool H0.100 W0.200<br/>G1 Z0.100 F1002<br/>G1 X105.219 Y106.200 E0.0273 F1200</p>\n<p>First Layer - Height 100%, Width 100%:<br/>; tool H0.200 W0.400<br/>G1 Z0.200 F1002<br/>G1 X105.095 Y105.900 E0.1166 F1200</p>\n<p>First Layer - Height 150%, Width 150%:<br/>; tool H0.300 W0.600<br/>G1 Z0.300 F1002<br/>G1 X104.970 Y105.600 E0.2795 F1200</p>"
+ }
+]

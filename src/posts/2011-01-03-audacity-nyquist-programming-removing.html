@@ -1,0 +1,148 @@
+---
+title: Audacity Nyquist Programming: Removing a 60hz hum
+date: 2011-01-03T01:45:00Z
+url: /blog/2011/01/audacity-nyquist-programming-removing.html
+excerpt:  My friend Flavio and I record a Spanish-language podcast dedicated to Apple products called Puromac. Since he currently lives in Puerto Rico and I'm in New York City, we talk…
+tags: audio, programming
+---
+<p>
+  My friend Flavio and I record a Spanish-language podcast dedicated to Apple products called <a href="https://puromac.com/">Puromac</a>. Since he currently lives in Puerto Rico and I'm in New York City, we talk over Skype and record the conversation using either <a href="https://www.rogueamoeba.com/audiohijackpro/">Audio Hijack Pro</a> or <a href="https://web.archive.org/web/20111231105504/http://www.ecamm.com/mac/callrecorder/">Call Recorder for Skype</a>.</p>
+
+<p>
+In our most recent episode, Flavio's mic produced an audible 60hz hum throughout the whole podcast. When he ran the audio file through <a href="https://web.archive.org/web/20111222043115/http://www.conversationsnetwork.org/levelator">Levelator</a> (an excellent utility to adjust the levels of all audio within a file) the hum was made even louder. Before doing any post work on the audio file, I needed to remove the hum.</p>
+
+<p>
+I use <a href="https://www.audacityteam.org/">Audacity</a> for my audio editing and while it has a very good Noise Removal tool, it was failing to pull out the hum completely, leaving a "thumping" effect over the audio. My guess is that the harmonics of the electrical hum (the frequency isn't a solid 60hz) were a problem for the Noise Removal tool.</p>
+
+<p>
+What I needed was a notch filter--a filter that removes a specific frequency from an audio signal. My plan was to use a notch filter to remove the bulk of the hum and then clean up the rest using Audacity's Noise Removal tool.</p>
+
+<p>
+Searching around the web, I found a Nyquist script that removed a 60hz hum along with an additional 4 of its harmonics.</p>
+
+<p>
+Audio samples (You will need headphones to hear the differences):</p>
+
+<ol><li> Original audio file with a noticeable hum.<br/>
+<p>[Audio sample no longer available: it was hosted on DivShare, a Flash-based service that has shut down.]</p>
+
+</li><li>An attempt to remove the hum using solely Audacity's Noise Removal  tool. You will notice there is still a hum in parts of the dialogue  which fades in and out.<br/>
+<p>[Audio sample no longer available: it was hosted on DivShare, a Flash-based service that has shut down.]</p>
+
+</li><li>The stereo Nyquist script below applied to the original file.<br/>
+<p>[Audio sample no longer available: it was hosted on DivShare, a Flash-based service that has shut down.]</p>
+
+</li><li>The stereo Nyquist script applied followed by Audacity's Noise Removal tool.<br/>
+<p>[Audio sample no longer available: it was hosted on DivShare, a Flash-based service that has shut down.]</p>
+
+</li></ol>
+
+<h3>What is Nyquist?</h3>
+
+<p>
+Nyquist is a programming language for use in audio and music applications developed at <a href="https://www.cmu.edu/">Carnegie Mellon University</a> (my alma matter). Version 2.x of the language (which is what Audacity uses) is written in Lisp. Audacity's help page has a <a href="https://web.archive.org/web/20120102123012/http://audacity.sourceforge.net/help/nyquist">very brief but informative introduction into Lisp</a>. I recommend reading it as it makes the Nyquist script below easier to understand. You can also visit the <a href="https://web.archive.org/web/20120114073159/http://www-2.cs.cmu.edu/~music/music.software.html">Nyquist page at CMU</a> for more information.</p>
+
+<h3>Removing a 60hz hum with a Nyquist script:</h3>
+
+<p>
+Audacity doesn't have a full Nyquist development environment, but it  does have a plugin that allows you enter a Nyquist script to run and  debug.</p>
+
+<p>
+In Audacity, select a portion of the audio you want to clean. (You could select the whole thing, but since there is no preview function for Nyquist scripts, and my audio was more than a hour long, I selected a representative portion of the audio, ran the script, made sure it worked, pressed Command-Z  (on a Mac) to undo the script, selected the whole file then ran the script again. )</p>
+
+<p>
+If you're working with a mono audio tractk, select Effect:Nyquist Prompt... then in the window that pops up, enter the following script.<br/>
+<code><br/>
+(notch2<br/>
+(notch2<br/>
+(notch2<br/>
+(notch2<br/>
+(notch2<br/>
+s<br/>
+300 10)<br/>
+240 8)<br/>
+180 4)<br/>
+120 2)<br/>
+60 1)<br/>
+</code></p>
+
+<p>
+... Then click "OK".</p>
+
+<p>
+This runs a recursive set of notch filters (the notch2 function) on the audio signal, filtering out 60, 120, 180, 240 and 300 hz frequencies.</p>
+
+<p>
+For a stereo track, the script is more involved:<br/>
+<code><br/>
+(vector<br/>
+(notch2<br/>
+(notch2<br/>
+(notch2<br/>
+(notch2<br/>
+(notch2<br/>
+(aref s 0)<br/>
+300 10)<br/>
+240 8)<br/>
+180 4)<br/>
+120 2)<br/>
+60 1)<br/>
+(notch2<br/>
+(notch2<br/>
+(notch2<br/>
+(notch2<br/>
+(notch2<br/>
+(aref s 1)<br/>
+300 10)<br/>
+240 8)<br/>
+180 4)<br/>
+120 2)<br/>
+60 1) )<br/>
+</code></p>
+
+<p>
+This script is the same as the first, except that it handles 2 inputs via a vector (basically an array).</p>
+
+<p>
+If you still hear a little bit of hum (I did, though it was barely audible), use the Noise Removal filter in Audacity for that last bit of noise.</p>
+
+<h3>Examining the Nyquist script:</h3>
+
+<p>
+As I understand it, in Lisp everything is a function call. The format for all calls is:</p>
+
+<p><code>([FUNC_NAME] [ARGS...])</code></p>
+
+<p>
+The notch2 function is called like this:</p>
+
+<p><code>(notch2 s 60 1)</code></p>
+
+<p>
+Where "notch2" is the name of the function, "s" is the first argument referring to the audio signal (I guess Audacity calls it "s" and makes it available globally), "60" is the value in Hertz of the frequency to extract and "1" is the Q factor.</p>
+
+<p>
+The Nyquist and Audacity documentation don't talk much about what a Q factor is, except that it's the "depth and width" of the function, or the "fudge factor" around the frequency. My friend Taylor sent me this <a href="https://en.wikipedia.org/wiki/Q_factor">Wikipedia article on Q factors</a> after seeing the original version of this blog posts in which I conceded ignorance on the subject. Essentially, a value below 1 creates a wider notch, while a value above it creates a narrower one. </p>
+
+<p>
+The script above could be written as:</p>
+
+<p><code>(notch2 (notch2 (notch2 (notch2 (notch2 s 300 10) 240 8) 180 4) 120 2) 60 1)</code></p>
+
+<p>
+Though it's a little harder to read, you get a better sense of the recursive nature of the call. The inner notch2 function call filters out 300hz with the signal "s" as the input. The output of that call is fed to the second notch2 call, which filters out 240hz. Then comes 180hz, 120hz and finally the outer call filters out the remaining 60hz signal from the audio.</p>
+
+<p>
+You can <a href="https://web.archive.org/web/20120107110707/http://wiki.audacityteam.org/index.php?title=Noise_Removal">read more about noise removal in Audacity</a> on its Wiki page.</p>
+
+<h3>Prebuilt Nyquist filters:</h3>
+
+<p>
+After writing this blog entry I discovered that Audacity already has a notch filter routine already written as part of their <a href="https://web.archive.org/web/20120103174316/http://audacity.sourceforge.net/download/nyquistplugins">downloadable library</a>, so that you can add it to Audacity's plug-ins folder. It's not clear to me why these plugins don't come installed by default.</p>
+
+<p>
+Looking at the code for <a href="https://web.archive.org/web/20111223004426/http://audacity.sourceforge.net/nyquist/notch.ny">Audacity's notch.ny</a>, I don't think it handles harmonics like the script above, but it's certainly easier to use and knows the difference between a mono and stereo file.</p>
+
+<p>
+[UPDATED: More information about Q factors]
+</p>

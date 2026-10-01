@@ -1,0 +1,38 @@
+---
+title: Contact / Contacto
+path: /contact/
+section: contact
+description: Get in touch with Federico Hatoum, in English or Spanish.
+---
+<div class="wrap contact-grid">
+  <div>
+    <span class="kicker">Contact / Contacto</span>
+    <h1>Say hello.</h1>
+    <p class="lede">Questions about a video or a post, a project idea, or just want to say hi? Write in English or Spanish.</p>
+    <p lang="es">¿Preguntas o comentarios? Escríbeme en inglés o en español.</p>
+    <p>Prefer your own email app? Write to <a data-email-link href="/contact/">my email address</a>.</p>
+  </div>
+  <div class="contact-card">
+    <form id="contact-form" data-user="mail" data-domain="hatoum.com" novalidate>
+      <div class="field">
+        <label for="c-name">Name <span>/ Nombre</span></label>
+        <input id="c-name" name="name" type="text" autocomplete="name" required>
+      </div>
+      <div class="field">
+        <label for="c-email">Email address <span>/ Email</span></label>
+        <input id="c-email" name="email" type="email" autocomplete="email" required>
+      </div>
+      <div class="field">
+        <label for="c-subject">Subject <span>/ Tema</span></label>
+        <input id="c-subject" name="subject" type="text" required>
+      </div>
+      <div class="field">
+        <label for="c-message">Message <span>/ Mensaje</span></label>
+        <textarea id="c-message" name="message" required></textarea>
+      </div>
+      <button class="btn btn-primary" type="submit">[[icon mail]] Send / Enviar</button>
+      <p id="form-status" class="form-status" role="status"></p>
+      <noscript><p class="form-status">This form needs JavaScript to open your email app. You can also reach me on <a href="https://www.linkedin.com/pub/federico-hatoum/0/866/1a2">LinkedIn</a>.</p></noscript>
+    </form>
+  </div>
+</div>

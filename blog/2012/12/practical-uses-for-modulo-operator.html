@@ -1,0 +1,287 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Practical uses for the modulo operator · Federico Hatoum</title>
+  <meta name="description" content="I was introduced to the modulo operator in my first real programming job (longer ago than I care to admit). The problem I had was that I needed to generate a calendar as a simple…">
+  <link rel="canonical" href="https://hatoum.com/blog/2012/12/practical-uses-for-modulo-operator.html">
+  <meta name="color-scheme" content="light dark">
+  <meta name="theme-color" content="#f6f1e9" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#121417" media="(prefers-color-scheme: dark)">
+  <meta property="og:site_name" content="Federico Hatoum">
+  <meta property="og:title" content="Practical uses for the modulo operator · Federico Hatoum">
+  <meta property="og:description" content="I was introduced to the modulo operator in my first real programming job (longer ago than I care to admit). The problem I had was that I needed to generate a calendar as a simple…">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://hatoum.com/blog/2012/12/practical-uses-for-modulo-operator.html">
+  <meta property="og:image" content="https://hatoum.com/assets/img/home/lake.webp">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="icon" type="image/png" sizes="32x32" href="../../../assets/icons/favicon-32.png">
+  <link rel="apple-touch-icon" href="../../../assets/icons/apple-touch-icon.png">
+  <link rel="preload" href="../../../assets/fonts/inter-var.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="../../../assets/fonts/fraunces-var.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="../../../assets/css/site.css">
+  <link rel="alternate" type="application/rss+xml" title="Federico Hatoum — Blog" href="../../../blog/feed.xml">
+  <script>try{var t=localStorage.getItem('theme');if(t==='light'||t==='dark')document.documentElement.setAttribute('data-theme',t)}catch(e){}</script>
+  <script src="../../../assets/js/site.js" defer></script>
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "BlogPosting", "headline": "Practical uses for the modulo operator", "datePublished": "2012-12-27T16:14:00Z", "author": {"@type": "Person", "name": "Federico Hatoum", "url": "https://hatoum.com"}, "mainEntityOfPage": "https://hatoum.com/blog/2012/12/practical-uses-for-modulo-operator.html"}</script>
+  <meta property="article:published_time" content="2012-12-27T16:14:00Z">
+</head>
+<body class="">
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-header">
+    <div class="wrap header-inner">
+      <a class="brand" href="../../../">
+        <img src="../../../assets/icons/dog.png" alt="" width="30" height="30">
+        <span>Federico Hatoum</span>
+      </a>
+      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav">
+        <span class="nav-toggle-bars" aria-hidden="true"></span><span class="visually-hidden">Menu</span>
+      </button>
+      <nav id="site-nav" class="site-nav" aria-label="Main">
+        <a href="../../../about/">About</a>
+        <a href="../../../blog/" aria-current="page">Blog</a>
+        <a href="../../../films/">Films</a>
+        <a href="../../../acting/">Acting</a>
+        <a href="../../../contact/">Contact</a>
+      </nav>
+      <button class="theme-toggle" type="button" aria-label="Switch to dark theme" title="Toggle theme">
+        <svg class="icon icon-moon" aria-hidden="true"><use href="../../../assets/icons/icons.svg#moon"></use></svg>
+        <svg class="icon icon-sun" aria-hidden="true"><use href="../../../assets/icons/icons.svg#sun"></use></svg>
+      </button>
+    </div>
+  </header>
+
+  <main id="main">
+<article class="post wrap-narrow">
+  <header class="post-header">
+    <p class="post-kicker"><a href="../../../blog/">Blog</a></p>
+    <h1>Practical uses for the modulo operator</h1>
+    <p class="post-meta"><time datetime="2012-12-27T16:14:00Z">December 27, 2012</time> · 5 min read</p>
+  </header>
+  <div class="prose">
+<p>
+I was introduced to the modulo operator in my first real programming job (longer ago than I care to admit). The problem I had was that I needed to generate a calendar as a simple HTML table (remember when all website layout was done with tables?) and needed to layout columns in multiples of 7.</p>
+
+<p>
+I shared my dilemma with Felix, a more experienced and knowledgeable programmer at work who taught me about the modulus operator.</p>
+
+<p>
+The modulus operator returns the remainder of a <a href="https://en.wikipedia.org/wiki/Modulo_operation" target="_blank" rel="noopener">division of one number by another</a>. In most programming languages, modulo is indicated with a percent sign. For example, "4 mod 2" or "4%2" returns 0, because 2 divides into 4 perfectly, without a remainder. "5%2", however, returns 1 because 1 is the remainder of 5 divided by 2 (2 divides into 5 2 times, with 1 left over).</p>
+
+<p>
+That doesn't sound like much, but it turns out that knowing the remainder of a division is immensely useful in certain situations.</p>
+
+<h4>
+Example 1: Is a number even?</h4>
+
+<p>
+Since any even number divided by 2 has a remainder of 0, we can use modulo to determine the even-ess of a number. This can be used to make every other row in a table a certain color, for example.</p>
+
+<pre>
+for (x = 1; x &lt; 11; x++) {
+
+    if (x%2 == 0) {
+        // Yes! this is an even row
+        rowColor = #CCCCCC; // grey
+    
+    } else {
+        // This is an odd row
+        rowColor = #FFFFFF; // white
+    }
+}
+</pre>
+
+<h4>
+Example 2: Do something every nth time.</h4>
+
+<p>
+If you have a for loop and want to report on the state of the loop, but not every cycle through, you can use modulo:</p>
+
+<pre>
+for (x=0; x &lt;100000; x++) {
+
+    // do regular stuff here
+ 
+    // do something special every 9th time through
+    // the loop
+    if (x % 9 == 0) {
+        // important stuff here
+    }
+}
+</pre>
+
+<h4>
+Example 3: Prepare seconds for display as Hours, Minutes and seconds.</h4>
+
+<p>
+If you need to turn an elapsed number of seconds into Hours, Minutes and Seconds, modulo comes in handy.</p>
+
+<pre>
+hours:int   = seconds / 3600;
+minutes:int = (seconds / 60) % 60;
+seconds:int = seconds % 60;
+</pre>
+
+<p>
+starting with 582 seconds:</p>
+
+<pre>
+hours   = 582 / 3600 = 0 // integer would round this to 0
+minutes = (582 / 60) % 60 = (9.7) % 60 = 9
+seconds = 582 % 60 = 42
+</pre>
+
+<p>
+Thus, 582 seconds is 9 minutes, 42 seconds.</p>
+
+<h4>
+Example 4: Force a number to be a multiple of another number</h4>
+
+<p>
+Another way of thinking of this example is forcing a number to be evenly divisible by another number.</p>
+
+<p>
+Let's say you need to have a number that is always a multiple of 10. You can use modulo in this way to accomplish it:</p>
+
+<pre>
+multipleOfTen = x - (x % 10);
+</pre>
+
+<p>
+By subtracting the remainder of a value x divided by 10 from x we get a value that is always divisible by 10. It's a neat mathematical trick.</p>
+
+<p>
+For x=1 through x=9, for example, x%10 is always x. Thus:</p>
+
+<pre>
+multipleOfTen = 1 - (1 % 10) = 1 - (1) = 0;
+multipleOfTen = 2 - (2 % 10) = 2 - (2) = 0;
+multipleOfTen = 3 - (3 % 10) = 3 - (3) = 0;
+...
+multipleOfTen = 9 - (9 % 10) = 9 - (9) = 0;
+</pre>
+
+<p>
+once we hit 10, we get:</p>
+
+<pre>
+multipleOfTen = 10 - (10 % 10) = 10 - (0) = 10;
+</pre>
+
+<p>
+and once we hit 20 we get:</p>
+
+<pre>
+multipleOfTen = 20 - (20 % 10) = 20 - (0) = 20;
+</pre>
+
+<p>
+But...how is this useful? Well, imagine that you need to work with a data structure that is made up of values grouped in multiples. One such data structure is a ByteArray representing an audio file. Often times programming languages give you access to binary files as ByteArrays so that they are easy to operate upon (upload, write to the file system or perform data conversions).</p>
+
+<p>
+Now, if you record 32-bit audio, you're capturing data 4 bytes at a time. That means that every audio sample, the smallest unit of data, is 4 bytes wide. Indexes 0 through 3 of the ByteArray would represent one sample.</p>
+
+<p>
+If you were to split a byte array representing a 32-bit audio file in the middle of a 4-byte unit, you would "break" the audio file. When played back, you would either get an end of file error and/or it would sound like a screech.</p>
+
+<p>
+In order to safely edit the audio ByteArray, you can only edit in multiples of 4, at the beginning or end of a 4 byte block, not in the middle.</p>
+
+<p>
+So, let's say we want to trim some bytes from the start of the audio file. What's a safe starting index in the array?</p>
+
+<p>
+Since the data is chunked in groups of 4, we can say:</p>
+
+<pre>
+safeStartIndex = startIndex - (startIndex%4)
+</pre>
+
+<p>
+A start index of 0 would yield a safeStartIndex of:</p>
+
+<pre>
+safeStartIndex = 0 - (0%4) = 0 - (0) = 0
+</pre>
+
+<p>
+A start index of 1 would yield:</p>
+
+<pre>
+safeStartIndex = 1 - (1%4) = 1 - (1) = 0
+</pre>
+
+<p>
+A start index of 2 would yield:</p>
+
+<pre>
+safeStartIndex = 2 - (2%4) = 2 - (2) = 0
+</pre>
+
+<p>
+A start index of 3 would yield:</p>
+
+<pre>
+safeStartIndex = 3 - (3%4) = 3 - (3) = 0
+</pre>
+
+<p>
+A start index of 4 would yield:</p>
+
+<pre>
+safeStartIndex = 4 - (4%4) = 4 - (0) = 4
+</pre>
+
+<p>
+Notice that by using modulo, we can automatically adjust non-safe ByteArray indexes to an index which is divisible by 4 and won't split the audio file represented by our array in the wrong place (ie. in the middle of a sample group).</p>
+
+<h4>
+Final Words</h4>
+
+<p><a href="https://watchhogstories.wordpress.com/2008/08/11/coding-practices-the-modulus-operator/" target="_blank" rel="noopener">The WatchHogStories blog</a> has another way of describing modulo which I really like. As Dotun, the author of the blog, says (with a slight modification):</p>
+
+<p>
+* a is zero or a positive number.<br/>
+* n is a positive number.<br/>
+* if a / n equals a whole number then a % n  always equals 0<br/>
+* if a is and less than n then a % n always equals a<br/>
+* if a is greater than n then a % n always equals a value between 1 and n-1</p>
+
+  </div>
+  <section class="comments" aria-labelledby="comments-title">
+    <h2 id="comments-title">12 comments</h2>
+    <p class="comments-note">Comments are closed. These were left on the previous version of this site. Questions? <a href="../../../contact/">Get in touch</a>.</p>
+    <ol class="comment-list"><li class="comment" id="comment-54c3ffd1e4b04453ba5be1d5"><article><header class="comment-meta"><span class="comment-author">Alex</span><a class="comment-date" href="#comment-54c3ffd1e4b04453ba5be1d5"><time datetime="2012-12-27T16:38:42Z">December 27, 2012</time></a></header><div class="comment-body">Thanks for the informative post!  One note is that for negative numbers modulo may work differently than one expects, as the rule " if a is less than n then a % n always equals a" doesn't hold.   Here is the output of a C program:<br/><br/>  -4 % 2 is 0  <br/> -3 % 2 is -1 <br/> -2 % 2 is 0  <br/> -1 % 2 is -1 <br/>  0 % 2 is 0  <br/>  1 % 2 is 1  <br/>  2 % 2 is 0  <br/>  3 % 2 is 1  <br/>  4 % 2 is 0  <br/><br/><br/></div></article></li><li class="comment is-owner" id="comment-54c3ffd1e4b04453ba5be1d6"><article><header class="comment-meta"><span class="comment-author">Federico Hatoum</span> <span class="comment-badge">Author</span><a class="comment-date" href="#comment-54c3ffd1e4b04453ba5be1d6"><time datetime="2012-12-27T20:56:41Z">December 27, 2012</time></a></header><div class="comment-body">And thank you also, Alex, for your value-added comments. I've edited the quote from the WatchHogStories blog to specify that the "a" value must be positive.</div></article></li><li class="comment" id="comment-5ec4b09c280250266384058c"><article><header class="comment-meta"><span class="comment-author"><a href="https://hatoum.com/blog/2012/12/practical-uses-for-modulo-operator.html" rel="nofollow ugc">a</a></span><a class="comment-date" href="#comment-5ec4b09c280250266384058c"><time datetime="2020-05-20T04:22:52Z">May 19, 2020</time></a></header><div class="comment-body"><p>Brilliant article. I love when programming topics are introduced with practical examples. Thanks!</p></div></article></li><li class="comment" id="comment-5f133e3eb4f17e3c86044009"><article><header class="comment-meta"><span class="comment-author">Hank Wojteczko</span><a class="comment-date" href="#comment-5f133e3eb4f17e3c86044009"><time datetime="2020-07-18T18:23:58Z">July 18, 2020</time></a></header><div class="comment-body"><p>Authoritatively written, accurate, with clear, practical application examples. How refreshing.</p>
+<ul>
+<li>h</li>
+</ul></div></article></li><li class="comment" id="comment-60bf1fc20281ed6eb124a76f"><article><header class="comment-meta"><span class="comment-author">Seb</span><a class="comment-date" href="#comment-60bf1fc20281ed6eb124a76f"><time datetime="2021-06-08T07:44:02Z">June 8, 2021</time></a></header><div class="comment-body"><p>Very useful, thank you!</p></div></article><ol class="comment-replies"><li class="comment is-owner" id="comment-60bfa339b2b83074090502b8"><article><header class="comment-meta"><span class="comment-author">Federico Hatoum</span> <span class="comment-badge">Author</span><a class="comment-date" href="#comment-60bfa339b2b83074090502b8"><time datetime="2021-06-08T17:04:57Z">June 8, 2021</time></a></header><div class="comment-body"><p>You're welcome! Glad you found it useful and thank you for the comment. </p></div></article></li></ol></li><li class="comment" id="comment-6130dab5c42c9760fc188856"><article><header class="comment-meta"><span class="comment-author">CyberScholar</span><a class="comment-date" href="#comment-6130dab5c42c9760fc188856"><time datetime="2021-09-02T14:07:49Z">September 2, 2021</time></a></header><div class="comment-body"><p>Using modulo to force a number to be a multiple of another is interesting. Using a safe start index for the byte array would work, but (and I'm assuming a loop) couldn't you simply change your increment to +4 instead of ++ (+1)?</p></div></article><ol class="comment-replies"><li class="comment is-owner" id="comment-613283174be2c32ba2f57a1f"><article><header class="comment-meta"><span class="comment-author">Federico Hatoum</span> <span class="comment-badge">Author</span><a class="comment-date" href="#comment-613283174be2c32ba2f57a1f"><time datetime="2021-09-03T20:18:31Z">September 3, 2021</time></a></header><div class="comment-body"><p>Sure, you could use a loop and increment with +4. Using modulo is, in my opinion, cleaner and easier to read.<br/>For example, with modulo you can test if an index is safe without needing to loop through all of the previous choices. If you were testing if index 2 was a safe place to start with a loop, you'd have to have logic in your loop to check when you arrived at step 2 (of a 4 increment loop) and test its "safety". With modulo you do that all in one step, without looping.</p></div></article></li></ol></li><li class="comment" id="comment-613182b359a40464beb068a9"><article><header class="comment-meta"><span class="comment-author">Jeremy J</span><a class="comment-date" href="#comment-613182b359a40464beb068a9"><time datetime="2021-09-03T02:04:35Z">September 2, 2021</time></a></header><div class="comment-body"><p>I'm extremely facinated by the math/programming behind slot machines in casinos. One of the major aspects of slot machines is the use of the modulo operator.</p>
+<p>For example, a single virtual reel in a slot machine might have 128 different stops numbered 0-127. The RNG is the machine is spitting out huge random numbers every microsecond. When one of these numbers is grabbed it will use modulo operator to determine the 0-127 result from that massive number.</p></div></article><ol class="comment-replies"><li class="comment is-owner" id="comment-6132834be71b6f7b03f23034"><article><header class="comment-meta"><span class="comment-author">Federico Hatoum</span> <span class="comment-badge">Author</span><a class="comment-date" href="#comment-6132834be71b6f7b03f23034"><time datetime="2021-09-03T20:19:23Z">September 3, 2021</time></a></header><div class="comment-body"><p>Very cool. </p></div></article></li></ol></li><li class="comment" id="comment-621e6947a774ee1a00166202"><article><header class="comment-meta"><span class="comment-author">Suresh</span><a class="comment-date" href="#comment-621e6947a774ee1a00166202"><time datetime="2022-03-01T18:43:19Z">March 1, 2022</time></a></header><div class="comment-body"><p>can you tell why modulo is used in some implementation of hashmap (specifically in Java) to determine the size of the bucket i.e array of key/value pairs.</p></div></article><ol class="comment-replies"><li class="comment is-owner" id="comment-622e345d6edc7c16a4cde8ae"><article><header class="comment-meta"><span class="comment-author">Federico Hatoum</span> <span class="comment-badge">Author</span><a class="comment-date" href="#comment-622e345d6edc7c16a4cde8ae"><time datetime="2022-03-13T18:13:49Z">March 13, 2022</time></a></header><div class="comment-body"><p>Hi Suresh. I wasn't familiar with how modulo is used in HashMap, so I did some searching and think I now understand.<br/>From what I read, HashMaps have Nodes which are the entries and each node goes into a Bucket.</p>
+<p>The Bucket that a Node goes into is determined by the modulo of the hash value and the capacity of the HashMap. </p></div></article></li></ol></li></ol>
+  </section>
+  <nav class="pager" aria-label="More posts">
+    <a class="pager-prev" href="../../../blog/2012/08/recently-i-completed-project-where-i.html"><span>Older</span>HTML script tags can not be atomic/self-closing</a><a class="pager-next" href="../../../blog/2012/12/repairing-omron-and-alps-buttons.html"><span>Newer</span>Repairing Omron and Alps buttons</a>
+  </nav>
+</article>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap footer-inner">
+      <div class="footer-about">
+        <p class="footer-name">Federico Hatoum</p>
+        <p>Software developer, maker &amp; YouTuber in Los Angeles.</p>
+      </div>
+      <nav aria-label="Elsewhere">
+      <ul class="social">
+        <li><a href="https://www.youtube.com/channel/UCQGkNFXJCUBLkzMIShzf12g" title="Fed Learns To Make on YouTube" target="_blank" rel="noopener"><svg class="icon" aria-hidden="true"><use href="../../../assets/icons/icons.svg#youtube"></use></svg><span class="visually-hidden">Fed Learns To Make on YouTube</span></a></li>
+        <li><a href="https://github.com/fedhat" title="GitHub" target="_blank" rel="noopener"><svg class="icon" aria-hidden="true"><use href="../../../assets/icons/icons.svg#github"></use></svg><span class="visually-hidden">GitHub</span></a></li>
+        <li><a href="https://www.linkedin.com/pub/federico-hatoum/0/866/1a2" title="LinkedIn" target="_blank" rel="noopener"><svg class="icon" aria-hidden="true"><use href="../../../assets/icons/icons.svg#linkedin"></use></svg><span class="visually-hidden">LinkedIn</span></a></li>
+        <li><a href="https://www.facebook.com/583536348" title="Facebook" target="_blank" rel="noopener"><svg class="icon" aria-hidden="true"><use href="../../../assets/icons/icons.svg#facebook"></use></svg><span class="visually-hidden">Facebook</span></a></li>
+        <li><a href="../../../blog/feed.xml" title="Blog RSS feed"><svg class="icon" aria-hidden="true"><use href="../../../assets/icons/icons.svg#rss"></use></svg><span class="visually-hidden">Blog RSS feed</span></a></li>
+      </ul>
+      </nav>
+      <p class="footer-copy">© 2026 Federico Hatoum</p>
+    </div>
+  </footer>
+</body>
+</html>

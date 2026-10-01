@@ -1,0 +1,61 @@
+---
+title: [UPDATED][DEPRECATED] Simplify3D: Confusing First Layer settings
+date: 2018-01-02T22:23:01Z
+url: /blog/2018/1/2/simplify3d-confusing-first-layer-settings
+excerpt:  Has has been pointed out, while this blog post was accurate many years ago, it no longer applies. Simplify3D 4.0 is a powerful 3D mesh slicer program for 3D printing with many…
+---
+<h2>UPDATE:</h2>
+
+<p>Has has been pointed out, while this blog post was accurate many years ago, it no longer applies.</p>
+
+<h2>First Layer Height and Width:</h2>
+
+<p><a href="https://simplify3d.com">Simplify3D 4.0</a> is a powerful 3D mesh slicer program for 3D printing with many options and settings, some of which are non-obvious. Such is the case with the First Layer Settings, under a process' Layer tab. Until I happened upon a post in Simplify3D's forums I didn't understand the effects of changing the First Layer Height and First Layer Width settings, causing me a lot of frustration and failed first layers.</p>
+
+<figure><a class="lightbox" href="/assets/img/blog/2018/simplify3d-confusing-first-layer-settings/01-screen-shot-2018-01-02-at-17-07-28.webp"><img src="/assets/img/blog/2018/simplify3d-confusing-first-layer-settings/01-screen-shot-2018-01-02-at-17-07-28.webp" alt="" width="947" height="419" loading="lazy" decoding="async"></a></figure>
+
+<h2>First Layer Height:</h2>
+
+<p>Both nozzle height and extrusion amount can be affected by this setting, but perhaps not in the way you think.</p>
+
+<p>If set <em>below</em> 100%:</p>
+
+<ul><li><p><strong>Amount of extruded plastic</strong> is <strong>UNCHANGED</strong>.</p>
+
+</li><li><p><strong>Layer height</strong> (distance from nozzle to printing bed) is <strong>REDUCED</strong></p>
+
+</li><li><p>Values below 100% <strong>ONLY</strong> lower the nozzle closer to the printing surface. Essentially squishes the standard amount of plastic into a lower layer height.</p>
+
+</li><li><p>This is meant to help with adhesion.</p>
+
+</li></ul>
+
+<p>if set <em>above</em> 100%:</p>
+
+<ul><li><p><strong>Amount of extruded plastic </strong>is<strong> INCREASED.</strong></p>
+
+</li><li><p><strong>Layer height</strong> is <strong>INCREASED</strong>.</p>
+
+</li><li><p><strong>BOTH</strong> extrudes more plastic <strong>AND</strong> pulls the nozzle slightly away from bed so as not to squish the layer.</p>
+
+</li><li><p>This is used primarily when printing fine layer heights and/or on slightly uneven printing beds. The extra height and plastic volume makes thin layers thicker and also helps smooth out bumps and inconsistencies in bed surfaces.</p>
+
+</li></ul>
+
+<h2>First Layer Width:</h2>
+
+<p>Width changes ALWAYS AFFECT extrusion amounts, but leave Layer Height UNCHANGED.</p>
+
+<p>If set below 100%:</p>
+
+<ul><li><p>The <strong>amount of extruded plastic</strong> is <strong>REDUCED</strong>.</p>
+
+</li></ul>
+
+<p>If set above 100%:</p>
+
+<ul><li><p>The <strong>amount of extruded plastic</strong> is <strong>INCREASED</strong>.</p>
+
+</li></ul>
+
+<p>For reference, here's the full thread in Simplify3D's forums: <a href="https://forum.simplify3d.com/viewtopic.php?f=9&amp;t=2292&amp;start=20#p18419">https://forum.simplify3d.com/viewtopic.php?f=9&amp;t=2292&amp;start=20#p18419</a></p>

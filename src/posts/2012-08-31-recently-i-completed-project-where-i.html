@@ -1,0 +1,47 @@
+---
+title: HTML script tags can not be atomic/self-closing
+date: 2012-08-31T13:19:00Z
+url: /blog/2012/08/recently-i-completed-project-where-i.html
+excerpt:  Recently I completed a project where I converted an Actionscript form generation system I wrote for my wife's business into Javascript. I've been writing Javascript on and off…
+---
+<p>
+  Recently I completed a project where I converted an Actionscript form generation system I wrote for my wife's business into Javascript.</p>
+
+<p>
+I've been writing Javascript on and off for the last, almost, 20 years. For easy coding, I started with all my code and css styles in the same html file, but eventually broke up everything into individual files.</p>
+
+<p>
+I placed the stylesheet in its own file and loaded it using a standard &lt;link&gt; tag:</p>
+
+<pre>
+&lt;link id="primaryStylesheet" rel="stylesheet" type="text/css" href="path/to/my/fancy/stylesheet.css" /&gt;
+</pre>
+
+<p>
+Notice how the I used the self-closing (atomic) version of the &lt;link&gt; tag (ends with "/&gt;" rather than with a closing "&lt;/link&gt;").</p>
+
+<p>
+Then it was time to load in all the Javascript which was now in its own set of external files. I used a standard &lt;script&gt; tag for that:</p>
+
+<pre>
+&lt;!-- DOESN'T WORK --&gt;
+&lt;script type="text/JavaScript" src="/awesome/library.js" /&gt;
+</pre>
+
+<p>
+However, I was surprised to find that while my stylesheet loaded without a problem, my Javascript files did not. I knew this not because I got an error like "Javascript files did not load", but because the scripts that I knew to work and do something on screen no longer did anything. After a little investigation, I discovered they weren't in memory at all.</p>
+
+<p>
+A little googling brought me to an entry on <a href="https://web.archive.org/web/20120802031003/http://siderite.blogspot.com/2008/01/javascript-external-file-not-loading.html">Siderite's Blog</a> that explains he had the same problem and discovered that the W3C DOM recommendation states the following about the script tag:</p>
+
+<p><em>Start tag: <strong>required</strong>, End tag: <strong>required</strong></em><br/>
+<em><strong><br/></strong></em>
+Thus, it can't be an atomic/self-closing tag. Browsers respect that, though they don't provide any error feedback, instead failing silently.</p>
+
+<pre>
+&lt;!-- Works! --&gt;
+&lt;script type="text/JavaScript" src="/awesome/library.js"&gt;&lt;/script&gt;
+</pre>
+
+<p>
+So, thanks Siderite for reminding me that it pays to read specs. :-)</p>

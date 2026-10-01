@@ -1,0 +1,200 @@
+[
+ {
+  "id": "54c3ffd1e4b04453ba5be211",
+  "parent": "",
+  "author": "Brian",
+  "url": "",
+  "owner": false,
+  "date": "2011-03-11T23:45:29Z",
+  "body": "A search for a Dust Buster battery pack lead me to your project post. Thanks for sharing. Before giving it a shot myself, I wonder how do you feel it worked out a few months later?<br/><br/>I guess my biggest concern about switching battery types is the tendency for other members to just leave the DB in the charger after every use. I guess I could unplug it as a safeguard. On the other hand going through the process of building another NiCD pack to have it eventually suffer the same short run problem is pushing me in this direction."
+ },
+ {
+  "id": "54c3ffd1e4b04453ba5be212",
+  "parent": "",
+  "author": "Fed",
+  "url": "",
+  "owner": true,
+  "date": "2011-03-13T16:18:03Z",
+  "body": "Thanks for the question, Brian.<br/><br/>So far the Dustbuster is doing very well with the new battery pack. I haven't noticed a decrease in capacity, nor have I ever run out of charge mid-use, despite using it 3-4 times a week. I'm glad I didn't use NiCDs again, because even when the DB was new, it didn't run for very long before needing a recharge.<br/><br/>Even though we keep the DB in its hanging station, the station itself isn't plugged in all the time to avoid the very issue that you allude to: overcharging damage.<br/><br/>However, I have other devices with NiMh batteries (an older Logitech wireless mouse, for example) which are plugged in all the time and don't seem to have suffered any ill effects. So, my monthly charging regimen might be unnecessary and overly cautious of me, but I also know it won't hurt.<br/><br/>About once a month I plug in the base station (using the charger that came with the DB) and let the DustBuster charge for 12-24 hours. I just guess at how much charge I need based on how much I've used the DustBuster, but NiMh's are forgiving to overcharging, especially at low voltages. I'm quite happy with the updated batteries."
+ },
+ {
+  "id": "54c3ffd1e4b04453ba5be213",
+  "parent": "",
+  "author": "crayon maker",
+  "url": "",
+  "owner": false,
+  "date": "2011-08-20T23:56:35Z",
+  "body": "Thanks for the instructions! I ordered 13 batteries from a source I found on e-Bay and got them on Friday. Took me a few hours froim start to finish but my Dustbuster now has a whole new life to it! <br/><br/>great photos and step-by-step instructions. I found it easier to use the white plastic shell to hold the batteries in place while I soldered. I did one entire side. placed the other side of the plastic shell; flipped them all over, removed the first plastic shell. IT was super easy this way."
+ },
+ {
+  "id": "54c3ffd1e4b04453ba5be214",
+  "parent": "",
+  "author": "Fed",
+  "url": "",
+  "owner": true,
+  "date": "2011-09-10T20:41:01Z",
+  "body": "Glad the instructions were useful.<br/><br/>I thought about using the white plastic shell like that as well, but was paranoid that I'd make the wrong connection somewhere and cause a short circuit.<br/><br/>Seeing how that technique worked for you, though, makes me think I should've just gone for it. :-)"
+ },
+ {
+  "id": "54c3ffd1e4b04453ba5be215",
+  "parent": "",
+  "author": "Walter",
+  "url": "",
+  "owner": false,
+  "date": "2011-12-26T23:51:52Z",
+  "body": "Hi, thanks a lot for the guide, it was awesome, catch every critical detail, I just do it and all is working great. I bought the batteries from ebay (http://cgi.ebay.com/ws/eBayISAPI.dll?ViewItem&amp;item=150716764855) and it arrive in just 4 weeks all the way from China to Mexico. Again thanks a lot and hope it makes last the dustbuster for a while instead of just droping it because it works great. Thanks!<br/><br/>Best wishes!"
+ },
+ {
+  "id": "54c3ffd1e4b04453ba5be216",
+  "parent": "",
+  "author": "Mason Foley",
+  "url": "",
+  "owner": false,
+  "date": "2012-06-05T13:28:01Z",
+  "body": "Howdy!  I plan to do this project but have a couple of questions.  1)  I went to all-battery.com and see a variety of subC NiMH options but none of them at 3300mh.  Is the project dead in the water without that specific rating?  2) I don't see the battery purchase option that include the metal tabs you were talking about.  If I'm correct in what I'm seeing, what option would you go with?<br/><br/>http://www.all-battery.com/subcscsizeseriesni-mhrechargeablebatteries.aspx<br/><br/>Thanks and great tutorial by the way.<br/><br/>Cheers"
+ },
+ {
+  "id": "54c3ffd1e4b04453ba5be217",
+  "parent": "",
+  "author": "Fed",
+  "url": "",
+  "owner": true,
+  "date": "2012-08-25T23:53:16Z",
+  "body": "Hi Mason.<br/><br/>It looks like they don't make the 3300mAh cells anymore (or at least all-battery.com doesn't sell them anymore). They've all been replaced by 3800mAh cells.<br/><br/>The good news is that you can use those higher capacity cells without a problem. The only thing that you'll have to keep in mind is that charging them fully will take even longer than it does on my 3300mAh version.<br/><br/>When I just checked on all-battery.com, they do have cells with tabs. Strictly speaking, you don't need the tabs, as you can use wire to connect the cells, but they do make the process easier."
+ },
+ {
+  "id": "54c3ffd1e4b04453ba5be218",
+  "parent": "",
+  "author": "Marius",
+  "url": "",
+  "owner": false,
+  "date": "2012-12-17T17:20:30Z",
+  "body": "Thank you for your guide. I too love to tinker and it just sits wrong with me that they design these to break. I would rather fix it for the same price as a new device (And then have better batteries) than discard and buy new ones. (wasteful)"
+ },
+ {
+  "id": "54c3ffd1e4b04453ba5be219",
+  "parent": "",
+  "author": "Marius",
+  "url": "",
+  "owner": false,
+  "date": "2012-12-28T16:07:11Z",
+  "body": "Ok, so ive done this repair, and my dustbuster is now fully charged and working like new again.<br/><br/>NOTE: be very careful of short circuits... The soldering may remove some needed plastic. Even one battery may cause a fire...<br/><br/>Also, I had to remove some bits of plastic on the main housing since my battery housing did not want to close properly any longer, and did not want to go in all the way.<br/><br/>Thanks again."
+ },
+ {
+  "id": "54c3ffd1e4b04453ba5be21a",
+  "parent": "",
+  "author": "Senor Peppy",
+  "url": "",
+  "owner": false,
+  "date": "2013-02-17T21:56:58Z",
+  "body": "Hi and thanks for the insightful idea. I would like to convert my rechargeable DB to a corded version with a long cord. Any ideas on how to do this or a link to a how to? Thanks!"
+ },
+ {
+  "id": "54c3ffd1e4b04453ba5be21b",
+  "parent": "",
+  "author": "Richi V",
+  "url": "",
+  "owner": false,
+  "date": "2013-11-12T11:40:49Z",
+  "body": "Hi Fed,<br/><br/>Nice work. Once you charge these batteries , how long the dust buster works ? more than 1 hr or so ?<br/><br/>Thanks,<br/>Richi"
+ },
+ {
+  "id": "54c3ffd1e4b04453ba5be21c",
+  "parent": "",
+  "author": "Fed",
+  "url": "",
+  "owner": true,
+  "date": "2013-11-12T13:55:17Z",
+  "body": "Hi Richi.<br/><br/>I'd say the batteries last about 20 to 30 minutes, though I haven't done a thorough test of run time. With the new batteries, the DB definitely runs longer than it did using the NiCd batteries, which on a good day was around 5-10 minutes."
+ },
+ {
+  "id": "54c3ffd1e4b04453ba5be21d",
+  "parent": "",
+  "author": "Richi V",
+  "url": "",
+  "owner": false,
+  "date": "2013-11-14T06:44:49Z",
+  "body": "i have db model nw4860n wet &amp; dry model . it's 4.8 volts, can it work on this model ? i just need to make 4.8 volts sub C NiMH ..batteries ?"
+ },
+ {
+  "id": "54c3ffd1e4b04453ba5be21e",
+  "parent": "",
+  "author": "Fed",
+  "url": "",
+  "owner": true,
+  "date": "2013-11-14T14:28:19Z",
+  "body": "I'm unfamiliar with the batteries used in that DB model, but if they are Sub-C 1.2V cells, there should be no problem with replacing them with cells of the same size. Before you buy any batteries, carefully open up your DustBuster and investigate what batteries it currently uses."
+ },
+ {
+  "id": "54c3ffd1e4b04453ba5be21f",
+  "parent": "",
+  "author": "Gerrelda Humphrey",
+  "url": "",
+  "owner": false,
+  "date": "2013-12-15T05:07:59Z",
+  "body": "Would you be willing to rebuild my battery pack for a fee?"
+ },
+ {
+  "id": "54c3ffd1e4b04453ba5be220",
+  "parent": "",
+  "author": "Federico Hatoum",
+  "url": "",
+  "owner": true,
+  "date": "2013-12-16T15:29:01Z",
+  "body": "Hello Gerrelda. It would be much less expensive and convenient for you to find a friend or family member that knows how to solder and have them do it for you."
+ },
+ {
+  "id": "587c9e9f725e25c8c7ca2756",
+  "parent": "",
+  "author": "amir najam",
+  "url": "http://www.vacuumcleanerstuffs.com/best-dustbuster-hand-vac-reviews/",
+  "owner": false,
+  "date": "2017-01-16T10:21:19Z",
+  "body": "<p>Very impressive idea. Glad to know about this thing. I have tried this method for BLACK + DECKER CHV1410L Cordless Dustbuster Hand Vac. This takes 30 hours to full charge and get discharged in 6 hours.</p>"
+ },
+ {
+  "id": "5a90525271c10b0d65c99fdc",
+  "parent": "",
+  "author": "B-Radd",
+  "url": "http://bhiking.wordpress.com",
+  "owner": false,
+  "date": "2018-02-23T17:41:38Z",
+  "body": "<p>Thanks for the tutorial. I just rebuilt mine and it's regained its power! In fact, I didn't realize just how powerful it could be for a handheld vacuum. (I found a 16-pack of \"Ultracell\" NiMH 3300 mAH Sub-C cells with solder tabs on eBay for about $33, free shipping.)</p>"
+ },
+ {
+  "id": "5b22b1ca1ae6cf50b39d10c3",
+  "parent": "",
+  "author": "Stu",
+  "url": "",
+  "owner": false,
+  "date": "2018-06-14T18:19:55Z",
+  "body": "<p>I got my batteries direct from China through Ali Baba. $10. Worked great.</p>"
+ },
+ {
+  "id": "5b4ca0b12b6a28b68311670e",
+  "parent": "",
+  "author": "Stuart Weissman",
+  "url": "",
+  "owner": false,
+  "date": "2018-07-16T13:42:09Z",
+  "body": "<p>FYI...I've used the dustbuster about every other day for a few minutes. It's still hasn't required a recharge or is even showing any signs of slowing down. Thanks again for the guide. For others about to embark on this project, the toughest part for me was getting everything back together after sliding the new battery pack back in. Take a picture of the innards when you first get to the point where you are sliding the existing battery pack out. There are particular places where the wires have to run for the unit to close tightly. It took me five tries, but patience sure has paid off. Unit is better than brand new and repair cost me $10 in supplies.</p>"
+ },
+ {
+  "id": "5cc664fa7444790001775cd2",
+  "parent": "",
+  "author": "Roberto Almeida",
+  "url": "",
+  "owner": false,
+  "date": "2019-04-29T02:44:10Z",
+  "body": "<p>Thank you for the tutorial Federico.<br/>I used 13 batteries just like you and forgot to check with the multimeter as I was soldering.<br/>Then when I finished and turned on my dust buster it was working on very high rotation, like never before! Then I checked the voltage with the multimeter and it was 16.9V! The batteries are the ones you recommended from Amazon. What could have happened?<br/>I removed one battery and the voltage became 15.6V.</p>"
+ },
+ {
+  "id": "5f0faaaaccfcf37079996a11",
+  "parent": "",
+  "author": "Aziz Madhani",
+  "url": "",
+  "owner": false,
+  "date": "2020-07-16T01:17:30Z",
+  "body": "<p>Senor Frederico, thank you for your post, and detailed explanation of disassembly. In fact, the model in the display is the exact one that I carry. I have ordered the batteriies on ebay, 16 pack of ULTRACELL 3300 mAH @ $38.93 as on date. Looking forward to reassembly after receiving the replacement batteries.</p>\n<p>Regards and Good Luck</p>"
+ }
+]

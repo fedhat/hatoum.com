@@ -1,0 +1,75 @@
+---
+title: Installing FTP task on Ant 1.8.X on MacOSX
+date: 2010-11-21T16:51:00Z
+url: /blog/2010/11/installing-ftp-task-on-ant-18x-on.html
+excerpt:  I recently had to reinstall the OS on the laptop I use primarily for work. I thought I had installed everything I needed, but realized that I couldn't run the FTP task in Ant…
+---
+<h3>Background:</h3>
+
+<p>
+I recently had to reinstall the OS on the laptop I use primarily for work. I thought I had installed everything I needed, but realized that I couldn't run the FTP task in Ant because of missing libraries. The message I received was:</p>
+
+<p><code><br/>
+Problem: failed to create task or type ftp<br/>
+Cause: the class org.apache.tools.ant.taskdefs.optional.net.FTP was not found.<br/>
+This looks like one of Ant's optional components.<br/>
+Action: Check that the appropriate optional JAR exists in<br/>
+-/usr/share/ant/lib<br/>
+-/Users/fed/.ant/lib<br/>
+-a directory added on the command line with the -lib argument<br/>
+<br/>
+Do not panic, this is a common problem.<br/>
+The commonest cause is a missing JAR.<br/>
+<br/>
+This is not a bug; it is a configuration problem</code></p>
+
+<p>My searches on the subject lead to multiple solutions, but they were aimed at earlier versions of Ant (1.7.X and below), somewhat complicated and turned out not to be what I needed for my version of Ant (1.8.1 on MacOSX 10.6.5). You'll see lots of instructions for setting your ANT_HOME environment variable, along with other settings, but that's not necessary with newer versions of Ant on MacOSX.</p>
+
+<p>Most information I found on the web correctly pointed out that according to the <a href="https://ant.apache.org/manual/install.html">Apache Ant install instructions</a> for optional tasks, such as FTP, you need to have the <a href="https://jakarta.apache.org/site/downloads/downloads_oro.cgi">Jakarta Oro 2.0.8</a> (text manipulation) and <a href="https://commons.apache.org/net/download_net.cgi">Commons-Net 2.0</a> (networking protocol support) jar libraries installed.</p>
+
+<p>What wasn't clear is that you also need to have ant-commons-net.jar installed. However, by default, the version of Ant that is installed via the <a href="https://web.archive.org/web/20110107081027/http://developer.apple.com/resources/">MacOSX Developer Tools</a> does not provide that library. So, even if you install Jakarta-Oro and Commons-Net, you'll still get the missing libraries error above. If you look in the ant/lib directory, all you'll see if ant-commons-net.pom, which is a Maven support file, but not the necessary jar file.</p>
+
+<p>A handy command to show you what's installed or not in your version of ant is:<br/>
+<code>&gt; ant -diagnostics</code></p>
+
+<p>That generates a long list of features, installed jars, version numbers, etc. When I ran it, I confirmed that the FTP task was not available:<br/>
+<code>-------------------------------------------<br/>
+ Tasks availability<br/>
+-------------------------------------------<br/>
+...<br/>
+ftp : Not Available (the implementation class is not present)<br/>
+...<br/>
+</code><br/>
+This was after I had installed Oro and Commons-Net. The phrase 'implementation class is not present' stuck out at me and I realized that ant-commons-net.jar contained the ftp implementation class, which in turn uses Oro and Commons-Net to support ftp'ing.</p>
+
+<p>That said...</p>
+
+<h3> Here's how to install everything:</h3>
+
+<ul><li>Find your ant/lib directory. Any jars placed in here are available to Ant at launch. The command 'whereis' or 'which' tells you where the executable of a command is located:<br/>
+<br/>
+<code>&gt; whereis ant<br/>
+&gt; /usr/bin/ant</code><br/>
+<br/>
+If you then do 'ls -la /usr/bin/ant' you'll see that on MacOSX that path is usually a symbolic link to /usr/share/ant.<br/>
+<br/>
+<code>&gt; ls -la /usr/bin/ant<br/>
+&gt; lrwxr-xr-x  1 root  wheel  22 Nov 13 17:54 /usr/bin/ant -&gt; /usr/share/ant/bin/ant</code><br/>
+<br/>
+Ant the lib directory, which is where you will place your jar files, is located at /usr/share/ant/lib.</li><li>Download the <a href="https://jakarta.apache.org/site/downloads/downloads_oro.cgi">Jakarta-Oro 2.0.8</a> and <a href="https://commons.apache.org/net/download_net.cgi">Commons-Net 2.0</a> jars and copy them to your ant/lib directory: /usr/share/ant/lib. (It's easiest to download the zip version of binaries, btw) Ex:<br/>
+<br/>
+<code>&gt; sudo cp /path/to/jakarta-oro-2.0.8.jar /usr/share/ant/lib<br/>
+&gt; sudo cp /another/path/commons-net-2.0.jar /usr/share/ant/lib</code><br/>
+<br/>
+You need to use 'sudo' since you need root permissions to copy files into the ant/lib directory.</li><li>Confirm your version of ant:<br/>
+<code>&gt; ant -version<br/>
+&gt; Apache Ant version 1.8.1 compiled on September 21 2010</code><br/>
+<br/>
+or<br/>
+<br/>
+<code>&gt; ant -diagnostics<br/>
+&gt; ------- Ant diagnostics report -------<br/>
+Apache Ant version 1.8.1 compiled on September 21 2010</code></li><li>Download a full/complete copy of the version of Ant you have installed. I downloaded a copy from the <a href="https://apache.org/dyn/closer.cgi">Apache Software Foundation mirror download site</a>. I downloaded [MIRROR_SITE]/ant/binaries/apache-ant-1.8.1-bin.zip.</li><li>Unzip full Ant installation, then copy ant-commons-net.jar to your ant/lib directory. Ex:<br/>
+&gt; sudo cp ~/Downloads/apache-ant-1.8.1/lib/ant-commons-net.jar /usr/share/ant/lib</li></ul>
+
+<p> Once you have the jars in place your Ant scripts which use the 'ftp' task will work. </p>

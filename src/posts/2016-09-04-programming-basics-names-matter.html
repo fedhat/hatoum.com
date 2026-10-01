@@ -1,0 +1,89 @@
+---
+title: Programming Basics: Names matter
+date: 2016-09-04T16:02:39Z
+url: /blog/2016/9/4/programming-basics-names-matter
+excerpt:  The names developers use for identifiers in their code is essential for readability, maintainability and is one of the indicators of a competent software developer. Combined with…
+---
+<h2>TLDR;</h2>
+<p>The names developers use for identifiers in their code is essential for readability, maintainability and is one of the indicators of a competent software developer.</p>
+<p>Combined with a naming convention system, well-chosen identifier names have the potential to make or break a project, especially on collaborative endeavors with multiple developers. </p>
+<h2>What makes a good name?</h2>
+<p>A good identifier name enhances comprehension of the code it describes, making it readable, easy to follow and ultimately more maintainable.</p>
+<p>While placing comments in code is very important, you could argue that using descriptive names for identifiers in our code greatly reduces or possibly eliminates the need for comments.</p>
+<p>You can further magnify the effect of the identifier names you use by applying naming conventions.</p>
+<h3>What are naming conventions?</h3>
+<p>For the uninitiated, naming conventions are rule sets applied to the names of identifiers in software (ex: variables, constants, types, functions). There are many systems of naming conventions such as <a href="https://en.wikipedia.org/wiki/Hungarian_notation">Hungarian Notation</a> and <a href="https://en.wikipedia.org/wiki/CamelCase">Camel Case</a>.</p>
+<p>Here's an example of Camel Case -- where the individual words in identifier names are visually separated by capitalizing the first letter of that word. <code>getName()</code> instead of <code>getname()</code>. The camel cased version of the method is easier to read.</p>
+<p>I personally separate the concepts of naming from naming conventions since, although similar, they aren't the same thing. Most naming conventions dictate the use of underscores, letter case and letter code combinations for use within identifier names, but they don't address the actual content or meaning of the identifier itself. </p>
+<p>Most naming convention systems rely on the programmer applying them to logical, meaningful names. And that's the area in which, surprisingly, a lot of software developers do a poor job.</p>
+<p>A good identifier name for a service that handled Person objects could be <code>personservice</code>. Applying Camel Case to it transforms it to 'PersonService'. Again, the application of a naming convention makes it easier to read and understand.</p>
+<p>However, if instead of calling the class <code>PersonService</code> we had called it <code>ps</code>, applying camel case to it (<code>PS</code>) does little to aid readability, and the meaning -- arguably the most important part of the name -- is still vague.</p>
+<h2>Examples:</h2>
+<p>One of the things that source code obfuscaters do is rename variables and function calls to remove their meaning. Why? Because it's much harder to understand code that has no context. Consider the following snippets of Javascript:</p>
+<h4>Original code:</h4>
+<p>This is fairly useless code, does nothing too important, but even without comments (which I always encourage), you can easily follow along to figure out what the code is intended to do.</p>
+<pre><code class="language-javascript">var mass, acceleration;
+var force = 0;
+var isAccelerating = false;
+
+mass = 10;
+acceleration = 9.8;
+
+function calculateForce(massKg, accelMeterSecondSq) {
+    return massKg * accelMeterSecondSq;
+}
+
+isAccelerating = (acceleration &gt; 0) ? true : false;
+
+if (isAccelerating) {
+    force = calculateForce(mass, acceleration);
+}
+
+console.log('Value is: ' + force);</code></pre>
+<p>Even if you're unfamiliar with the formula for force ( force = mass * acceleration), you could follow along and get the meaning of code.</p>
+<h4>Obfuscated:</h4>
+<p>Here's what an obfuscater might turn the original code into. I've kept the formatting the same, so we can just focus on the differences in the identifier names.</p>
+<pre><code class="language-javascript">var b,c;
+var d = 0;
+var t = false;
+
+b = 10;
+c = 9.8;
+
+function a(e,f) {
+    return e*f;
+}
+
+t = (c &gt; 0) ? true : false;
+
+if (t) {
+    d = a(b,c);
+}
+
+console.log('Value is: ' + d);</code></pre>
+<p>While functionally the program does the same thing, unless you happen to recognize numbers like 9.8 as the acceleration due to gravity and that force = mass * acceleration, you would have a very hard time placing the code in any sort of context.</p>
+<h4>Stupidly named identifiers:</h4>
+<p>I've seen far too much of this kind of thing. To the programmer who wrote this code, it makes perfect sense, but to anyone else it would be hard to follow.</p>
+<pre><code class="language-javascript">var heavy, fast;
+var hard = 0;
+var acceleration =  false;
+
+heavy = 10;
+fast = 9.8;
+
+function calc(val1, val2) {
+    return val1 * val2;
+}
+
+acceleration = (fast &gt; 0) ? true : false;
+
+if (acceleration) {
+    hard = calc(heavy, fast);
+}
+
+console.log('Value is: ' + hard);</code></pre>
+<p>I consider this version of the code worse than the obfuscated code. At first glance, the identifiers appear to provide contextual information, but as you read the code, you discover that they are named in such a way as to inhibit understanding.</p>
+<h3>Anecdotal proof</h3>
+<p>An excellent programmer and mentor of mine told me a story that illustrated very clearly the effect that identifier names have in software development. He was in a job where he was treated poorly and had decided to leave. In his last week of employment he altered his source code as a final act of rebellion. He didn't add a back door or a virus which could have gotten him into legal trouble. Instead, he changed all the identifier names. <code>isReady()</code> became <code>isNotDoneNot()</code>, <code>correct</code> became <code>unbadly</code>, <code>date</code> became <code>value123</code>. Unfortunately, the programmer who inherited the code was a good friend of my mentor and called him up bitching about how my mentor had ruined his life because the code was impossible to follow. They're still friends.</p>
+<h3>Summary</h3>
+<p>Please use logical, descriptive names for your identifiers. Your fellow programmers will enjoy working on your code, even if they aren't aware why. This also applies to Lone Wolf programmers as well who "work alone, damnit!" Descriptively named identifiers will greatly reduce the amount of time you spend saying to yourself "WTF was I trying to do here?!" when maintaining your old code.</p>

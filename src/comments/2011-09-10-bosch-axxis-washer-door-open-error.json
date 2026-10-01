@@ -1,0 +1,128 @@
+[
+ {
+  "id": "54c3ffd1e4b04453ba5be205",
+  "parent": "",
+  "author": "Grandma Betsey",
+  "url": "",
+  "owner": false,
+  "date": "2011-11-04T20:24:10Z",
+  "body": "Thanks for posting this... even though my door is locked closed. :-)"
+ },
+ {
+  "id": "54c3ffd1e4b04453ba5be206",
+  "parent": "",
+  "author": "Fed",
+  "url": "",
+  "owner": true,
+  "date": "2011-12-01T16:25:01Z",
+  "body": "@Grandma There is an access panel underneath the washer with a plastic handle that allows you open the door lock manually. If you look above, you'll see a picture which shows the other end of the handle that hooks into the door latch mechanism. By opening the panel and pulling on the handle, you can open a locked door."
+ },
+ {
+  "id": "54c3ffd1e4b04453ba5be207",
+  "parent": "",
+  "author": "Joe",
+  "url": "",
+  "owner": false,
+  "date": "2011-12-05T21:00:50Z",
+  "body": "Wow!  I just searched for this and it is perfect.  THANK YOU.  Unfortunately, my part is broken, the latch lock switch on my model is much less robustly built and fastened, but I wonder if I could order and fix myself..."
+ },
+ {
+  "id": "54c3ffd1e4b04453ba5be208",
+  "parent": "",
+  "author": "frank",
+  "url": "",
+  "owner": false,
+  "date": "2012-11-03T16:27:05Z",
+  "body": "Hello Fed,<br/><br/>Your detailed instructions were amazing. You were right on the money!! I followed your instructions and fixed my washer. Sure enough, the cable and switch were loose. It was probably due to all the washing after Sandy. Great photos. Now I need to look how to open the dryer panel so I can clean the filter (I can see it is dirty). Thank you so much for a great post. Have a great day.<br/><br/>Frank"
+ },
+ {
+  "id": "54c3ffd1e4b04453ba5be209",
+  "parent": "",
+  "author": "Manuel Delgado",
+  "url": "",
+  "owner": false,
+  "date": "2013-06-05T20:03:25Z",
+  "body": "Hello<br/><br/>I even replaced the latch and I still have door open ? any Idea to what to do ?"
+ },
+ {
+  "id": "54c3ffd1e4b04453ba5be20a",
+  "parent": "",
+  "author": "Federico Hatoum",
+  "url": "",
+  "owner": true,
+  "date": "2013-06-07T15:20:07Z",
+  "body": "Hi. Before you replaced the latch switch, did you confirm that the problem with the original latch was not that it got disconnected from the cable bundles? It's also possible that either you didn't properly connect the new latch or that the fault is not in the latch itself, but in the washer control unit to which the latch is connected.<br/><br/>To test it, I would manually short the two leads in correct cable bundle, simulating what the latch does when the door is closed. You'll want to take a look at the \"switch state output\" (as I have it labeled above) and see which leads in the cable bundle get connected to tell the washer that the door is shut."
+ },
+ {
+  "id": "577c7cf8b3db2b681b9aa62c",
+  "parent": "",
+  "author": "Lianne",
+  "url": "",
+  "owner": false,
+  "date": "2016-07-06T03:37:28Z",
+  "body": "<p>Hi. I followed your instructions and was successful! My latch was totally broken so I had to replace it. But simply popped it off the plastic stabilizing bracket, removed the red manual unlock plastic rod, removed the little blue cord unit and then reattached everything to the new latch. Wiggled it back in place on the washer and my washer started up again, no problem. My washer door is indeed a little wonky so I will have to gently close it each time to avoid the problem reoccurring. Thanks for your help!</p>"
+ },
+ {
+  "id": "577d13cd3e00be4d811cde7e",
+  "parent": "577c7cf8b3db2b681b9aa62c",
+  "author": "Federico Hatoum",
+  "url": "",
+  "owner": true,
+  "date": "2016-07-06T14:21:01Z",
+  "body": "<p>Hi Lianne. Thanks so much for your feedback. I'm glad that the post was useful to you. Do you mind if I ask where you bought the replacement part and what is the Bosch part number?</p>"
+ },
+ {
+  "id": "58889c45893fc0b363350960",
+  "parent": "",
+  "author": "Margot Trevelyan",
+  "url": "",
+  "owner": false,
+  "date": "2017-01-25T12:38:29Z",
+  "body": "<p>I found that my Bosch dryer would not start, falsely indicating the door was open. I read the above and decided that it was too complicated for me so, assuming that all modern appliances are basically a computer, I unplugged it for an hour, plugged it back in and it worked. If you can't pull out the plug, turn off the breaker. The trick is that you have to wait about an hour at least with the plug out (or breaker off) before plugging it back in. Once you plug it back in you can start it right away.</p>"
+ },
+ {
+  "id": "5888c7b2db29d6d090a53717",
+  "parent": "58889c45893fc0b363350960",
+  "author": "Federico Hatoum",
+  "url": "",
+  "owner": true,
+  "date": "2017-01-25T15:43:46Z",
+  "body": "<p>I'm glad that leaving your drier unplugged for an hour worked for you. In my case, the cables had physically become disconnected and I'm pretty sure that the technique you used wouldn't have worked for me. Still, it's something that anyone coming to this page could try first, before taking apart their washers.</p>"
+ },
+ {
+  "id": "58c84f2b1e5b6c4a9ccb5bc1",
+  "parent": "",
+  "author": "Sam",
+  "url": "",
+  "owner": false,
+  "date": "2017-03-14T20:14:35Z",
+  "body": "<p>Well thank you, your post helped me figure out what was wrong so I could fix it! I did a temporary fix until I can get a new latch.</p>\n<p>But man, was it ever a pain getting that wire back on &gt;.&lt; I had to use a tiny phillips screwdriver and push down SUPER HARD to expand the spring with my left hand, while maneuvering the rest of the wire into place with the flat head in my right hand, I even used my foot to hold the wire in place. Needless to say I fixed it but at the expense of a very throbbing and sore left palm lol.</p>"
+ },
+ {
+  "id": "5d33b492809728000145c2ee",
+  "parent": "",
+  "author": "carla",
+  "url": "",
+  "owner": false,
+  "date": "2019-07-21T00:40:50Z",
+  "body": "<p>I have the same problem but my bosch only has 1 cable bundle. It's not an axxis. It's a 300 series</p>"
+ },
+ {
+  "id": "5d519d26c80ece0001bab618",
+  "parent": "",
+  "author": "Magnus Grape",
+  "url": "",
+  "owner": false,
+  "date": "2019-08-12T17:08:54Z",
+  "body": "<p>Amazing! Thank you</p>"
+ },
+ {
+  "id": "61238655057dc2593a0ba061",
+  "parent": "",
+  "author": "graham mawby",
+  "url": "",
+  "owner": false,
+  "date": "2021-08-23T11:28:21Z",
+  "body": "<p>Margot Trevelyan's SIMPLE solution WORKED for me: Turn it off at the mains and then turn it on again. It fixed my Hotpoint door open error warning. Thank you very much!</p>"
+ }
+]

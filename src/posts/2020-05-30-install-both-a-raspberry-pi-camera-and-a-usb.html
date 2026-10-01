@@ -1,0 +1,447 @@
+---
+title: Install both a Raspberry PI Camera and a USB Camera on Octopi 0.17 and 0.18
+date: 2020-05-30T15:48:20Z
+url: /blog/2020/5/27/install-both-a-raspberry-pi-camera-and-a-usb-camera-on-octopi-017
+excerpt:  I use Octoprint to manage my Prusa MK3 3D printer. To keep an eye on my prints, I have two cameras hooked up to the Raspberry PI on which I have Octoprint installed. The main…
+---
+<h3>Last updated February 27, 2021</h3>
+
+<hr>
+
+<p>I use <a href="https://octoprint.org/">Octoprint</a> to manage my Prusa MK3 3D printer. To keep an eye on my prints, I have two cameras hooked up to the Raspberry PI on which I have Octoprint installed. The main camera is a Raspberry PI camera that hooks up directly the PI via a ribbon cable, and the second camera is a Logitech C510 webcam that I plug into one of the PI’s USB ports.</p>
+
+<p>When I upgraded <a href="https://github.com/guysoft/OctoPi">Octopi</a> — a Raspberry PI Linux distribution that comes with Octoprint pre-installed — the USB camera stopped working and I couldn’t figure out how to get it working again. Octopi 0.17 is significantly different from previous versions, so I couldn’t rely on the tutorials I had used before.</p>
+
+<p>I searched on YouTube, my favorite DIY resource, and found Chris Riley’s <em>Chris’ Basement</em> channel. He has a <a href="https://youtu.be/sCxvW1XX44U">series of videos</a> on how to set up an Octoprint multi-instance on one PI on Octopi 0.17.  His instructions are great and I wouldn’t have found a solution without his videos, but they are geared toward hooking up USB cameras — not both a Raspberry PI camera and a USB camera.</p>
+
+<h2>Prerequisites</h2>
+
+<p>In this post I don’t explain how to install Octopi 0.17/0.18, nor how to attach and get working a PI Cam. You’ll need to get that done first before moving on.</p>
+
+<p>You’ll also need to know a little about getting around a Linux command line and using the nano text editor.</p>
+
+<p>Once you have the PI  and PI Cam up and running, follow the instructions below to get a second (USB) camera working with your Raspberry PI.</p>
+
+<h3>Word of Caution:</h3>
+
+<p>You might be tempted to connect 2, 3 or 4 USB webcams to your Raspberry PI. Don’t do it. That path leads to madness. The cameras won’t mount as expected — I suspect because of limitations of Raspberry PIs in general, but I don’t know for sure. You’ll drive yourself crazy. Be content with running the RPI Camera Module and one USB camera.</p>
+
+<h2>1: Get information about your USB webcam</h2>
+
+<p>Log into your Raspberry PI via ssh. If you followed the standard Octopi setup, ssh’ing into your PI should be as simple as this:</p>
+
+
+<pre><code class="language-javascript">&gt; ssh pi@octopi.local</code></pre>
+
+
+<p>Make sure your USB webcam is unplugged from Raspberry PI. Type the following command in the terminal:</p>
+
+
+<pre><code class="language-javascript">&gt; tail -f /var/log/messages</code></pre>
+
+
+<p>Now plug the USB camera back in, and look at the new text that appeared in the logs you’re tailing. You should see bunch of lines that include the text “New USB device found”, or similar. Here’s an example of my log:</p>
+
+
+<pre><code class="language-javascript">May 25 17:43:00 octopi kernel: [    2.411980] usb 1-1.3: new high-speed USB device number 5 using dwc_otg
+May 25 17:43:00 octopi kernel: [    2.753813] usb 1-1.3: New USB device found, idVendor=046d, idProduct=081b, bcdDevice= 0.12
+May 25 17:43:00 octopi kernel: [    2.759809] usb 1-1.3: New USB device strings: Mfr=0, Product=0, SerialNumber=2May 25 17:43:00 octopi kernel: [    2.763045] usb 1-1.3: SerialNumber: 61196260</code></pre>
+
+
+<p>You'll need the values for <strong>idVendor</strong>, <strong>idProduct</strong>, and <strong>SerialNumber</strong> in the next step.</p>
+
+<h2>2: Create (or edit if existing) USB rules file</h2>
+
+<p>Use the nano text editor to edit (or create) a usb rules file:</p>
+
+
+<pre><code class="language-javascript">&gt; sudo nano /etc/udev/rules.d/99-usb.rules</code></pre>
+
+
+<p>Add the following line to the file:</p>
+
+
+<pre><code class="language-javascript">SUBSYSTEM=="video4linux", ATTRS{idVendor}=="046d", ATTRS{idProduct}=="081b", ATTRS{serial}=="61196260", SYMLINK+="PrusaWebCam"</code></pre>
+
+
+<p>These are the values I found in my log for my camera (a Logitech C510 HD webcam) — you’ll need to use your values for idVendor, idProduct and serial. For SYMLINK, use whatever name you want to give your camera. You’ll use the name in upcoming steps.</p>
+
+<h2>3: Confirm USB camera is properly set up:</h2>
+
+<p>Before moving on to step 4, it’s a good idea to confirm that the camera you configured in the previous udev USB rules step is working properly. If it isn’t, then none of the steps that follow will work.</p>
+
+<p>First, let’s reboot the Raspberry PI to make it read the settings in <code>99-usb.rules</code> and connect your camera.</p>
+
+
+<pre><code class="language-javascript">&gt; sudo reboot</code></pre>
+
+
+<p>Once your PI is back up, ssh into it again and type the following command to list all the devices under the <code>/dev</code> directory:</p>
+
+
+<pre><code class="language-javascript">&gt; ls -la /dev</code></pre>
+
+
+<p>If <code>99-usb.rules</code> was read correctly at startup, you should find the symlink you created under <code>/dev</code>. Here’s what I see on my PI (I removed lots of entries to keep this short):</p>
+
+
+<pre><code class="language-javascript">drwxr-xr-x  2 root root          60 Feb 11 19:20 net
+crw-rw-rw-  1 root root      1,   3 Feb 11 19:20 null
+crw-------  1 root root    108,   0 Feb 11 19:20 ppp
+lrwxrwxrwx  1 root root           6 Feb 11 19:20 PrusaWebCam -&gt; video0
+crw-rw-rw-  1 root tty       5,   2 Feb 11 19:26 ptmx
+drwxr-xr-x  2 root root           0 Feb 14  2019 pts
+brw-rw----  1 root disk      1,   0 Feb 11 19:20 ram0</code></pre>
+
+
+<p>The <code>-&gt;</code> character next to PrusaWebCam indicates that linux set up a symbolic link to the video0 device called PrusaWebCam.</p>
+
+<h3><strong>If you see a symbolic link for your camera:</strong></h3>
+
+<p>Congratulations! You are the golden child! Move on to step 4.</p>
+
+<h3>If you DON’T see a symbolic link for your camera:</h3>
+
+<p>Darn it! Something is wrong in <code>99-usb.rules</code>.  Here are some things you can try:</p>
+
+<h3>Troubleshooting 1:</h3>
+
+<p>Before you start messing around with text editors, try the following: REBOOT AGAIN. This shouldn’t be a serious step, but it’s worked some than once for me.</p>
+
+<h3>Troubleshooting 2:</h3>
+
+<p>One of the main culprits of issues with udev rules is that some cameras don’t have valid serial numbers.</p>
+
+<p>For example, I bought a <a href="https://amzn.to/2NhkBCg">cheap USB endoscope on Amazon</a> to test and connected it to my spare Raspberry PI with Octopi 0.18 installed. I tailed the messages log while I plugged the endoscope in and here’s a partial list of the output:</p>
+
+
+<pre><code class="language-javascript">Feb 11 20:04:22 octopi2 kernel: [ 2619.572078] usb 1-1.1.3: new high-speed USB device number 7 using dwc_otg
+Feb 11 20:04:23 octopi2 kernel: [ 2619.783159] usb 1-1.1.3: New USB device found, idVendor=1908, idProduct=2311, bcdDevice= 1.00
+Feb 11 20:04:23 octopi2 kernel: [ 2619.783177] usb 1-1.1.3: New USB device strings: Mfr=1, Product=2, SerialNumber=0</code></pre>
+
+
+<p><code>SerialNumber=0</code> was suspicious to me, but I tried using it anyway in a second entry in my 99-usb.rules file, with <code>SYMLINK+="EndoCam"</code>. After a reboot, I didn’t find an EndoCam symbolic link under the <code>/dev</code> directory. I rebooted several more times, still no luck.</p>
+
+<p>The fix was easy. I added the EndoCam entry without a serial number attribute. Here’s what my <code>99-usb.rules</code> file looks like now with both cameras configured: </p>
+
+
+<pre><code class="language-javascript">SUBSYSTEM=="video4linux", ATTRS{idVendor}=="046d", ATTRS{idProduct}=="081b", ATTRS{serial}=="3A108F50", SYMLINK+="PrusaWebCam"
+SUBSYSTEM=="video4linux", ATTRS{idVendor}=="1908", ATTRS{idProduct}=="2311", SYMLINK+="EndoCam"</code></pre>
+
+
+<p>After rebooting, I now saw two video symbolic links under <code>/dev</code>.</p>
+
+
+<pre><code class="language-javascript">lrwxrwxrwx  1 root root           6 Feb 11 20:04 EndoCam -&gt; video5
+lrwxrwxrwx  1 root root           6 Feb 11 19:20 PrusaWebCam -&gt; video0</code></pre>
+
+
+<h3>Troubleshooting 3:</h3>
+
+<p>Recheck your <code>99-usb.rules</code> file. Make sure the syntax is correct, that the serial number and vendor ID are correct, and that you don’t have any strange characters like “smart quotes” or anything else that isn’t a standard ASCII character. </p>
+
+<h2>4: Prepare octopi.txt file for new webcam:</h2>
+
+<p>Under <code>/boot</code> there is an <code>octopi.txt</code> file which is a configuration file for the <code>webcamd</code> service (more on that service later). If you have your Raspberry PI camera running, then <code>octopi.txt</code> is set up to configure your PI cam. We’ll copy that file and use it to configure our webcam.</p>
+
+
+<pre><code class="language-javascript">&gt; cd /boot
+&gt; sudo cp octopi.txt octopi2.txt
+&gt; sudo nano octopi2.txt</code></pre>
+
+
+<h3>Edit <strong>octopi2.txt</strong>:</h3>
+
+<ul><li><p>Change the text <code>camera="raspi"</code> (or it might be <code>camera="auto"</code>) to <code>camera="usb".</code></p>
+
+<ul><li><p>The line might be commented out, indicated by a “#” (pound, or hash symbol) at the beginning of the line. Make sure to remove the # at the beginning of the line, otherwise changing the line to read <code>camera="usb"</code> will have no effect.</p>
+
+</li></ul>
+
+</li><li><p>NOTE: Some people have reported not seeing a “camera” entry at all in their octopi.txt file. If that’s the case, you’ll need to add one yourself.</p>
+
+</li><li><p>Remove the <code>#</code> from in front of the line that starts with <code>camera_usb_options</code> to uncomment it. Currently, it should look something like <code>camera_usb_options="-r 640x480 -f 10"</code></p>
+
+</li><li><p>Change that line to point to your USB camera. You’ll do that by adding a <code>-d</code> flag with the name you gave your USB camera. Here’s what my camera usb options looks like:<br/> <code>camera_usb<em>_</em>options="-d /dev/PrusaWebCam -r 1280x720 -f 10"</code></p>
+
+</li><li><p>NOTE: Be conservative with your resolution and framerate settings. A Logitech C920 can support 1920x1080 at 30 frames per second. However, your Raspberry PI can’t keep up with the camera, especially if it’s running a PI Cam module and Octoprint. So, I recommend setting USB cameras as 1280x720 and 10 fps.</p>
+
+</li></ul>
+
+<p>If your camera supports higher resolution you can experiment with changing the <code>-r</code> setting (resolution) from <code>640x480</code> to a different resolution, like I did in my example above. The <code>-f</code> flag is for framerate.</p>
+
+<ul><li><p>Further down in <code>octopi2.txt</code> you’ll need to comment out the line that starts with <code>camera_raspi_options</code> by adding a <code>#</code> in front of it.</p>
+
+</li><li><p>Finally, remove the <code>#</code> from in front of the line that starts with <code>camera_http_options</code> to uncomment it (should be at the very end of the file) and change it to read <code>camera_http_options="-p 8081"</code></p>
+
+</li><li><p>That sets the port for your webcam to 8081.</p>
+
+</li><li><p>You’re done with this file and can save and close it.</p>
+
+</li></ul>
+
+<h3>Now let’s edit <strong>octopi.txt</strong> (the config file for your Raspicam):</h3>
+
+
+<pre><code class="language-javascript">&gt; sudo nano octopi.txt</code></pre>
+
+
+<p>To avoid the original <code>octopi.txt</code> from starting up the wrong camera, let’s edit it as well and make sure <code>camera</code> is set to <code>raspi</code> and not <code>auto</code>.</p>
+
+<ul><li><p>Find the <code>camera</code> line and make sure it reads <code>camera="raspi"</code>instead of <code>auto</code></p>
+
+</li><li><p>NOTE: As mentioned above, your octopi.txt file might not have a “camera” entry. If that’s the case for you, add one and set it to <code>camera="raspi"</code></p>
+
+</li><li><p>Set the port of the PI camera to 8080 by uncommenting the last line of the file, which should be <code>camera_http_options</code> by deleting the <code>#</code> in front of the line.</p>
+
+</li><li><p>Make the line read <code>camera_http_options="-p 8080"</code></p>
+
+</li><li><p>Save and close the file</p>
+
+</li></ul>
+
+<h2>5: Prepare webcamd service files:</h2>
+
+<p>First we’ll duplicate the existing webcamd file.</p>
+
+
+<pre><code class="language-javascript">&gt; cd /root/bin
+&gt; sudo cp webcamd webcamd2</code></pre>
+
+
+<h3>Now let’s edit <strong>webcamd</strong>.</h3>
+
+
+<pre><code class="language-javascript">&gt; sudo nano webcamd</code></pre>
+
+
+<ul><li><p>Toward the top of the file, make sure the line that starts with <code>cfg_files+=</code> points to <code>octopi.txt</code>. It should read: <code>cfg_files+=/boot/octopi.txt</code></p>
+
+</li><li><p>Further down in the file, look for two lines that read:<br/><code># add video device into options</code><br/><code>options="$options -d /dev/$device"</code></p>
+
+</li><li><p>Add a <code>#</code> in front of the <code>options</code> line to comment it out.<br/><code>#options="$options -d /dev/$device"</code></p>
+
+</li><li><p>That line only works when you have a single camera connected, otherwise it causes problems.</p>
+
+</li></ul>
+
+<h3>We’ll make almost the same edits to <strong>webcamd2</strong>.</h3>
+
+
+<pre><code class="language-javascript">&gt; sudo nano webcamd2</code></pre>
+
+
+<ul><li><p>Toward the top of the file, make sure the line that starts with <code>cfg_files+=</code> points to <code>octopi2.txt</code> (our second octopi configuration file). It should read: <code>cfg_files+=/boot/octopi2.txt</code></p>
+
+</li><li><p>Comment out the same <code>options</code> line as you did in <strong>webcamd</strong>.<br/><code>#options="$options -d /dev/$device"</code></p>
+
+</li></ul>
+
+<h2>6: Set up service for webcamd2:</h2>
+
+<p>Now that we have our webcamd2 file ready, we need to create a service start file. We’ll copy an existing service file and edit it.</p>
+
+
+<pre><code class="language-javascript">&gt; cd /etc/systemd/system/
+&gt; sudo cp webcamd.service webcamd2.service
+&gt; sudo nano webcamd2.service</code></pre>
+
+
+<ul><li><p>Change the <code>ExecStart</code> line to read <code>ExecStart=/root/bin/webcamd2</code></p>
+
+</li></ul>
+
+<ul><li><p>Save and close the file.</p>
+
+</li></ul>
+
+<h3>Now let’s inform Linux about the webcamd2 service so it will get started at boot time:</h3>
+
+
+<pre><code class="language-javascript">&gt; sudo systemctl enable webcamd2</code></pre>
+
+
+<h2>7: Set up camera proxy:</h2>
+
+<p>The final step for running a second webcam on Octopi, is to set up a proxy. The proxy links the internal webcamd2 camera service to an http port, allowing you (and Octoprint) to view the camera’s mpeg stream from a browser.</p>
+
+
+<pre><code class="language-javascript">&gt; cd /etc/haproxy
+&gt; sudo nano haproxy.cfg</code></pre>
+
+
+<ul><li><p>Under the <code>frontend public</code> heading add the following line:<br/><code>use_backend webcam2 if { path_beg /webcam2/ }</code></p>
+
+</li><li><p>There will already be an entry for <code>webcam</code>. Copy the entire <code>backend webcam</code> section and paste it below the first entry. We’ll make a couple of changes to have it point to the second webcam. It should look like this:</p>
+
+</li></ul>
+
+
+<pre><code class="language-javascript">backend webcam2
+        reqrep ^([^\ :]*)\ /webcam2/(.*)     \1\ /\2
+        server webcam1  127.0.0.1:8081
+        errorfile 503 /etc/haproxy/errors/503-no-webcam.http</code></pre>
+
+
+<p>Notice a few things: </p>
+
+<ul><li><p>regrep line changed to read <code>webcam2</code></p>
+
+</li><li><p><code>server</code> line port changed to 8081, the port we assigned the second camera in an earlier step.</p>
+
+</li><li><p>HOWEVER, the server name should remain <code>webcam1</code>. That’s not a typo above. Tricksy Linux.</p>
+
+</li></ul>
+
+<p>Here’s what the two <code>backend</code> entries look like in my <code>haproxy.cfg</code> file.</p>
+
+
+<pre><code class="language-javascript">backend webcam
+        reqrep ^([^\ :]*)\ /webcam/(.*)     \1\ /\2
+        server webcam1  127.0.0.1:8080
+        errorfile 503 /etc/haproxy/errors/503-no-webcam.http
+
+backend webcam2
+        reqrep ^([^\ :]*)\ /webcam2/(.*)     \1\ /\2
+        server webcam1  127.0.0.1:8081
+        errorfile 503 /etc/haproxy/errors/503-no-webcam.http</code></pre>
+
+
+<p>Now you can reboot and you should see output from your second camera by pointing a browser to port 8081 on your Octopi box. Example: I have Bonjour setup and called my Raspberry PI box “octopi”, so the URL for the second camera within my home network is: <a href="http://octopi.local:8081/?action=stream">http://octopi.local:8081/?action=stream</a></p>
+
+<p>If you don’t see your USB camera at port 8081, move on to step 8 for troubleshooting tips.</p>
+
+<h2>8: Troubleshooting Services</h2>
+
+<p>The most common issue after not seeing your camera listed under /dev is problems with the service that launches mjpg streamer for the USB camera.</p>
+
+<p>If you don’t see your USB webcam show up at port 8081, do you see it under /dev, then the service that starts up mjpg streamer is having a problem. To confirm this, run the following systemctl command: </p>
+
+
+<pre><code class="language-javascript">&gt; systemctl status webcamd2.service</code></pre>
+
+
+<p>If the service started up correctly, you’ll see something like this:</p>
+
+
+<pre><code class="language-javascript">● webcamd2.service - the OctoPi webcam daemon with the user specified config
+   Loaded: loaded (/etc/systemd/system/webcamd2.service; enabled; vendor preset: enabled)
+   Active: active (running) since Sat 2021-02-27 15:16:51 PST; 9min ago
+  Process: 340 ExecStart=/root/bin/webcamd2 (code=exited, status=0/SUCCESS)
+ Main PID: 486 (mjpg_streamer)
+    Tasks: 4 (limit: 1939)
+   CGroup: /system.slice/webcamd2.service
+           └─486 ./mjpg_streamer -o output_http.so -w ./www-octopi -p 8081 -i input_uvc.so -d /dev/LogiCam -r 640x480 -f 5
+
+Feb 27 15:16:50 octopi2 mjpg_streamer[486]: MJPG-streamer [486]: Format............: JPEG
+Feb 27 15:16:50 octopi2 mjpg_streamer[486]: MJPG-streamer [486]: TV-Norm...........: DEFAULT
+Feb 27 15:16:50 octopi2 mjpg_streamer[486]: MJPG-streamer [486]: www-folder-path......: ./www-octopi/
+Feb 27 15:16:50 octopi2 mjpg_streamer[486]: MJPG-streamer [486]: HTTP TCP port........: 8081
+Feb 27 15:16:50 octopi2 mjpg_streamer[486]: MJPG-streamer [486]: HTTP Listen Address..: (null)
+Feb 27 15:16:50 octopi2 mjpg_streamer[486]: MJPG-streamer [486]: username:password....: disabled
+Feb 27 15:16:50 octopi2 mjpg_streamer[486]: MJPG-streamer [486]: commands.............: enabled
+Feb 27 15:16:50 octopi2 mjpg_streamer[486]: MJPG-streamer [486]: starting input plugin input_uvc.so
+Feb 27 15:16:50 octopi2 mjpg_streamer[486]: MJPG-streamer [486]: starting output plugin: output_http.so (ID: 00)
+Feb 27 15:16:51 octopi2 systemd[1]: Started the OctoPi webcam daemon with the user specified config.</code></pre>
+
+
+<p>However, if the service failed to start up correctly, you’ll see something like this:</p>
+
+
+<pre><code class="language-javascript">● webcamd2.service - the OctoPi webcam daemon with the user specified config
+   Loaded: loaded (/etc/systemd/system/webcamd2.service; enabled; vendor preset: enabled)
+   Active: inactive (dead) since Sat 2021-02-27 15:28:51 PST; 1min 35s ago
+  Process: 350 ExecStart=/root/bin/webcamd2 (code=exited, status=0/SUCCESS)
+
+Feb 27 15:28:50 octopi2 mjpg_streamer[484]: MJPG-streamer [484]: starting application
+Feb 27 15:28:50 octopi2 mjpg_streamer[484]: MJPG-streamer [484]: MJPG Streamer Version: git rev: 5554f42c352ecfa7edaec6fc51e507afce605a34
+Feb 27 15:28:50 octopi2 mjpg_streamer[484]: MJPG-streamer [484]: Using V4L2 device.: /dev/video3
+Feb 27 15:28:50 octopi2 mjpg_streamer[484]: MJPG-streamer [484]: Desired Resolution: 640 x 480
+Feb 27 15:28:50 octopi2 mjpg_streamer[484]: MJPG-streamer [484]: Frames Per Second.: 5
+Feb 27 15:28:50 octopi2 mjpg_streamer[484]: MJPG-streamer [484]: Format............: JPEG
+Feb 27 15:28:50 octopi2 mjpg_streamer[484]: MJPG-streamer [484]: TV-Norm...........: DEFAULT
+Feb 27 15:28:50 octopi2 mjpg_streamer[484]: MJPG-streamer [484]: init_VideoIn failed</code></pre>
+
+
+<p>Notice the last line. It reads <code>init_VideoIn failed</code>. AND THIS IS WITH THE SAME CAMERA WITH THE SAME SETTINGS.</p>
+
+<h3>Troubleshooting Tip 1:</h3>
+
+<p>Reduce the resolution and frame rate of both your PI Camera and your USB webcam. </p>
+
+<p>Your Raspberry PI is amazing, but it still must obey the laws of physics, and you just might be asking it to do too much. Remember, your PI is running Linux, Octoprint and two video streaming services.</p>
+
+<p>Here are the settings for my PI Cam and Logitech C510 in octopi.txt and octopi2.txt, respectively:</p>
+
+
+<pre><code class="language-javascript">// octopi.txt -- raspi cam settings
+camera_raspi_options="-x 1280 -y 720 -fps 10"
+
+// octopi2.txt -- USB cam settings
+camera_usb_options="-d /dev/PrusaWebCam -r 1280x720 -f 10"</code></pre>
+
+
+<p>Both cameras support resolutions of 1920x1080 and frame rates of 30fps, but setting the cameras to their max values caused the cameras not to start up. Sometimes I’d get one, or the other, but never both at the same time.</p>
+
+<p>NOTE: Don’t set your frame rate to less than 5. While testing, I set my USB camera to <code>-f 1</code> and discovered in the logs that the value was being pushed up (or “coerced” in video4linux speak) to 5. Seems like Linux doesn’t like frame rates that low.</p>
+
+<h3>Troubleshooting Tip 2:</h3>
+
+<p>Switch the camera to another USB port.</p>
+
+<p>This shouldn’t matter, but apparently it can make a difference. Follow this procedure:</p>
+
+<ol><li><p>Boot your PI, confirm that the service didn’t load properly.</p>
+
+</li><li><p>Move the USB camera to another port while the PI is still on.</p>
+
+</li><li><p>Reboot your PI.</p>
+
+</li><li><p>Check the service status.</p>
+
+</li></ol>
+
+<h3>Troubleshooting Tip 3:</h3>
+
+<p>Change the service’s restart delay.</p>
+
+<p>By editing webcamd2.service you can change the delay before the service controller tries to restart a failing service.</p>
+
+
+<pre><code class="language-javascript">sudo nano /etc/systemd/system/webcamd2.service</code></pre>
+
+
+<p>Change the RestartSec setting to 3, instead of 1, which is the default.</p>
+
+
+<pre><code class="language-javascript">RestartSec=3</code></pre>
+
+<hr>
+
+<h3>UPDATE February 27, 2021:</h3>
+
+<p>Added new services troubleshooting section, and updated the camera configuration section with comments about limiting resolution and frame rates.</p>
+
+<h3>UPDATE February 11, 2021:</h3>
+
+<p>Added a new troubleshooting section with information about confirming the camera set up and configuring cameras without serial numbers.</p>
+
+<h3>UPDATE February 7, 2021:</h3>
+
+<h3>TL;DR:</h3>
+
+<p>Because of issues with HTML and Unicode, the code fragments in the instructions below had curly quotes (“) instead of straight quotes ("). Anyone that copied text off this page was unknowingly pasting in curly quotes that caused the Linux configuration files to not work. I’ve gone through and updated all the code sections and confirmed that everything works in Octopi 0.18. </p>
+
+<h3>The full story (for those who are curious):</h3>
+
+<p>A couple of weeks ago this post started getting a flurry of comments and questions, seemingly related to the instructions below not working when users updated to Octopi 0.18. The most common complaint was that only one camera (typically the PI cam) would work, while the USB camera didn’t connect.</p>
+
+<p>To investigate why Octopi 0.18 didn’t work as expected, I took a spare Raspberry PI and installed a fresh copy of Octopi 0.18. Octoprint 1.5.2 worked correctly, as did a spare Raspberry PI camera module I have.</p>
+
+<p>I followed my own instructions to connect a spare USB camera — I apparently have a lot of spare parts — and it didn’t work. The webcamd2 service I had created tried over and over to connect to the USB camera but failed. For a couple of hours I went down various rabbit holes, reading through comments, trying various approaches and learning more about the vagaries of Linux configuration. At one point, I even compared configuration files from Octopi 0.17 and 0.18, looking for a bug.</p>
+
+<p>After ruling out issues with all the other configuration files I had created or edited, I was left with just one: the 99-usb.rules file. That’s how you tell the USB system about your USB camera and set up a symlink/alias to the camera. The alias/symlink is supposed to show up under <code>/dev</code> with whatever name you gave in your rules file. I had called my USB camera TestCam, but there was no entry under <code>/dev</code>.</p>
+
+<p>I checked my working Octopi 0.17 build and sure enough, I saw a symlinked entry under the /dev directory. When I compared the two 99-usb.rules files from my Octopi 0.17 and 0.18 installations, I saw what was going on. The Octopi 0.18 rules files had curly quotes (“) instead of standard straight quotes ("). Curly quotes — also known as “smart” quotes — are fancy quotes used in word processors and webpages, but they don’t belong in text-only Linux configuration files. Putting curly quotes in configuration files is like putting diesel in a gasoline engine. It don’t work.</p>
+
+<p>The only text I had copied and pasted from this blog entry had been for the usb rules file. And, when I checked, I saw that the usb rules text in the post had curly quotes in it. Once I edited <code>99-usb.rules</code>, replaced the stupid smart quotes with regular ASCII straight quotes and rebooted, the USB camera showed up under <code>/dev</code>, webcam2 service was able to find it and start up, and the camera worked correctly. I then went through all the code sections in this blog post and ensured that none contained curly quotes.</p>

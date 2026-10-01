@@ -1,0 +1,45 @@
+---
+title: Hiding XML in script tags
+date: 2013-07-16T13:28:00Z
+url: /blog/2013/07/hiding-xml-in-script-tags.html
+excerpt:  A few years ago I created a simple Paypal form generation system for my wife, who runs her own business; a wellness travel company called Pravassa. The original version of the…
+---
+<h2><strong>Background</strong></h2>
+
+<p>A few years ago I created a simple Paypal form generation system for my wife, who runs her own business; a <a href="https://web.archive.org/web/20140112124839/http://pravassawellnesstravel.com/">wellness travel company called Pravassa</a>. The original version of the form generator used Flex as the display layer and XML files as the data/model. She edited XML files which dictated to the Flex form system I built what to display (prices, descriptions, etc).</p>
+
+<p>When my wife updated her website to SquareSpace 6 (from versions 4 and 5), I decided to port all my form generation code to Javascript/JQuery/HTML 5/CSS 4.</p>
+
+<p>Whereas before I used a Flex URLLoader object to load the configuration XML files, I switched to using JQuery's AJAX functions. And that's when I ran into a problem.</p>
+
+<p>SquareSpace 6 websites use virtual docroots, where all the files loaded by website owners are converted to references and redirects to the actual file. This allows SS6 to, for example, automatically generate and reference different versions of images for display on different screen sizes (mobile site vs. desktop).</p>
+
+<p>The only problem with the system is that it interferes with AJAX calls, when those calls are to files on your own site. The reason for this is that AJAX calls can only be made to the same domain, unless the sites involved support Cross Origin Resource Sharing (<a href="http://www.w3.org/TR/cors/">CORS</a>). CORS is a kind of security model that allows different domains to make calls to each other.</p>
+
+<p>SS6 rewrites all the URLs for files so that, to an AJAX call, they no longer appear to be on the same site. For example, if your SS6 site is "www.awesomesite.com", and you place an XML file under "awesomesite.com/myfiles/config.xml", when the file is requested, SS6 redirects the URL to "static.squarespace.com/878783783hsfsysfkhksfh/khwirykhfkhs/dfdf78d7f8.xml" or something equally ugly. Because the URL gets changed, "local" AJAX requests for files on one's own site fail silently or with a non-related error.</p>
+
+<p><a href="https://web.archive.org/web/20131115030417/http://answers.squarespace.com/questions/3557/is-cors-support-planned-for-squarespace-6">Since SquareSpace isn't going to support CORS anytime soon</a>, I was forced to use a different technique to access the XML configuration files my wife uses for her website. By the way, I realize my need to load local files via AJAX is a somewhat specific use case, though I hope that SquareSpace either eventually supports CORS, or no longer uses redirects when users request files from their own file store. </p>
+
+<h2><strong>Solution</strong></h2>
+
+<p>My solution was to embed the XML configuration files right on the page, hidden in a &lt;script&gt; tag. This is a hack, but it works, and it allowed my wife to continue adding forms to her website without having to learn a whole new way of doing things.</p>
+
+<p>The basic idea is using a script tag without a type attribute, but with an id attribute. The id gives you a simple lookup via JQuery to access the XML document between the script tags.</p>
+
+<p>Example Script tag:</p>
+
+<pre>&lt;script id="form_config"&gt;
+ &lt;form_config&gt;
+&lt;name&gt;My Great Form&lt;/name&gt;
+ &lt;/form_config&gt;
+&lt;/script&gt;
+</pre>
+
+<p>JQuery to access the value of &lt;name&gt;:</p>
+
+<pre>//Pulls the content of the script tag out as text.
+var xmlDoc = jQuery('#form_config').text();
+
+//Searches within the text (treating it as an XML doc)
+var nameValue = jQuery(xmlDoc).find('name').text(); 
+</pre>

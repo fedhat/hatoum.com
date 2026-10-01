@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>[UPDATED][DEPRECATED] Simplify3D: Confusing First Layer settings · Federico Hatoum</title>
+  <meta name="description" content="Has has been pointed out, while this blog post was accurate many years ago, it no longer applies. Simplify3D 4.0 is a powerful 3D mesh slicer program for 3D printing with many…">
+  <link rel="canonical" href="https://hatoum.com/blog/2018/1/2/simplify3d-confusing-first-layer-settings/">
+  <meta name="color-scheme" content="light dark">
+  <meta name="theme-color" content="#f6f1e9" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#121417" media="(prefers-color-scheme: dark)">
+  <meta property="og:site_name" content="Federico Hatoum">
+  <meta property="og:title" content="[UPDATED][DEPRECATED] Simplify3D: Confusing First Layer settings · Federico Hatoum">
+  <meta property="og:description" content="Has has been pointed out, while this blog post was accurate many years ago, it no longer applies. Simplify3D 4.0 is a powerful 3D mesh slicer program for 3D printing with many…">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://hatoum.com/blog/2018/1/2/simplify3d-confusing-first-layer-settings/">
+  <meta property="og:image" content="https://hatoum.com/assets/img/blog/2018/simplify3d-confusing-first-layer-settings/01-screen-shot-2018-01-02-at-17-07-28.webp">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="icon" type="image/png" sizes="32x32" href="../../../../../assets/icons/favicon-32.png">
+  <link rel="apple-touch-icon" href="../../../../../assets/icons/apple-touch-icon.png">
+  <link rel="preload" href="../../../../../assets/fonts/inter-var.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="../../../../../assets/fonts/fraunces-var.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="../../../../../assets/css/site.css">
+  <link rel="alternate" type="application/rss+xml" title="Federico Hatoum — Blog" href="../../../../../blog/feed.xml">
+  <script>try{var t=localStorage.getItem('theme');if(t==='light'||t==='dark')document.documentElement.setAttribute('data-theme',t)}catch(e){}</script>
+  <script src="../../../../../assets/js/site.js" defer></script>
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "BlogPosting", "headline": "[UPDATED][DEPRECATED] Simplify3D: Confusing First Layer settings", "datePublished": "2018-01-02T22:23:01Z", "author": {"@type": "Person", "name": "Federico Hatoum", "url": "https://hatoum.com"}, "mainEntityOfPage": "https://hatoum.com/blog/2018/1/2/simplify3d-confusing-first-layer-settings/", "image": "https://hatoum.com/assets/img/blog/2018/simplify3d-confusing-first-layer-settings/01-screen-shot-2018-01-02-at-17-07-28.webp"}</script>
+  <meta property="article:published_time" content="2018-01-02T22:23:01Z">
+</head>
+<body class="">
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-header">
+    <div class="wrap header-inner">
+      <a class="brand" href="../../../../../">
+        <img src="../../../../../assets/icons/dog.png" alt="" width="30" height="30">
+        <span>Federico Hatoum</span>
+      </a>
+      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav">
+        <span class="nav-toggle-bars" aria-hidden="true"></span><span class="visually-hidden">Menu</span>
+      </button>
+      <nav id="site-nav" class="site-nav" aria-label="Main">
+        <a href="../../../../../about/">About</a>
+        <a href="../../../../../blog/" aria-current="page">Blog</a>
+        <a href="../../../../../films/">Films</a>
+        <a href="../../../../../acting/">Acting</a>
+        <a href="../../../../../contact/">Contact</a>
+      </nav>
+      <button class="theme-toggle" type="button" aria-label="Switch to dark theme" title="Toggle theme">
+        <svg class="icon icon-moon" aria-hidden="true"><use href="../../../../../assets/icons/icons.svg#moon"></use></svg>
+        <svg class="icon icon-sun" aria-hidden="true"><use href="../../../../../assets/icons/icons.svg#sun"></use></svg>
+      </button>
+    </div>
+  </header>
+
+  <main id="main">
+<article class="post wrap-narrow">
+  <header class="post-header">
+    <p class="post-kicker"><a href="../../../../../blog/">Blog</a></p>
+    <h1>[UPDATED][DEPRECATED] Simplify3D: Confusing First Layer settings</h1>
+    <p class="post-meta"><time datetime="2018-01-02T22:23:01Z">January 2, 2018</time> · 2 min read</p>
+  </header>
+  <div class="prose">
+<h2>UPDATE:</h2>
+
+<p>Has has been pointed out, while this blog post was accurate many years ago, it no longer applies.</p>
+
+<h2>First Layer Height and Width:</h2>
+
+<p><a href="https://simplify3d.com" target="_blank" rel="noopener">Simplify3D 4.0</a> is a powerful 3D mesh slicer program for 3D printing with many options and settings, some of which are non-obvious. Such is the case with the First Layer Settings, under a process' Layer tab. Until I happened upon a post in Simplify3D's forums I didn't understand the effects of changing the First Layer Height and First Layer Width settings, causing me a lot of frustration and failed first layers.</p>
+
+<figure><a class="lightbox" href="../../../../../assets/img/blog/2018/simplify3d-confusing-first-layer-settings/01-screen-shot-2018-01-02-at-17-07-28.webp"><img src="../../../../../assets/img/blog/2018/simplify3d-confusing-first-layer-settings/01-screen-shot-2018-01-02-at-17-07-28.webp" alt="" width="947" height="419" loading="lazy" decoding="async"><span class="visually-hidden">View full-size image</span></a></figure>
+
+<h2>First Layer Height:</h2>
+
+<p>Both nozzle height and extrusion amount can be affected by this setting, but perhaps not in the way you think.</p>
+
+<p>If set <em>below</em> 100%:</p>
+
+<ul><li><p><strong>Amount of extruded plastic</strong> is <strong>UNCHANGED</strong>.</p>
+
+</li><li><p><strong>Layer height</strong> (distance from nozzle to printing bed) is <strong>REDUCED</strong></p>
+
+</li><li><p>Values below 100% <strong>ONLY</strong> lower the nozzle closer to the printing surface. Essentially squishes the standard amount of plastic into a lower layer height.</p>
+
+</li><li><p>This is meant to help with adhesion.</p>
+
+</li></ul>
+
+<p>if set <em>above</em> 100%:</p>
+
+<ul><li><p><strong>Amount of extruded plastic </strong>is<strong> INCREASED.</strong></p>
+
+</li><li><p><strong>Layer height</strong> is <strong>INCREASED</strong>.</p>
+
+</li><li><p><strong>BOTH</strong> extrudes more plastic <strong>AND</strong> pulls the nozzle slightly away from bed so as not to squish the layer.</p>
+
+</li><li><p>This is used primarily when printing fine layer heights and/or on slightly uneven printing beds. The extra height and plastic volume makes thin layers thicker and also helps smooth out bumps and inconsistencies in bed surfaces.</p>
+
+</li></ul>
+
+<h2>First Layer Width:</h2>
+
+<p>Width changes ALWAYS AFFECT extrusion amounts, but leave Layer Height UNCHANGED.</p>
+
+<p>If set below 100%:</p>
+
+<ul><li><p>The <strong>amount of extruded plastic</strong> is <strong>REDUCED</strong>.</p>
+
+</li></ul>
+
+<p>If set above 100%:</p>
+
+<ul><li><p>The <strong>amount of extruded plastic</strong> is <strong>INCREASED</strong>.</p>
+
+</li></ul>
+
+<p>For reference, here's the full thread in Simplify3D's forums: <a href="https://forum.simplify3d.com/viewtopic.php?f=9&amp;t=2292&amp;start=20#p18419" target="_blank" rel="noopener">https://forum.simplify3d.com/viewtopic.php?f=9&amp;t=2292&amp;start=20#p18419</a></p>
+
+  </div>
+  <section class="comments" aria-labelledby="comments-title">
+    <h2 id="comments-title">13 comments</h2>
+    <p class="comments-note">Comments are closed. These were left on the previous version of this site. Questions? <a href="../../../../../contact/">Get in touch</a>.</p>
+    <ol class="comment-list"><li class="comment" id="comment-5a566cb753450ad1023cd870"><article><header class="comment-meta"><span class="comment-author">Rp</span><a class="comment-date" href="#comment-5a566cb753450ad1023cd870"><time datetime="2018-01-10T19:42:47Z">January 10, 2018</time></a></header><div class="comment-body"><p>Hi Federico,</p>
+<p>Thanks for posting this! Very helpful!<br/>One problem, when I click on the forum link at the bottom of the article, it brings me back to the article instead of the forum. If I copy and past it, I get to the forum.</p>
+<p>Thanks again!</p></div></article><ol class="comment-replies"><li class="comment is-owner" id="comment-5a5671bbe4966b5f251758e0"><article><header class="comment-meta"><span class="comment-author">Federico Hatoum</span> <span class="comment-badge">Author</span><a class="comment-date" href="#comment-5a5671bbe4966b5f251758e0"><time datetime="2018-01-10T20:04:11Z">January 10, 2018</time></a></header><div class="comment-body"><p>Thank you for pointing out the problem with the forum link, Rp. I've corrected it.<br/>Glad you found the post helpful!</p></div></article></li></ol></li><li class="comment" id="comment-5bd440440852291fdf4c25a1"><article><header class="comment-meta"><span class="comment-author"><a href="https://www.thingiverse.com/wersy/designs" rel="nofollow ugc noopener" target="_blank">Michael</a></span><a class="comment-date" href="#comment-5bd440440852291fdf4c25a1"><time datetime="2018-10-27T10:39:00Z">October 27, 2018</time></a></header><div class="comment-body"><p>Hi Federico,<br/>Regarding layer width. Have you checked the Gcode?<br/>No matter which width I enter, the extruded quantity always remains the same.<br/>In this respect it works like the other slicers.</p>
+<p>Michael</p></div></article><ol class="comment-replies"><li class="comment is-owner" id="comment-5bd9de0d0ebbe80db3b624e7"><article><header class="comment-meta"><span class="comment-author">Federico Hatoum</span> <span class="comment-badge">Author</span><a class="comment-date" href="#comment-5bd9de0d0ebbe80db3b624e7"><time datetime="2018-10-31T16:53:33Z">October 31, 2018</time></a></header><div class="comment-body"><p>Hi Michael,</p>
+<p>I previously hadn't checked the Gcode for validation, though in my non-scientific tests, there did <em>appear</em> to be more plastic extruded.<br/>However, I just did a test with an old model and created two gcode files, one with layer width set to 100% and a second one set to 400%. The previews show much wider lines being drawn and I see in the gcode that the E commands for the first layer are different -- about 4x different.</p></div></article></li></ol></li><li class="comment" id="comment-5bda1509562fa73fc14f4a6d"><article><header class="comment-meta"><span class="comment-author"><a href="https://www.thingiverse.com/wersy/designs" rel="nofollow ugc noopener" target="_blank">Michael</a></span><a class="comment-date" href="#comment-5bda1509562fa73fc14f4a6d"><time datetime="2018-10-31T20:48:09Z">October 31, 2018</time></a></header><div class="comment-body"><p>Can you send me your gcodes?</p>
+<p>I made two tests, one with 100% and one with 200%.<br/>The E value is almost the same.<br/>The 200% is even slightly less which is logical if you know how slicers handle thicker extrusion width.<br/>You can see my comments on rc-network: http://www.rc-network.de/forum/showthread.php/632131-Bau-des-DIY-3D-Druckers-Mika3D/page55<br/>It is comment #823</p>
+<p>I can send you my gcodes.</p></div></article><ol class="comment-replies"><li class="comment is-owner" id="comment-5bda1cd221c67c69e6b2678b"><article><header class="comment-meta"><span class="comment-author">Federico Hatoum</span> <span class="comment-badge">Author</span><a class="comment-date" href="#comment-5bda1cd221c67c69e6b2678b"><time datetime="2018-10-31T21:21:22Z">October 31, 2018</time></a></header><div class="comment-body"><p>Hi. I just sent you the two test files I generated. Hope they help.</p></div></article></li></ol></li><li class="comment" id="comment-5bdac1528a922d1e357eae58"><article><header class="comment-meta"><span class="comment-author"><a href="https://www.thingiverse.com/wersy/designs" rel="nofollow ugc noopener" target="_blank">Michael</a></span><a class="comment-date" href="#comment-5bdac1528a922d1e357eae58"><time datetime="2018-11-01T09:03:14Z">November 1, 2018</time></a></header><div class="comment-body"><p>Thank you for your gcodes.<br/>In both cases the first layer ends with E 573.0794</p></div></article><ol class="comment-replies"><li class="comment is-owner" id="comment-5be45b8521c67c669e53758f"><article><header class="comment-meta"><span class="comment-author">Federico Hatoum</span> <span class="comment-badge">Author</span><a class="comment-date" href="#comment-5be45b8521c67c669e53758f"><time datetime="2018-11-08T15:51:33Z">November 8, 2018</time></a></header><div class="comment-body"><p>I'm not sure what to tell you. The information I presented came from S3D's website and, at least in preview mode, when I change the first layer width, the preview shows a thicker, wider line. And when I print, I do indeed see a wider line.<br/>Perhaps that's accomplished differently than was described in S3D's website.</p></div></article></li></ol></li><li class="comment" id="comment-5ddd5ff1e6b17d4a8f045c17"><article><header class="comment-meta"><span class="comment-author">Michael P</span><a class="comment-date" href="#comment-5ddd5ff1e6b17d4a8f045c17"><time datetime="2019-11-26T17:25:05Z">November 26, 2019</time></a></header><div class="comment-body"><p>FYI, Simplify3d has updated their First Layer Height settings in 4.1. Specifically "Using a first layer height below 100% will now correctly reduce the amount of extruded material (alternatively, a negative global Z-axis offset can be used to lower the first layer while still extruding the same amount of material)"</p>
+<p>Here's the full release notes: https://www.simplify3d.com/software/release-notes/</p></div></article><ol class="comment-replies"><li class="comment is-owner" id="comment-5dde00cc51c72e2c5ecc0d3a"><article><header class="comment-meta"><span class="comment-author">Federico Hatoum</span> <span class="comment-badge">Author</span><a class="comment-date" href="#comment-5dde00cc51c72e2c5ecc0d3a"><time datetime="2019-11-27T04:51:24Z">November 26, 2019</time></a></header><div class="comment-body"><p>I wasn't aware of that. Thank you for letting me know!</p></div></article></li></ol></li><li class="comment" id="comment-61bbd2b1d07b79547eda77fc"><article><header class="comment-meta"><span class="comment-author">Don</span><a class="comment-date" href="#comment-61bbd2b1d07b79547eda77fc"><time datetime="2021-12-16T23:58:41Z">December 16, 2021</time></a></header><div class="comment-body"><p>This used to be correct back in 2016. But I've analyzed the GCode produced. Both first layer height and first layer width change both the distances AND extrusion amounts, regardless of whether the percentage is above ore below 100.</p></div></article><ol class="comment-replies"><li class="comment is-owner" id="comment-61bce00464e1220497345688"><article><header class="comment-meta"><span class="comment-author">Federico Hatoum</span> <span class="comment-badge">Author</span><a class="comment-date" href="#comment-61bce00464e1220497345688"><time datetime="2021-12-17T19:07:48Z">December 17, 2021</time></a></header><div class="comment-body"><p>Thanks Don. I'll put a note in the post indicating that it no longer applies.</p></div></article></li></ol></li><li class="comment" id="comment-61bf66c2bc1f33115145a0b3"><article><header class="comment-meta"><span class="comment-author">Don</span><a class="comment-date" href="#comment-61bf66c2bc1f33115145a0b3"><time datetime="2021-12-19T17:07:14Z">December 19, 2021</time></a></header><div class="comment-body"><p>This information is mostly still valid except for First Layer Height less than 100% DOES reduce extrusion. See gcode below (from version 4.1.2):</p>
+<p>First Layer - Height 50%, Width 50%:<br/>; tool H0.100 W0.200<br/>G1 Z0.100 F1002<br/>G1 X105.219 Y106.200 E0.0273 F1200</p>
+<p>First Layer - Height 100%, Width 100%:<br/>; tool H0.200 W0.400<br/>G1 Z0.200 F1002<br/>G1 X105.095 Y105.900 E0.1166 F1200</p>
+<p>First Layer - Height 150%, Width 150%:<br/>; tool H0.300 W0.600<br/>G1 Z0.300 F1002<br/>G1 X104.970 Y105.600 E0.2795 F1200</p></div></article></li></ol>
+  </section>
+  <nav class="pager" aria-label="More posts">
+    <a class="pager-prev" href="../../../../../blog/2017/12/6/using-regular-expressions-to-change-case/"><span>Older</span>Using Regular Expressions to change case</a><a class="pager-next" href="../../../../../blog/2018/2/6/dont-use-sketchup-for-3d-printed-designs/"><span>Newer</span>Don&#x27;t use SketchUp for 3D-printed designs</a>
+  </nav>
+</article>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap footer-inner">
+      <div class="footer-about">
+        <p class="footer-name">Federico Hatoum</p>
+        <p>Software developer, maker &amp; YouTuber in Los Angeles.</p>
+      </div>
+      <nav aria-label="Elsewhere">
+      <ul class="social">
+        <li><a href="https://www.youtube.com/channel/UCQGkNFXJCUBLkzMIShzf12g" title="Fed Learns To Make on YouTube" target="_blank" rel="noopener"><svg class="icon" aria-hidden="true"><use href="../../../../../assets/icons/icons.svg#youtube"></use></svg><span class="visually-hidden">Fed Learns To Make on YouTube</span></a></li>
+        <li><a href="https://github.com/fedhat" title="GitHub" target="_blank" rel="noopener"><svg class="icon" aria-hidden="true"><use href="../../../../../assets/icons/icons.svg#github"></use></svg><span class="visually-hidden">GitHub</span></a></li>
+        <li><a href="https://www.linkedin.com/pub/federico-hatoum/0/866/1a2" title="LinkedIn" target="_blank" rel="noopener"><svg class="icon" aria-hidden="true"><use href="../../../../../assets/icons/icons.svg#linkedin"></use></svg><span class="visually-hidden">LinkedIn</span></a></li>
+        <li><a href="https://www.facebook.com/583536348" title="Facebook" target="_blank" rel="noopener"><svg class="icon" aria-hidden="true"><use href="../../../../../assets/icons/icons.svg#facebook"></use></svg><span class="visually-hidden">Facebook</span></a></li>
+        <li><a href="../../../../../blog/feed.xml" title="Blog RSS feed"><svg class="icon" aria-hidden="true"><use href="../../../../../assets/icons/icons.svg#rss"></use></svg><span class="visually-hidden">Blog RSS feed</span></a></li>
+      </ul>
+      </nav>
+      <p class="footer-copy">© 2026 Federico Hatoum</p>
+    </div>
+  </footer>
+</body>
+</html>
